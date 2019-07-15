@@ -20,10 +20,8 @@ class CreateProductsTable extends Migration
 
                 $table->string('name');
                 $table->text('description');
-                $table->text('details');
 
-                $table->integer('price');
-                $table->boolean('includes_tax');
+                $table->boolean('includes_tax')->default(1);
 
                 // create tax_id
                 $table->bigInteger('tax_id')

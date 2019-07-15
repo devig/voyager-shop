@@ -20,6 +20,15 @@ class CreateOrdersTable extends Migration
 
                 $table->string('token');
 
+                $table->enum('state', [
+                    'cart',
+                    'pending',
+                    'billed',
+                    'canceled',
+                    'declined',
+                    'refunded'
+                ])->default('cart');
+
                 // create user_id
                 $table->bigInteger('user_id')
                     ->unsigned()
@@ -38,6 +47,16 @@ class CreateOrdersTable extends Migration
                 $table->foreign('project_id')
                     ->references('id')
                     ->on('projects')
+                    ->onDelete('cascade');
+
+                // create country_id
+                $table->bigInteger('country_id')
+                    ->unsigned()
+                    ->nullable();
+                // make country_id column a foreign key
+                $table->foreign('country_id')
+                    ->references('id')
+                    ->on('countries')
                     ->onDelete('cascade');
 
                 $table->timestamps();

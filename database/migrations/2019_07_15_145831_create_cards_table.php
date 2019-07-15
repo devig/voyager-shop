@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderItemsTable extends Migration
+class CreateCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,27 +15,32 @@ class CreateOrderItemsTable extends Migration
     public function up()
     {
         DB::transaction(function () {
-            Schema::create('order_items', function (Blueprint $table) {
+            Schema::create('cards', function (Blueprint $table) {
                 $table->bigIncrements('id');
 
-                // create order_id
-                $table->bigInteger('order_id')
+                $table->string('name');
+                $table->string('brand');
+                $table->string('last_four');
+                $table->string('stripe_id');
+
+                // create project_id
+                $table->bigInteger('project_id')
                     ->unsigned()
                     ->nullable();
-                // make order_id column a foreign key
-                $table->foreign('order_id')
+                // make project_id column a foreign key
+                $table->foreign('project_id')
                     ->references('id')
-                    ->on('orders')
+                    ->on('projects')
                     ->onDelete('cascade');
 
-                // create product_variant_id
-                $table->bigInteger('product_variant_id')
+                // create user_id
+                $table->bigInteger('user_id')
                     ->unsigned()
                     ->nullable();
-                // make product_variant_id column a foreign key
-                $table->foreign('product_variant_id')
+                // make user_id column a foreign key
+                $table->foreign('user_id')
                     ->references('id')
-                    ->on('product_variants')
+                    ->on('users')
                     ->onDelete('cascade');
 
                 $table->timestamps();
@@ -51,7 +56,7 @@ class CreateOrderItemsTable extends Migration
     public function down()
     {
         DB::transaction(function () {
-            Schema::dropIfExists('order_items');
+            Schema::dropIfExists('cards');
         });
     }
 }
