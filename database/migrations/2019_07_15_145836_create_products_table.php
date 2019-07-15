@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
 
                 $table->string('name');
                 $table->text('description');
+                $table->text('details');
 
                 $table->integer('price');
                 $table->boolean('includes_tax');
