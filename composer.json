@@ -1,0 +1,12 @@
+{
+    "name": "tjventurini/voyager-shop",
+    "description": "This package provides a graphql shop that is manageable through the voyager admin panel.",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Thomas Venturini",
+            "email": "thomas@venturini.codes"
+        }
+    ],
+    "require": {}
+}
