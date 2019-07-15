@@ -8,5 +8,11 @@
             "email": "thomas@venturini.codes"
         }
     ],
-    "require": {}
+    "require": {
+        "nuwave/lighthouse": "^3.7",
+        "tcg/voyager": "^1.2",
+        "tjventurini/voyager-projects": "*",
+        "laravel/passport": "^7.3",
+        "joselfonseca/lighthouse-graphql-passport-auth": "^1.3"
+    }
 }
