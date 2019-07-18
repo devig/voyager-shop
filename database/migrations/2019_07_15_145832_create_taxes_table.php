@@ -15,7 +15,7 @@ class CreateTaxesTable extends Migration
     public function up()
     {
         DB::transaction(function () {
-            Schema::create('products', function (Blueprint $table) {
+            Schema::create('taxes', function (Blueprint $table) {
                 $table->bigIncrements('id');
 
                 $table->string('name');
@@ -54,7 +54,7 @@ class CreateTaxesTable extends Migration
     public function down()
     {
         DB::transaction(function () {
-            Schema::dropIfExists('products');
+            Schema::dropIfExists('taxes');
         });
     }
 }
