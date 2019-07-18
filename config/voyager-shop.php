@@ -23,8 +23,18 @@ return [
     
     'tables' => [],
 
-    'models' => [],
+    'models' => [
+        'user' => \App\User::class,
+        'project' => \Tjventurini\VoyagerProjects\Models\Project::class,
+        'country' => \Tjventurini\VoyagerShop\Models\Country::class,
+        'tax' => \Tjventurini\VoyagerShop\Models\Tax::class,
+    ],
 
-    'foreign_keys' => [],
+    'foreign_keys' => [
+        'user' => 'user_id',
+        'project' => 'project_id',
+        'country' => 'country_id',
+        'tax' => 'tax_id',
+    ],
 
 ];

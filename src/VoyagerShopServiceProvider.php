@@ -4,6 +4,7 @@ namespace Tjventurini\VoyagerShop;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
+use Tjventurini\VoyagerShop\Console\Commands\VoyagerShopInstall;
 
 class VoyagerShopServiceProvider extends ServiceProvider
 {
@@ -45,6 +46,13 @@ class VoyagerShopServiceProvider extends ServiceProvider
 
         // tell laravel where to find routes
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
+
+        // register commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                VoyagerShopInstall::class,
+            ]);
+        }
     }
 
     /**
