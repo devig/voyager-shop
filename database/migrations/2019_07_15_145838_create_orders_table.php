@@ -49,16 +49,6 @@ class CreateOrdersTable extends Migration
                     ->on('projects')
                     ->onDelete('cascade');
 
-                // create country_id
-                $table->bigInteger('country_id')
-                    ->unsigned()
-                    ->nullable();
-                // make country_id column a foreign key
-                $table->foreign('country_id')
-                    ->references('id')
-                    ->on('countries')
-                    ->onDelete('cascade');
-
                 $table->timestamps();
             });
         });
