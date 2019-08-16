@@ -16,5 +16,5 @@ Route::group(['prefix' => config('voyager.prefix')], function () {
     $namespace = '\\Tjventurini\\VoyagerShop\\Http\\Controllers\\';
 
     // create routes
-    // Route::get('shop', $namespace . 'ShopController@index')->name('voyager.shop.index');
+    Route::get('shop', $namespace . 'ProductController@index')->name('voyager.shop.product.index');
 });

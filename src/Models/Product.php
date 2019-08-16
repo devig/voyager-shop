@@ -3,6 +3,7 @@
 namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
@@ -40,5 +41,17 @@ class Product extends Model
         $tax_id = config('voyager-shop.foreign_keys.tax');
 
         return $this->belongsTo($model, $tax_id);
+    }
+
+    /**
+     * Relationship with product variants.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productVariants(): HasMany
+    {
+        $model = config('voyager-shop.models.productVariant');
+        $product_id = config('voyager-shop.foreign_keys.product');
+
+        return $this->hasMany($model, $product_id);
     }
 }
