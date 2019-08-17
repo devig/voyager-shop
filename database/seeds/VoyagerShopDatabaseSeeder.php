@@ -16,6 +16,7 @@ class VoyagerShopDatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(VoyagerShopDataTypesSeeder::class);
         $this->call(VoyagerShopMenuItemsSeeder::class);
     }
 }
