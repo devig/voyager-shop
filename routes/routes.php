@@ -19,4 +19,5 @@ Route::group(['prefix' => config('voyager.prefix')], function () {
     Route::get('orders', $namespace . 'OrdersController@index')->name('voyager.shop.orders.index');
     Route::get('products', $namespace . 'ProductsController@index')->name('voyager.shop.products.index');
     Route::get('product-variants', $namespace . 'ProductVariantsController@index')->name('voyager.shop.product-variants.index');
+    Route::get('countries', $namespace . 'CountriesController@index')->name('voyager.shop.countries.index');
 });

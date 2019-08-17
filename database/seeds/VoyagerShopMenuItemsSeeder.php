@@ -82,6 +82,19 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // country
+            $route = 'voyager.shop.countries.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-world',
+                'color' => null,
+                'order' => 4,
+                'title' => trans('shop::countries.label_plural'),
+            ]);
 
             // currency
 
