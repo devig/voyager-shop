@@ -45,7 +45,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
                 'menu_id' => $menu->id,
                 'parent_id' => $parentItem->id,
                 'target' => '_self',
-                'icon_class' => 'voyager-dollar',
+                'icon_class' => 'voyager-bag',
                 'color' => null,
                 'order' => 1,
                 'title' => trans('shop::orders.label_plural'),
@@ -97,10 +97,49 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // currency
+            $route = 'voyager.shop.currencies.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-dollar',
+                'color' => null,
+                'order' => 5,
+                'title' => trans('shop::currencies.label_plural'),
+            ]);
 
             // taxes
+            $route = 'voyager.shop.taxes.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-pie-chart',
+                'color' => null,
+                'order' => 6,
+                'title' => trans('shop::taxes.label_plural'),
+            ]);
 
             // cards
+            $route = 'voyager.shop.cards.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-credit-cards',
+                'color' => null,
+                'order' => 7,
+                'title' => trans('shop::cards.label_plural'),
+            ]);
         });
     }
 }
