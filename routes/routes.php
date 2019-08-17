@@ -16,11 +16,11 @@ Route::group(['prefix' => config('voyager.prefix')], function () {
     $namespace = '\\Tjventurini\\VoyagerShop\\Http\\Controllers\\';
 
     // create routes
-    Route::get('orders', $namespace . 'OrdersController@index')->name('voyager.shop.orders.index');
-    Route::get('products', $namespace . 'ProductsController@index')->name('voyager.shop.products.index');
-    Route::get('product-variants', $namespace . 'ProductVariantsController@index')->name('voyager.shop.product-variants.index');
-    Route::get('countries', $namespace . 'CountriesController@index')->name('voyager.shop.countries.index');
-    Route::get('currencies', $namespace . 'CurrenciesController@index')->name('voyager.shop.currencies.index');
-    Route::get('taxes', $namespace . 'TaxesController@index')->name('voyager.shop.taxes.index');
-    Route::get('cards', $namespace . 'CardsController@index')->name('voyager.shop.cards.index');
+    Route::get('orders', $namespace . 'OrdersController@index')->name('voyager.orders.index');
+    Route::get('products', $namespace . 'ProductsController@index')->name('voyager.products.index');
+    Route::get('product-variants', $namespace . 'ProductVariantsController@index')->name('voyager.product-variants.index');
+    Route::get('countries', $namespace . 'CountriesController@index')->name('voyager.countries.index');
+    Route::get('currencies', $namespace . 'CurrenciesController@index')->name('voyager.currencies.index');
+    Route::get('taxes', $namespace . 'TaxesController@index')->name('voyager.taxes.index');
+    Route::get('cards', $namespace . 'CardsController@index')->name('voyager.cards.index');
 });

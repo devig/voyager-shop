@@ -37,7 +37,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             $menu->items->add($parentItem);
             
             // orders
-            $route = 'voyager.shop.orders.index';
+            $route = 'voyager.orders.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [
@@ -52,7 +52,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // products
-            $route = 'voyager.shop.products.index';
+            $route = 'voyager.products.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [
@@ -67,7 +67,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // product variants
-            $route = 'voyager.shop.product-variants.index';
+            $route = 'voyager.product-variants.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [
@@ -82,7 +82,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // country
-            $route = 'voyager.shop.countries.index';
+            $route = 'voyager.countries.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [
@@ -97,7 +97,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // currency
-            $route = 'voyager.shop.currencies.index';
+            $route = 'voyager.currencies.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [
@@ -112,7 +112,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // taxes
-            $route = 'voyager.shop.taxes.index';
+            $route = 'voyager.taxes.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [
@@ -127,7 +127,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // cards
-            $route = 'voyager.shop.cards.index';
+            $route = 'voyager.cards.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [

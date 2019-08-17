@@ -13,4 +13,18 @@
 return [
     'label_singular' => 'Order',
     'label_plural' => 'Orders',
+
+    'data_rows' => [
+        'id' => 'ID',
+        'token' => 'Token',
+        'state' => 'State',
+        'states' => [
+            'cart' => 'Cart',
+            'pending' => 'Pending',
+            'billed' => 'Billed',
+            'canceled' => 'Canceled',
+            'declined' => 'Declined',
+            'refunded' => 'Refunded',
+        ],
+    ],
 ];
