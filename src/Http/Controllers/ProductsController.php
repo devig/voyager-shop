@@ -28,11 +28,11 @@ class ProductsController extends VoyagerBaseController
             'slug' => 'required|min:3',
             'description' => 'required|min:3',
 
-            'includes_tax' => 'required|boolean',
-
-            'tax_id' => 'required|exists:taxes,id',
+            'includes_tax' => 'sometimes|required|boolean',
 
             'project_id' => 'required|exists:projects,id',
+
+            'tax_id' => 'required|exists:taxes,id',
         ];
     }
 

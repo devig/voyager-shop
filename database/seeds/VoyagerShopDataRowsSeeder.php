@@ -17,6 +17,188 @@ class VoyagerShopDataRowsSeeder extends Seeder
     public function run()
     {
         $this->orders();
+        $this->products();
+    }
+
+    private function products()
+    {
+        DB::transaction(function () {
+            // get the data type
+            $data_type = DataType::where('slug', 'products')->firstOrFail();
+
+            // field id
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => trans('shop::products.data_rows.id'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field name
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'name',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::products.data_rows.name'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field slug
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'slug',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::products.data_rows.slug'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field description
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'description',
+            ], [
+                'type' => 'text_area',
+                'display_name' => trans('shop::products.data_rows.description'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field includes_tax
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'includes_tax',
+            ], [
+                'type' => 'checkbox',
+                'display_name' => trans('shop::products.data_rows.includes_tax'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'checked' => false,
+                ],
+                'order' => 1,
+            ]);
+
+            // field project_id
+            $field_project_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'project_id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => 'Hidden project id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [],
+                'order' => 1,
+            ]);
+
+            // field project
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'product_belongsto_project_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => 'Project',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => "Tjventurini\\VoyagerProjects\\Models\\Project",
+                    'table' => 'projects',
+                    'type' => 'belongsTo',
+                    'column' => 'project_id',
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field project_id
+            $field_project_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'project_id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => 'Hidden project id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [],
+                'order' => 1,
+            ]);
+
+            // field project
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'product_belongsto_tax_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => 'Tax',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Tax",
+                    'table' => 'taxes',
+                    'type' => 'belongsTo',
+                    'column' => 'tax_id',
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+        });
     }
 
     private function orders()

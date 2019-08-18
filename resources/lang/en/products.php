@@ -13,4 +13,12 @@
 return [
     'label_singular' => 'Product',
     'label_plural' => 'Products',
+
+    'data_rows' => [
+        'id' => 'ID',
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'description' => 'Description',
+        'includes_tax' => 'Tax Included',
+    ],
 ];
