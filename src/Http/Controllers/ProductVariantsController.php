@@ -25,14 +25,10 @@ class ProductVariantsController extends VoyagerBaseController
     {
         return [
             'name' => 'required|min:3',
-            'slug' => 'required|min:3',
-            'description' => 'required|min:3',
+            'details' => 'required|min:3',
+            'price' => 'required|numeric',
 
-            'includes_tax' => 'required|boolean',
-
-            'tax_id' => 'required|exists:taxes,id',
-
-            'project_id' => 'required|exists:projects,id',
+            'product_id' => 'required|exists:products,id',
         ];
     }
 
