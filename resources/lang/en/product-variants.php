@@ -13,4 +13,11 @@
 return [
     'label_singular' => 'Product Variant',
     'label_plural' => 'Product Variants',
+
+    'data_rows' => [
+        'id' => 'ID',
+        'name' => 'Name',
+        'details' => 'Details',
+        'price' => 'Price',
+    ],
 ];

@@ -18,6 +18,129 @@ class VoyagerShopDataRowsSeeder extends Seeder
     {
         $this->orders();
         $this->products();
+        $this->productVariants();
+    }
+
+    private function productVariants()
+    {
+        DB::transaction(function () {
+            // get the data type
+            $data_type = DataType::where('slug', 'product-variants')->firstOrFail();
+
+            // field id
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => trans('shop::product-variants.data_rows.id'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field name
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'name',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::product-variants.data_rows.name'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field details
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'details',
+            ], [
+                'type' => 'text_area',
+                'display_name' => trans('shop::product-variants.data_rows.details'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field price
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'price',
+            ], [
+                'type' => 'number',
+                'display_name' => trans('shop::product-variants.data_rows.price'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'step' => 0.01,
+                    'min' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field product_id
+            $field_product_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'product_id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => 'Hidden product id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [],
+                'order' => 1,
+            ]);
+
+            // field product
+            $field_product = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'product-variant_belongsto_project_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => 'Product',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Product",
+                    'table' => 'products',
+                    'type' => 'belongsTo',
+                    'column' => 'product_id',
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+        });
     }
 
     private function products()
@@ -44,7 +167,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ]);
 
             // field name
-            $field_id = DataRow::updateOrCreate([
+            $field_name = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'name',
             ], [
@@ -61,7 +184,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ]);
 
             // field slug
-            $field_id = DataRow::updateOrCreate([
+            $field_slug = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'slug',
             ], [
@@ -78,7 +201,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ]);
 
             // field description
-            $field_id = DataRow::updateOrCreate([
+            $field_description = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'description',
             ], [
@@ -95,7 +218,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ]);
 
             // field includes_tax
-            $field_id = DataRow::updateOrCreate([
+            $field_includes_tax = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'includes_tax',
             ], [
@@ -131,7 +254,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ]);
 
             // field project
-            $field_name = DataRow::updateOrCreate([
+            $field_project = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'product_belongsto_project_relationship',
             ], [
@@ -156,13 +279,13 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'order' => 1,
             ]);
 
-            // field project_id
-            $field_project_id = DataRow::updateOrCreate([
+            // field tax_id
+            $field_tax_id = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
-                'field' => 'project_id',
+                'field' => 'tax_id',
             ], [
                 'type' => 'hidden',
-                'display_name' => 'Hidden project id',
+                'display_name' => 'Hidden tax id',
                 'required' => 1,
                 'browse' => 1,
                 'read' => 1,
@@ -173,8 +296,8 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'order' => 1,
             ]);
 
-            // field project
-            $field_name = DataRow::updateOrCreate([
+            // field tax
+            $field_tax = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'product_belongsto_tax_relationship',
             ], [
@@ -329,7 +452,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ]);
 
             // field user
-            $field_name = DataRow::updateOrCreate([
+            $field_user = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'page_belongsto_user_relationship',
             ], [
