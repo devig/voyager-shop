@@ -26,5 +26,7 @@ return [
             'declined' => 'Declined',
             'refunded' => 'Refunded',
         ],
+        'created_at' => 'Created at',
+        'updated_at' => 'Updated at',
     ],
 ];

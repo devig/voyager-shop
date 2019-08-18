@@ -129,6 +129,23 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'order' => 1,
             ]);
 
+            // field user_id
+            $field_user_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'user_id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => 'Hidden user id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [],
+                'order' => 1,
+            ]);
+
             // field user
             $field_name = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
@@ -161,7 +178,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'field' => 'created_at',
             ], [
                 'type' => 'timestamp',
-                'display_name' => trans('orders::orders.data_rows.created_at'),
+                'display_name' => trans('shop::orders.data_rows.created_at'),
                 'required' => 1,
                 'browse' => 0,
                 'read' => 1,
@@ -178,7 +195,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'field' => 'updated_at',
             ], [
                 'type' => 'timestamp',
-                'display_name' => trans('orders::orders.data_rows.updated_at'),
+                'display_name' => trans('shop::orders.data_rows.updated_at'),
                 'required' => 1,
                 'browse' => 0,
                 'read' => 1,

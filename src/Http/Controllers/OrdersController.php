@@ -24,15 +24,9 @@ class OrdersController extends VoyagerBaseController
     private function rules(): array
     {
         return [
-            'name' => 'required|min:3',
-            'slug' => 'required|min:3',
-            'description' => 'required|min:3',
-
-            'includes_tax' => 'required|boolean',
-
-            'tax_id' => 'required|exists:taxes,id',
-
+            'state' => 'required|in:cart,pending,billed,canceled,declined,refunded',
             'project_id' => 'required|exists:projects,id',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 

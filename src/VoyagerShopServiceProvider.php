@@ -4,6 +4,8 @@ namespace Tjventurini\VoyagerShop;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
+use Tjventurini\VoyagerShop\Models\Order;
+use Tjventurini\VoyagerShop\Observers\OrderObserver;
 use Tjventurini\VoyagerShop\Console\Commands\VoyagerShopInstall;
 
 class VoyagerShopServiceProvider extends ServiceProvider
@@ -53,6 +55,9 @@ class VoyagerShopServiceProvider extends ServiceProvider
                 VoyagerShopInstall::class,
             ]);
         }
+
+        // observers
+        Order::observe(OrderObserver::class);
     }
 
     /**
