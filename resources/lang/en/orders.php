@@ -26,6 +26,8 @@ return [
             'declined' => 'Declined',
             'refunded' => 'Refunded',
         ],
+        'project' => 'Project',
+        'user' => 'User',
         'created_at' => 'Created at',
         'updated_at' => 'Updated at',
     ],

@@ -20,5 +20,9 @@ return [
         'slug' => 'Slug',
         'description' => 'Description',
         'includes_tax' => 'Tax Included',
+        'project' => 'Project',
+        'tax' => 'Tax',
+        'created_at' => 'Created at',
+        'updated_at' => 'Updated at',
     ],
 ];

@@ -18,6 +18,7 @@ return [
         'id' => 'ID',
         'name' => 'Name',
         'code' => 'Code',
+        'project' => 'Project',
         'created_at' => 'Created at',
         'updated_at' => 'Updated at',
     ],

@@ -19,5 +19,6 @@ return [
         'name' => 'Name',
         'details' => 'Details',
         'price' => 'Price',
+        'product' => 'Product',
     ],
 ];
