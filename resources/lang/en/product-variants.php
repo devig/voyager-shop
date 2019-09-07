@@ -20,5 +20,7 @@ return [
         'details' => 'Details',
         'price' => 'Price',
         'product' => 'Product',
+        'created_at' => 'Created at',
+        'updated_at' => 'Updated at',
     ],
 ];

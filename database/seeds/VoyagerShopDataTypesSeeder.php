@@ -127,7 +127,7 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'display_name_singular' => trans('shop::cards.label_singular'),
                 'display_name_plural' => trans('shop::cards.label_plural'),
                 'icon' => 'voyager-credit-cards',
-                'model_name' => \Tjventurini\VoyagerShop\Models\Cards::class,
+                'model_name' => \Tjventurini\VoyagerShop\Models\Card::class,
                 'policy_name' => null,
                 'controller' => \Tjventurini\VoyagerShop\Http\Controllers\CardsController::class,
                 'description' => '',

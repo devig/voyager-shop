@@ -13,4 +13,12 @@
 return [
     'label_singular' => 'Currency',
     'label_plural' => 'Currencies',
+
+    'data_rows' => [
+        'name' => 'Name',
+        'code' => 'Code',
+        'sign' => 'Sign',
+        'project' => 'Project',
+        'country' => 'Country',
+    ]
 ];

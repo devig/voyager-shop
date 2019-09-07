@@ -25,14 +25,11 @@ class CardsController extends VoyagerBaseController
     {
         return [
             'name' => 'required|min:3',
-            'slug' => 'required|min:3',
-            'description' => 'required|min:3',
-
-            'includes_tax' => 'required|boolean',
-
-            'tax_id' => 'required|exists:taxes,id',
-
+            'brand' => 'required|min:3',
+            'last_four' => 'required|digits:4',
+            'stripe_id' => 'required|min:3',
             'project_id' => 'required|exists:projects,id',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 
