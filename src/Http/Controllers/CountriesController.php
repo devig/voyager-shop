@@ -26,7 +26,7 @@ class CountriesController extends VoyagerBaseController
         return [
             'name' => 'required|min:3',
             'code' => 'required|regex:/^[A-Z]{2}$/',
-            'project_id' => 'required|exists:projects,id',
+            'country_belongsto_project_relationship' => 'required|exists:projects,id',
         ];
     }
 
