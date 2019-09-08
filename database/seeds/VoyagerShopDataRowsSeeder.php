@@ -44,7 +44,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -61,7 +61,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -78,7 +78,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -87,7 +87,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'data_type_id' => $data_type->id,
                 'field' => 'project_id',
             ], [
-                'type' => 'text',
+                'type' => 'hidden',
                 'display_name' => 'Hidden project id',
                 'required' => 1,
                 'browse' => 1,
@@ -100,7 +100,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ]);
 
             // field project
-            $field_project = DataRow::updateOrCreate([
+            $field_name = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
                 'field' => 'country_belongsto_project_relationship',
             ], [
@@ -113,7 +113,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => [
-                    'model' => "Tjventurini\\VoyagerProjects\\Models\\Project",
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Project",
                     'table' => 'projects',
                     'type' => 'belongsTo',
                     'column' => 'project_id',
@@ -138,7 +138,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -155,7 +155,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
         });
@@ -180,7 +180,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -197,7 +197,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -214,7 +214,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -258,7 +258,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             // field product
             $field_product = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
-                'field' => 'product-variant_belongsto_project_relationship',
+                'field' => 'product-variant_belongsto_product_relationship',
             ], [
                 'type' => 'relationship',
                 'display_name' => trans('shop::product-variants.data_rows.product'),
@@ -294,7 +294,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -311,7 +311,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
         });
@@ -336,7 +336,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -353,7 +353,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -370,7 +370,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -387,7 +387,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -441,7 +441,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => [
-                    'model' => "Tjventurini\\VoyagerProjects\\Models\\Project",
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Project",
                     'table' => 'projects',
                     'type' => 'belongsTo',
                     'column' => 'project_id',
@@ -509,7 +509,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -526,7 +526,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
         });
@@ -551,7 +551,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -568,7 +568,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -630,7 +630,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => [
-                    'model' => "Tjventurini\\VoyagerProjects\\Models\\Project",
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Project",
                     'table' => 'projects',
                     'type' => 'belongsTo',
                     'column' => 'project_id',
@@ -698,7 +698,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -715,7 +715,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
         });
@@ -745,7 +745,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -762,7 +762,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -816,7 +816,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => [
-                    'model' => "Tjventurini\\VoyagerProjects\\Models\\Project",
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Project",
                     'table' => 'projects',
                     'type' => 'belongsTo',
                     'column' => 'project_id',
@@ -884,7 +884,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -901,7 +901,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
         });
@@ -931,7 +931,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -948,7 +948,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -965,7 +965,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -982,7 +982,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1017,7 +1017,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => [
-                    'model' => "Tjventurini\\VoyagerProjects\\Models\\Project",
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Project",
                     'table' => 'projects',
                     'type' => 'belongsTo',
                     'column' => 'project_id',
@@ -1085,7 +1085,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1102,7 +1102,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
         });
@@ -1132,7 +1132,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1149,7 +1149,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1166,7 +1166,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1183,7 +1183,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1200,7 +1200,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1235,7 +1235,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => [
-                    'model' => "Tjventurini\\VoyagerProjects\\Models\\Project",
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Project",
                     'table' => 'projects',
                     'type' => 'belongsTo',
                     'column' => 'project_id',
@@ -1303,7 +1303,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1320,7 +1320,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => json_encode([]),
+                'details' => [],
                 'order' => 1,
             ]);
         });
