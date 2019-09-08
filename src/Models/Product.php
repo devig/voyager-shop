@@ -4,10 +4,13 @@ namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Tjventurini\VoyagerShop\Traits\BelongsToProject;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
+    use BelongsToProject;
+    
     protected $guarded = ['id'];
 
     /*
@@ -18,18 +21,6 @@ class Product extends Model
     | In this section you will find all relationships of this model.
     |
     */
-    
-    /**
-     * Relationship with project model.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function project(): BelongsTo
-    {
-        $model = config('voyager-shop.models.project');
-        $project_id = config('voyager-shop.foreign_keys.project');
-
-        return $this->belongsTo($model, $project_id);
-    }
 
     /**
      * Relationship with tax model.
