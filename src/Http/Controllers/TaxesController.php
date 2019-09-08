@@ -26,8 +26,8 @@ class TaxesController extends VoyagerBaseController
         return [
             'name' => 'required|min:3',
             'tax' => 'required|digits:2',
-            'project_id' => 'required|exists:projects,id',
-            'country_id' => 'required|exists:countries,id',
+            'tax_belongsto_project_relationship' => 'required|exists:projects,id',
+            'tax_belongsto_country_relationship' => 'required|exists:countries,id',
         ];
     }
 

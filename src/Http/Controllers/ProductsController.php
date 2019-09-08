@@ -30,9 +30,9 @@ class ProductsController extends VoyagerBaseController
 
             'includes_tax' => 'sometimes|required|boolean',
 
-            'project_id' => 'required|exists:projects,id',
+            'product_belongsto_project_relationship' => 'required|exists:projects,id',
 
-            'tax_id' => 'required|exists:taxes,id',
+            'product_belongsto_tax_relationship' => 'required|exists:taxes,id',
         ];
     }
 
