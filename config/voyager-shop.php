@@ -25,7 +25,7 @@ return [
 
     'models' => [
         'user' => \App\User::class,
-        'project' => \Tjventurini\VoyagerProjects\Models\Project::class,
+        'project' => \Tjventurini\VoyagerShop\Models\Project::class,
         'country' => \Tjventurini\VoyagerShop\Models\Country::class,
         'tax' => \Tjventurini\VoyagerShop\Models\Tax::class,
         'order' => \Tjventurini\VoyagerShop\Models\Order::class,
