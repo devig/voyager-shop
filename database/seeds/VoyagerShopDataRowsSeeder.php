@@ -44,7 +44,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -61,7 +61,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -78,24 +78,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
-                'order' => 1,
-            ]);
-
-            // field project_id
-            $field_project_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'project_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden project id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -138,7 +121,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -155,7 +138,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
         });
@@ -180,7 +163,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -197,7 +180,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -214,7 +197,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -235,23 +218,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'step' => 0.01,
                     'min' => 0,
                 ],
-                'order' => 1,
-            ]);
-
-            // field product_id
-            $field_product_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'product_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden product id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -294,7 +260,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -311,7 +277,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
         });
@@ -336,7 +302,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -353,7 +319,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -370,7 +336,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -387,7 +353,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -407,23 +373,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'details' => [
                     'checked' => false,
                 ],
-                'order' => 1,
-            ]);
-
-            // field project_id
-            $field_project_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'project_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden project id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -450,23 +399,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'pivot' => 0,
                     'taggable' => 0,
                 ],
-                'order' => 1,
-            ]);
-
-            // field tax_id
-            $field_tax_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'tax_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden tax id',
-                'required' => 1,
-                'browse' => 0,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -509,7 +441,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -526,7 +458,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
         });
@@ -551,7 +483,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -568,7 +500,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -599,23 +531,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'order' => 1,
             ]);
 
-            // field project_id
-            $field_project_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'project_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden project id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
-                'order' => 1,
-            ]);
-
             // field project
             $field_name = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
@@ -639,23 +554,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'pivot' => 0,
                     'taggable' => 0,
                 ],
-                'order' => 1,
-            ]);
-
-            // field user_id
-            $field_user_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'user_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden user id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -698,7 +596,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -715,7 +613,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
         });
@@ -745,7 +643,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -762,7 +660,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -782,23 +680,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'details' => [
                     "step" => 0.01
                 ],
-                'order' => 1,
-            ]);
-
-            // field project_id
-            $field_project_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'project_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden project id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -825,23 +706,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'pivot' => 0,
                     'taggable' => 0,
                 ],
-                'order' => 1,
-            ]);
-
-            // field country_id
-            $field_country_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'country_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden country id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -884,7 +748,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -901,7 +765,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
         });
@@ -931,7 +795,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -948,7 +812,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -965,7 +829,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -982,24 +846,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
-                'order' => 1,
-            ]);
-
-            // field project_id
-            $field_project_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'project_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden project id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1026,23 +873,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'pivot' => 0,
                     'taggable' => 0,
                 ],
-                'order' => 1,
-            ]);
-
-            // field country_id
-            $field_country_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'country_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden country id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1085,7 +915,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1102,7 +932,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
         });
@@ -1132,7 +962,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1149,7 +979,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1166,7 +996,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1183,7 +1013,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1200,24 +1030,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => [],
-                'order' => 1,
-            ]);
-
-            // field project_id
-            $field_project_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'project_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden project id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1244,23 +1057,6 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'pivot' => 0,
                     'taggable' => 0,
                 ],
-                'order' => 1,
-            ]);
-
-            // field user_id
-            $field_user_id = DataRow::updateOrCreate([
-                'data_type_id' => $data_type->id,
-                'field' => 'user_id',
-            ], [
-                'type' => 'hidden',
-                'display_name' => 'Hidden user id',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => [],
                 'order' => 1,
             ]);
 
@@ -1303,7 +1099,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
 
@@ -1320,7 +1116,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'edit' => 0,
                 'add' => 0,
                 'delete' => 1,
-                'details' => [],
+                'details' => json_encode([]),
                 'order' => 1,
             ]);
         });
