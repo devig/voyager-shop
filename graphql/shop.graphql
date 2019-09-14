@@ -8,11 +8,14 @@ extend type Query @middleware(checks: ["projectToken"]) {
     taxes: [Tax!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Tax")
     tax(id: ID!): Tax! @find(model: "Tjventurini\\VoyagerShop\\Models\\Tax")
     currencies: [Currency!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Currency")
-    currency(id: ID!): Currency! @find(model: "Tjventurini\\VoyagerShop\\Models\\Currency")
+    currency(code: String! @eq): Currency! @find(model: "Tjventurini\\VoyagerShop\\Models\\Currency")
 }
 
 ##########################################
 # Mutations
+extend type Mutation @middleware(checks: ["projectToken"]) {
+    createCart: Order!
+}
 
 ##########################################
 # Types
@@ -61,6 +64,14 @@ type Currency {
     sign: String!
     project: Project!
     country: Country!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Order {
+    token: String!
+    state: String!
+    user: User
+    project: Project!
     created_at: DateTime!
     updated_at: DateTime
 }

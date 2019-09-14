@@ -14,6 +14,10 @@ class Order extends Model
 
     protected $guarded = ['id'];
 
+    protected $attributes = [
+        'state' => 'cart',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | Relationships

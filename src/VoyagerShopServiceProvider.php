@@ -58,6 +58,18 @@ class VoyagerShopServiceProvider extends ServiceProvider
 
         // observers
         Order::observe(OrderObserver::class);
+
+        // update lighthouse configurationc
+        config(
+            [
+                'lighthouse.namespaces.mutations' => array_merge(
+                    [
+                        'Tjventurini\\VoyagerShop\\GraphQL\\Mutations'
+                    ],
+                    (!is_array(config('lighthouse.namespaces.mutations'))) ? [config('lighthouse.namespaces.mutations')] : config('lighthouse.namespaces.mutations')
+                )
+            ]
+        );
     }
 
     /**
