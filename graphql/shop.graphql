@@ -80,7 +80,6 @@ type Order {
     updated_at: DateTime
 }
 type OrderItem {
-    id: ID!
     order: Order!
     productVariant: ProductVariant!
     created_at: DateTime!
