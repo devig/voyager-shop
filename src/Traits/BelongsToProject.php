@@ -12,6 +12,8 @@
 
 namespace Tjventurini\VoyagerShop\Traits;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 trait BelongsToProject
 {
     /**

@@ -28,8 +28,8 @@ class CurrenciesController extends VoyagerBaseController
             'code' => 'required|regex:/^[A-Z]{3}$/',
             'sign' => 'required|min:1|max:1',
 
-            'project_id' => 'required|exists:projects,id',
-            'country_id' => 'required|exists:countries,id',
+            'currency_belongsto_project_relationship' => 'required|exists:projects,id',
+            'currency_belongsto_country_relationship' => 'required|exists:countries,id',
         ];
     }
 

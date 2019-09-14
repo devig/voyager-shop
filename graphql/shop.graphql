@@ -1,0 +1,66 @@
+##########################################
+# Queries
+extend type Query @middleware(checks: ["projectToken"]) {
+    products: [Product!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Product")
+    product(slug: String! @eq): Product! @find(model: "Tjventurini\\VoyagerShop\\Models\\Product")
+    countries: [Country!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Country")
+    country(code: String! @eq): Country! @find(model: "Tjventurini\\VoyagerShop\\Models\\Country")
+    taxes: [Tax!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Tax")
+    tax(id: ID!): Tax! @find(model: "Tjventurini\\VoyagerShop\\Models\\Tax")
+    currencies: [Currency!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Currency")
+    currency(id: ID!): Currency! @find(model: "Tjventurini\\VoyagerShop\\Models\\Currency")
+}
+
+##########################################
+# Mutations
+
+##########################################
+# Types
+type Product {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String
+    includes_tax: Boolean!
+    tax: Tax!
+    project: Project!
+    productVariants: [ProductVariant!]!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type ProductVariant {
+    id: ID!
+    name: String!
+    details: String!
+    price: Float!
+    product: Product!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Country {
+    id: ID!
+    name: String!
+    code: String!
+    project: Project!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Tax {
+    id: ID!
+    name: String!
+    tax: Int!
+    project: Project!
+    country: Country!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Currency {
+    id: ID!
+    name: String!
+    code: String!
+    sign: String!
+    project: Project!
+    country: Country!
+    created_at: DateTime!
+    updated_at: DateTime
+}
