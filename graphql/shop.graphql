@@ -10,14 +10,16 @@ extend type Query @middleware(checks: ["projectToken"]) {
     currencies: [Currency!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Currency")
     currency(code: String! @eq): Currency! @find(model: "Tjventurini\\VoyagerShop\\Models\\Currency")
 
-    cart(token: String! @eq): Order! @find(model: "Tjventurini\\VoyagerShop\\Models\\Order")
+    cart(token: String! @eq): Order! @find(model: "Tjventurini\\VoyagerShop\\Models\\Order") @middleware(checks: ["auth:api"])
+    orders: [Order!] @middleware(checks: ["auth:api"])
 }
 
 ##########################################
 # Mutations
-extend type Mutation @middleware(checks: ["projectToken"]) {
+extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
     createCart: Order!
     addToCart(token: String! item: ID!): Order!
+    removeFromCart(token: String! item: ID!): Order!
 }
 
 ##########################################
@@ -84,4 +86,7 @@ type OrderItem {
     productVariant: ProductVariant!
     created_at: DateTime!
     updated_at: DateTime
+}
+extend type User {
+    orders: [Order!]!
 }

@@ -67,6 +67,12 @@ class VoyagerShopServiceProvider extends ServiceProvider
                         'Tjventurini\\VoyagerShop\\GraphQL\\Mutations'
                     ],
                     (!is_array(config('lighthouse.namespaces.mutations'))) ? [config('lighthouse.namespaces.mutations')] : config('lighthouse.namespaces.mutations')
+                ),
+                'lighthouse.namespaces.queries' => array_merge(
+                    [
+                        'Tjventurini\\VoyagerShop\\GraphQL\\Queries'
+                    ],
+                    (!is_array(config('lighthouse.namespaces.queries'))) ? [config('lighthouse.namespaces.queries')] : config('lighthouse.namespaces.queries')
                 )
             ]
         );
