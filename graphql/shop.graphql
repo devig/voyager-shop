@@ -9,6 +9,8 @@ extend type Query @middleware(checks: ["projectToken"]) {
     tax(id: ID!): Tax! @find(model: "Tjventurini\\VoyagerShop\\Models\\Tax")
     currencies: [Currency!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Currency")
     currency(code: String! @eq): Currency! @find(model: "Tjventurini\\VoyagerShop\\Models\\Currency")
+
+    cart(token: String! @eq): Order! @find(model: "Tjventurini\\VoyagerShop\\Models\\Order")
 }
 
 ##########################################
