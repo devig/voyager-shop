@@ -34,8 +34,8 @@ class Order extends Model
     public function orderItems(): HasMany
     {
         $model = config('voyager-shop.models.orderItem');
-        $order_item_id = config('voyager-shop.foreign_keys.orderItem');
+        $order_id = config('voyager-shop.foreign_keys.order');
 
-        return $this->belongsTo($model, $order_item_id);
+        return $this->hasMany($model, $order_id);
     }
 }

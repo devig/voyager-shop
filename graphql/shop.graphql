@@ -15,6 +15,7 @@ extend type Query @middleware(checks: ["projectToken"]) {
 # Mutations
 extend type Mutation @middleware(checks: ["projectToken"]) {
     createCart: Order!
+    addToCart(token: String! item: ID!): Order!
 }
 
 ##########################################
@@ -72,6 +73,14 @@ type Order {
     state: String!
     user: User
     project: Project!
+    orderItems: [OrderItem!]
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type OrderItem {
+    id: ID!
+    order: Order!
+    productVariant: ProductVariant!
     created_at: DateTime!
     updated_at: DateTime
 }

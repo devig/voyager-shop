@@ -3,10 +3,12 @@
 namespace Tjventurini\VoyagerShop\GraphQL\Mutations;
 
 use GraphQL\Type\Definition\ResolveInfo;
+use Tjventurini\VoyagerShop\Models\Order;
+use Tjventurini\VoyagerShop\Models\ProductVariant;
 use Tjventurini\VoyagerShop\Services\OrderService;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class CreateCart
+class AddToCart
 {
     /**
      * Return a value for the field.
@@ -19,7 +21,11 @@ class CreateCart
      */
     public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
+        $Order = Order::where('token', $args['token'])->firstOrFail();
+
+        $ProductVariant = ProductVariant::findOrFail($args['item']);
+
         $OrderService = new OrderService();
-        return $OrderService->createCart();
+        return $OrderService->addToCart($Order, $ProductVariant);
     }
 }
