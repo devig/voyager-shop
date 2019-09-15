@@ -5,7 +5,7 @@ namespace Tjventurini\VoyagerShop\Http\Controllers;
 use Illuminate\Http\Request;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
-class OrdersController extends VoyagerBaseController
+class OrderItemsController extends VoyagerBaseController
 {
     /**
      * General validation.
@@ -25,8 +25,8 @@ class OrdersController extends VoyagerBaseController
     {
         return [
             'state' => 'required|in:cart,pending,billed,canceled,declined,refunded',
-            'order_belongsto_project_relationship' => 'required|exists:projects,id',
-            'order_belongsto_user_relationship' => 'required|exists:users,id',
+            'project_id' => 'required|exists:projects,id',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 

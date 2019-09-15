@@ -17,6 +17,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
     public function run()
     {
         $this->orders();
+        $this->orderItems();
         $this->products();
         $this->productVariants();
         $this->countries();
@@ -148,7 +149,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
     {
         DB::transaction(function () {
             // get the data type
-            $data_type = DataType::where('slug', 'product-variants')->firstOrFail();
+            $data_type = DataType::where('slug', 'product_variants')->firstOrFail();
 
             // field id
             $field_id = DataRow::updateOrCreate([
@@ -224,7 +225,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             // field product
             $field_product = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
-                'field' => 'product-variant_belongsto_product_relationship',
+                'field' => 'product_variant_belongsto_product_relationship',
             ], [
                 'type' => 'relationship',
                 'display_name' => trans('shop::product-variants.data_rows.product'),
@@ -607,6 +608,143 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ], [
                 'type' => 'timestamp',
                 'display_name' => trans('shop::orders.data_rows.updated_at'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+        });
+    }
+
+    /**
+     * Create data rows for the order items type.
+     *
+     * @return void
+     */
+    private function orderItems(): void
+    {
+        DB::transaction(function () {
+
+            // get the data type
+            $data_type = DataType::where('slug', 'order_items')->firstOrFail();
+
+            // field id
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => trans('shop::order-items.data_rows.id'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field product-variant
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'order_item_belongsto_product-variant_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::order-items.data_rows.product-variant'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\ProductVariant",
+                    'table' => 'product_variants',
+                    'type' => 'belongsTo',
+                    'column' => 'product_variant_id',
+                    'key' => 'id',
+                    'label' => 'token',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field quantity
+            $field_quantity = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'quantity',
+            ], [
+                'type' => 'number',
+                'display_name' => trans('shop::order-items.data_rows.quantity'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'step' => 1,
+                    'min' => 1,
+                ],
+                'order' => 1,
+            ]);
+
+            // field order
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'order_item_belongsto_order_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::order-items.data_rows.order'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => "Tjventurini\\VoyagerShop\\Models\\Order",
+                    'table' => 'orders',
+                    'type' => 'belongsTo',
+                    'column' => 'order_id',
+                    'key' => 'id',
+                    'label' => 'token',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field created_at
+            $field_created_at = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'created_at',
+            ], [
+                'type' => 'timestamp',
+                'display_name' => trans('shop::order-items.data_rows.created_at'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field updated_at
+            $field_updated_at = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'updated_at',
+            ], [
+                'type' => 'timestamp',
+                'display_name' => trans('shop::order-items.data_rows.updated_at'),
                 'required' => 1,
                 'browse' => 0,
                 'read' => 1,

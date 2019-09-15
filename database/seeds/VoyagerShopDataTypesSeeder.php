@@ -16,15 +16,31 @@ class VoyagerShopDataTypesSeeder extends Seeder
     public function run()
     {
         DB::transaction(function () {
+            $this->orders();
+            $this->orderItems();
+            $this->products();
+            $this->productVariants();
+            $this->countries();
+            $this->currencies();
+            $this->taxes();
+            $this->cards();
+        });
+    }
 
-            // orders
-            $orders = DataType::updateOrCreate([
+    /**
+     * Create orders data types.
+     *
+     * @return void
+     */
+    private function orders(): void
+    {
+        $orders = DataType::updateOrCreate([
                 'slug' => 'orders',
             ], [
                 'name' => 'orders',
                 'display_name_singular' => trans('shop::orders.label_singular'),
                 'display_name_plural' => trans('shop::orders.label_plural'),
-                'icon' => 'voyager-bag',
+                'icon' => 'voyager-basket',
                 'model_name' => \Tjventurini\VoyagerShop\Models\Order::class,
                 'policy_name' => null,
                 'controller' => \Tjventurini\VoyagerShop\Http\Controllers\OrdersController::class,
@@ -33,9 +49,40 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
+    }
 
-            // products
-            $products = DataType::updateOrCreate([
+    /**
+     * Create order items data types.
+     *
+     * @return void
+     */
+    private function orderItems(): void
+    {
+        $orders = DataType::updateOrCreate([
+                'slug' => 'order_items',
+            ], [
+                'name' => 'order_items',
+                'display_name_singular' => trans('shop::order-items.label_singular'),
+                'display_name_plural' => trans('shop::order-items.label_plural'),
+                'icon' => 'voyager-bag',
+                'model_name' => \Tjventurini\VoyagerShop\Models\OrderItem::class,
+                'policy_name' => null,
+                'controller' => \Tjventurini\VoyagerShop\Http\Controllers\OrderItemsController::class,
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => null,
+            ]);
+    }
+
+    /**
+     * Create products data types.
+     *
+     * @return void
+     */
+    private function products(): void
+    {
+        $products = DataType::updateOrCreate([
                 'slug' => 'products',
             ], [
                 'name' => 'products',
@@ -50,12 +97,19 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
+    }
 
-            // product-variants
-            $product_variants = DataType::updateOrCreate([
-                'slug' => 'product-variants',
+    /**
+     * Create prodict variants data type.
+     *
+     * @return void
+     */
+    private function productVariants(): void
+    {
+        $product_variants = DataType::updateOrCreate([
+                'slug' => 'product_variants',
             ], [
-                'name' => 'product-variants',
+                'name' => 'product_variants',
                 'display_name_singular' => trans('shop::product-variants.label_singular'),
                 'display_name_plural' => trans('shop::product-variants.label_plural'),
                 'icon' => 'voyager-star-half',
@@ -67,9 +121,17 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
+    }
 
-            // countries
-            $countries = DataType::updateOrCreate([
+    /**
+     * Create countries data type.
+     *
+     * @return void
+     */
+    private function countries(): void
+    {
+        // countries
+        $countries = DataType::updateOrCreate([
                 'slug' => 'countries',
             ], [
                 'name' => 'countries',
@@ -84,9 +146,16 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
+    }
 
-            // currencies
-            $currencies = DataType::updateOrCreate([
+    /**
+     * Create currencies data type.
+     *
+     * @return void
+     */
+    private function currencies(): void
+    {
+        $currencies = DataType::updateOrCreate([
                 'slug' => 'currencies',
             ], [
                 'name' => 'currencies',
@@ -101,9 +170,16 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
+    }
 
-            // taxes
-            $taxes = DataType::updateOrCreate([
+    /**
+     * Create taxes data type.
+     *
+     * @return void
+     */
+    private function taxes(): void
+    {
+        $taxes = DataType::updateOrCreate([
                 'slug' => 'taxes',
             ], [
                 'name' => 'taxes',
@@ -118,9 +194,16 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
+    }
 
-            // cards
-            $cards = DataType::updateOrCreate([
+    /**
+     * Create cards data type.
+     *
+     * @return void
+     */
+    private function cards(): void
+    {
+        $cards = DataType::updateOrCreate([
                 'slug' => 'cards',
             ], [
                 'name' => 'cards',
@@ -135,6 +218,5 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
-        });
     }
 }

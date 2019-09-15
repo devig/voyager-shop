@@ -76,6 +76,63 @@ class VoyagerShopPermissionsSeeder extends Seeder
                 $role->permissions()->attach($delete);
             }
 
+            /////////////////
+            // order items //
+            /////////////////
+
+            // get admin role
+            $role = Role:: where('name', 'admin')->first();
+
+            // check browse permission
+            $browse = Permission::firstOrNew([
+                'key' => 'browse_order_items',
+                'table_name' => 'order_items',
+            ]);
+            if (!$browse->exists) {
+                $browse->save();
+                $role->permissions()->attach($browse);
+            }
+
+            // check read permission
+            $read = Permission::firstOrNew([
+                'key' => 'read_order_items',
+                'table_name' => 'order_items',
+            ]);
+            if (!$read->exists) {
+                $read->save();
+                $role->permissions()->attach($read);
+            }
+
+            // check edit permission
+            $edit = Permission::firstOrNew([
+                'key' => 'edit_order_items',
+                'table_name' => 'order_items',
+            ]);
+            if (!$edit->exists) {
+                $edit->save();
+                $role->permissions()->attach($edit);
+            }
+
+            // check add permission
+            $add = Permission::firstOrNew([
+                'key' => 'add_order_items',
+                'table_name' => 'order_items',
+            ]);
+            if (!$add->exists) {
+                $add->save();
+                $role->permissions()->attach($add);
+            }
+
+            // check delete permission
+            $delete = Permission::firstOrNew([
+                'key' => 'delete_order_items',
+                'table_name' => 'order_items',
+            ]);
+            if (!$delete->exists) {
+                $delete->save();
+                $role->permissions()->attach($delete);
+            }
+
             //////////////
             // products //
             //////////////
@@ -142,8 +199,8 @@ class VoyagerShopPermissionsSeeder extends Seeder
 
             // check browse permission
             $browse = Permission::firstOrNew([
-                'key' => 'browse_product-variants',
-                'table_name' => 'product-variants',
+                'key' => 'browse_product_variants',
+                'table_name' => 'product_variants',
             ]);
             if (!$browse->exists) {
                 $browse->save();
@@ -152,8 +209,8 @@ class VoyagerShopPermissionsSeeder extends Seeder
 
             // check read permission
             $read = Permission::firstOrNew([
-                'key' => 'read_product-variants',
-                'table_name' => 'product-variants',
+                'key' => 'read_product_variants',
+                'table_name' => 'product_variants',
             ]);
             if (!$read->exists) {
                 $read->save();
@@ -162,8 +219,8 @@ class VoyagerShopPermissionsSeeder extends Seeder
 
             // check edit permission
             $edit = Permission::firstOrNew([
-                'key' => 'edit_product-variants',
-                'table_name' => 'product-variants',
+                'key' => 'edit_product_variants',
+                'table_name' => 'product_variants',
             ]);
             if (!$edit->exists) {
                 $edit->save();
@@ -172,8 +229,8 @@ class VoyagerShopPermissionsSeeder extends Seeder
 
             // check add permission
             $add = Permission::firstOrNew([
-                'key' => 'add_product-variants',
-                'table_name' => 'product-variants',
+                'key' => 'add_product_variants',
+                'table_name' => 'product_variants',
             ]);
             if (!$add->exists) {
                 $add->save();
@@ -182,8 +239,8 @@ class VoyagerShopPermissionsSeeder extends Seeder
 
             // check delete permission
             $delete = Permission::firstOrNew([
-                'key' => 'delete_product-variants',
-                'table_name' => 'product-variants',
+                'key' => 'delete_product_variants',
+                'table_name' => 'product_variants',
             ]);
             if (!$delete->exists) {
                 $delete->save();

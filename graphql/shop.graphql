@@ -84,6 +84,7 @@ type Order {
 type OrderItem {
     order: Order!
     productVariant: ProductVariant!
+    quantity: Int!
     created_at: DateTime!
     updated_at: DateTime
 }

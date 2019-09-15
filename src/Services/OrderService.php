@@ -30,6 +30,19 @@ class OrderService
      */
     public function addToCart(Order $Order, ProductVariant $ProductVariant): Order
     {
+        // check if product variant is already in cart
+        $OrderItem = $Order->orderItems()
+            ->where(config('voyager-shop.foreign_keys.productVariant'), $ProductVariant->id)
+            ->first();
+        if (!is_null($OrderItem)) {
+            $quantity = $OrderItem->quantity;
+            $OrderItem->update([
+                'quantity' => $quantity + 1
+            ]);
+            return $Order;
+        }
+
+        // create order item if product variant is not already in cart
         $Order->orderItems()->create([
             config('voyager-shop.foreign_keys.productVariant') => $ProductVariant->id
         ]);

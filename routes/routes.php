@@ -17,8 +17,9 @@ Route::group(['prefix' => config('voyager.prefix')], function () {
 
     // create routes
     Route::get('orders', $namespace . 'OrdersController@index')->name('voyager.orders.index');
+    Route::get('order_items', $namespace . 'OrderItemsController@index')->name('voyager.order_items.index');
     Route::get('products', $namespace . 'ProductsController@index')->name('voyager.products.index');
-    Route::get('product-variants', $namespace . 'ProductVariantsController@index')->name('voyager.product-variants.index');
+    Route::get('product_variants', $namespace . 'ProductVariantsController@index')->name('voyager.product_variants.index');
     Route::get('countries', $namespace . 'CountriesController@index')->name('voyager.countries.index');
     Route::get('currencies', $namespace . 'CurrenciesController@index')->name('voyager.currencies.index');
     Route::get('taxes', $namespace . 'TaxesController@index')->name('voyager.taxes.index');

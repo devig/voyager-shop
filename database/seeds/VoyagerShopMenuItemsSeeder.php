@@ -45,10 +45,25 @@ class VoyagerShopMenuItemsSeeder extends Seeder
                 'menu_id' => $menu->id,
                 'parent_id' => $parentItem->id,
                 'target' => '_self',
-                'icon_class' => 'voyager-bag',
+                'icon_class' => 'voyager-basket',
                 'color' => null,
                 'order' => 1,
                 'title' => trans('shop::orders.label_plural'),
+            ]);
+            
+            // order items
+            $route = 'voyager.order_items.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-bag',
+                'color' => null,
+                'order' => 1,
+                'title' => trans('shop::order-items.label_plural'),
             ]);
 
             // products
@@ -67,7 +82,7 @@ class VoyagerShopMenuItemsSeeder extends Seeder
             ]);
 
             // product variants
-            $route = 'voyager.product-variants.index';
+            $route = 'voyager.product_variants.index';
             $menuItem = MenuItem::updateOrCreate([
                 'route' => $route,
             ], [
