@@ -51,6 +51,11 @@ class VoyagerShopInstall extends Command
         // provision the packages
         $this->provisionPackages();
 
+        // install cashier
+        $this->call('vendor:publish', [
+            '--tag' => 'cashier-migrations'
+        ]);
+
         // run migrations
         $this->runMigrations();
 
