@@ -24,9 +24,9 @@ class OrderItemsController extends VoyagerBaseController
     private function rules(): array
     {
         return [
-            'state' => 'required|in:cart,pending,billed,canceled,declined,refunded',
-            'project_id' => 'required|exists:projects,id',
-            'user_id' => 'required|exists:users,id',
+            'order_item_belongsto_product-variant_relationship' => 'required|exists:product_variants,id',
+            'quantity' => 'required|numeric|min:1',
+            'order_item_belongsto_order_relationship' => 'required|exists:orders,id',
         ];
     }
 

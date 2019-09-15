@@ -78,4 +78,24 @@ class OrderService
     {
         return $User->orders;
     }
+
+    /**
+     * Update item in cart.
+     *
+     * @param  \Tjventurini\VoyagerShop\Models\Order          $Order
+     * @param  \Tjventurini\VoyagerShop\Models\ProductVariant $ProductVariant
+     * @param  array          $data
+     *
+     * @return \Tjventurini\VoyagerShop\Models\Order
+     */
+    public function updateCart(Order $Order, ProductVariant $ProductVariant, array $data): Order
+    {
+        $OrderItem = $Order->orderItems()
+            ->where(config('voyager-shop.foreign_keys.productVariant'), $ProductVariant->id)
+            ->firstOrFail();
+
+        $OrderItem->update($data);
+
+        return $Order;
+    }
 }

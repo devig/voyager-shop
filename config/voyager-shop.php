@@ -20,8 +20,16 @@ return [
     | this package.
     |
     */
-    
-    'tables' => [],
+   
+    'tables' => [
+        'projects' => 'projects',
+        'products' => 'products',
+        'taxes' => 'taxes',
+        'users' => 'users',
+        'productVariants' => 'product_variants',
+        'orders' => 'orders',
+        'countries' => 'countries',
+    ],
 
     'models' => [
         'user' => \App\User::class,
