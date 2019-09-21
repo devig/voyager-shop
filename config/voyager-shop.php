@@ -29,6 +29,7 @@ return [
         'productVariants' => 'product_variants',
         'orders' => 'orders',
         'countries' => 'countries',
+        'cards' => 'cards',
     ],
 
     'models' => [
@@ -40,6 +41,7 @@ return [
         'orderItem' => \Tjventurini\VoyagerShop\Models\OrderItem::class,
         'product' => \Tjventurini\VoyagerShop\Models\Product::class,
         'productVariant' => \Tjventurini\VoyagerShop\Models\ProductVariant::class,
+        'card' => \Tjventurini\VoyagerShop\Models\Card::class,
     ],
 
     'foreign_keys' => [
@@ -51,6 +53,7 @@ return [
         'orderItem' => 'order_item_id',
         'product' => 'product_id',
         'productVariant' => 'product_variant_id',
+        'card' => 'card_id',
     ],
 
 ];

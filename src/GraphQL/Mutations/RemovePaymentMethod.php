@@ -6,7 +6,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Tjventurini\VoyagerShop\Services\StripeService;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class SavePaymentMethod
+class RemovePaymentMethod
 {
     /**
      * Return a value for the field.
@@ -20,6 +20,6 @@ class SavePaymentMethod
     public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $StripeService = new StripeService();
-        return $StripeService->savePaymentMethod($args['stripe_id'], $args['brand'], $args['last_four'], $args['name'] ?? null);
+        return $StripeService->removePaymentMethod($args['id']);
     }
 }

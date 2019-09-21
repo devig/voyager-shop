@@ -70,13 +70,11 @@ class OrderService
     /**
      * Get orders of a given user.
      *
-     * @param  \App\User   $User
-     *
      * @return Collection
      */
-    public function getUserOrders(User $User): Collection
+    public function getUserOrders(): Collection
     {
-        return $User->orders;
+        return Auth::user()->orders;
     }
 
     /**

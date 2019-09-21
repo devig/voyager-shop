@@ -20,13 +20,14 @@ namespace App;
 use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Tjventurini\VoyagerShop\Traits\HasCards;
 use Tjventurini\VoyagerShop\Traits\HasOrders;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends \TCG\Voyager\Models\User
 {
-    use HasApiTokens, Notifiable, HasOrders, Billable;
+    use HasApiTokens, Notifiable, HasOrders, HasCards, Billable;
 
     ...
 ```

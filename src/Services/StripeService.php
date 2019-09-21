@@ -2,12 +2,17 @@
 
 namespace Tjventurini\VoyagerShop\Services;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Tjventurini\VoyagerShop\Models\Card;
+use Tjventurini\VoyagerShop\Services\CardService;
+
 class StripeService
 {
     private $key;
     private $secret;
 
-    public function __construct(): void
+    public function __construct()
     {
         $this->key = config('services.stripe.key');
         $this->secret = config('services.stripe.secret');
@@ -20,21 +25,24 @@ class StripeService
      * @param  string $brand
      * @param  string $last_four
      *
-     * @return array
+     * @return \Tjventurini\VoyagerShop\Models\Card
      */
-    public function savePaymentMethod(string $stripe_id, string $brand, string $last_four, $name = null): array
+    public function savePaymentMethod(string $stripe_id, string $brand, string $last_four, $name = null): Card
     {
-        $User = Auth::user();
+        $CardService = new CardService();
+        return $CardService->saveCard($stripe_id, $brand, $last_four, $name);
+    }
 
-        $project_token = request()->headers->get('project_token', false);
-        $Project = Project::where('token', $project_token)->firstOrFail();
-
-        return $User->cards->create([
-            'stripe_id' => $stripe_id,
-            'name' => $name,
-            'brand' => $brand,
-            'last_four' => $last_four,
-            'project_id' => $Project_id,
-        ]);
+    /**
+     * Remove given payment method from user.
+     *
+     * @param  int    $id
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function removePaymentMethod(int $id): Collection
+    {
+        $CardService = new CardService();
+        return $CardService->removePaymentMethod($id);
     }
 }

@@ -9,9 +9,10 @@ extend type Query @middleware(checks: ["projectToken"]) {
     tax(id: ID!): Tax! @find(model: "Tjventurini\\VoyagerShop\\Models\\Tax")
     currencies: [Currency!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Currency")
     currency(code: String! @eq): Currency! @find(model: "Tjventurini\\VoyagerShop\\Models\\Currency")
-
+    # custom queries
     cart(token: String! @eq): Order! @find(model: "Tjventurini\\VoyagerShop\\Models\\Order") @middleware(checks: ["auth:api"])
     orders: [Order!] @middleware(checks: ["auth:api"])
+    cards: [Card!] @middleware(checks: ["auth:api"])
 }
 
 ##########################################
@@ -22,21 +23,22 @@ extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
     removeFromCart(token: String! item: ID!): Order!
     updateCart(token: String! item: ID!, quantity: Int!): Order!
     savePaymentMethod(stripe_id: String!, brand: String!, last_four: String!, name: String): Card!
+    removePaymentMethod(id: ID!): [Card!]!
 }
 
 ##########################################
 # Types
 type Card {
-    stripe_id: String!,
-    name: String!,
-    brand: String!,
-    last_four: String!,
-    project: Project!,
-    user: User!,
-    created_at: DateTime!,
+    id: ID!
+    stripe_id: String!
+    name: String!
+    brand: String!
+    last_four: String!
+    project: Project!
+    user: User!
+    created_at: DateTime!
     updated_at: DateTime
 }
-
 type Product {
     id: ID!
     name: String!

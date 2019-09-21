@@ -2,7 +2,6 @@
 
 namespace Tjventurini\VoyagerShop\GraphQL\Queries;
 
-use Illuminate\Support\Facades\Auth;
 use GraphQL\Type\Definition\ResolveInfo;
 use Tjventurini\VoyagerShop\Services\OrderService;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
@@ -21,6 +20,6 @@ class Orders
     public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $OrderService = new OrderService();
-        return $OrderService->getUserOrders(Auth::user());
+        return $OrderService->getUserOrders();
     }
 }

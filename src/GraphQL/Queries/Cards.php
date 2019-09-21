@@ -1,12 +1,12 @@
 <?php
 
-namespace Tjventurini\VoyagerShop\GraphQL\Mutations;
+namespace Tjventurini\VoyagerShop\GraphQL\Queries;
 
 use GraphQL\Type\Definition\ResolveInfo;
-use Tjventurini\VoyagerShop\Services\StripeService;
+use Tjventurini\VoyagerShop\Services\CardService;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class SavePaymentMethod
+class Cards
 {
     /**
      * Return a value for the field.
@@ -19,7 +19,7 @@ class SavePaymentMethod
      */
     public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
-        $StripeService = new StripeService();
-        return $StripeService->savePaymentMethod($args['stripe_id'], $args['brand'], $args['last_four'], $args['name'] ?? null);
+        $CardService = new CardService();
+        return $CardService->getUserCards();
     }
 }
