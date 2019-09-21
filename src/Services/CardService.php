@@ -53,15 +53,18 @@ class CardService
     /**
      * Remove the given payment method.
      *
-     * @param  int    $id
+     * @param  string    $stripe_id
      *
      * @return \Illuminate\Support\Collection
      */
-    public function removePaymentMethod(int $id): Collection
+    public function removePaymentMethod(string $stripe_id): Collection
     {
         $User = Auth::user();
 
-        $User->cards()->findOrFail($id)->delete();
+        $User->cards()
+            ->where('stripe_id', $stripe_id)
+            ->firstOrFail()
+            ->delete();
 
         return $User->cards;
     }

@@ -20,6 +20,6 @@ class RemovePaymentMethod
     public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $StripeService = new StripeService();
-        return $StripeService->removePaymentMethod($args['id']);
+        return $StripeService->removePaymentMethod($args['stripe_id']);
     }
 }
