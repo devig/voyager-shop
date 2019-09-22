@@ -21,10 +21,11 @@ extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
     createCart: Order!
     addToCart(token: String! item: ID!): Order!
     removeFromCart(token: String! item: ID!): Order!
-    updateCart(token: String! item: ID!, quantity: Int!): Order!
+    updateCart(token: String! item: ID! quantity: Int!): Order!
     savePaymentMethod(stripe_id: String!, brand: String!, last_four: String!, name: String): Card!
     removePaymentMethod(stripe_id: String!): [Card!]!
-    charge(amount: Int!, stripe_id: String): Payment!
+    charge(description: String! amount: Int! stripe_id: String currency: String): Payment!
+    order(token: String item: ID stripe_id: String currency: String): Payment!
 }
 
 ##########################################

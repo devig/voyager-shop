@@ -9,7 +9,7 @@ use Tjventurini\VoyagerShop\Services\OrderService;
 use Tjventurini\VoyagerShop\Services\StripeService;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class Charge
+class Order
 {
     /**
      * Return a value for the field.
@@ -22,10 +22,10 @@ class Charge
      */
     public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
-        $StripeService = new StripeService();
-        return $StripeService->charge(
-            $args['description'],
-            $args['amount'],
+        $OrderService = new OrderService();
+        return $OrderService->order(
+            $args['token'] ?? null,
+            $args['item'] ?? null,
             $args['stripe_id'] ?? null,
             $args['currency'] ?? null
         );

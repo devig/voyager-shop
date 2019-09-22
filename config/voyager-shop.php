@@ -56,4 +56,6 @@ return [
         'card' => 'card_id',
     ],
 
+    'currency' => 'usd',
+
 ];

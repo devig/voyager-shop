@@ -3,6 +3,7 @@
 namespace Tjventurini\VoyagerShop\Services;
 
 use App\User;
+use Stripe\PaymentIntent;
 use Illuminate\Support\Collection;
 use Tjventurini\VoyagerShop\Models\Order;
 use Tjventurini\VoyagerShop\Models\OrderItem;
@@ -95,5 +96,28 @@ class OrderService
         $OrderItem->update($data);
 
         return $Order;
+    }
+
+    /**
+     * Method to order cart items or single product.
+     *
+     * @param  string|null $token
+     * @param  int|null    $product_variant_id
+     * @param  string|null $stripe_id
+     * @param  string|null $currency
+     *
+     * @return \Stripe\PaymentIntent
+     */
+    public function order(string $token = null, int $product_variant_id = null, string $stripe_id = null, string $currency = null): PaymentIntent
+    {
+        if ($token) {
+            return $this->orderCart($token, $stripe_id, $currency);
+        }
+
+        if ($product_variant_id) {
+            return $this->orderProduct($product_variant_id, $stripe_id, $currency);
+        }
+
+        throw new \Exception("You need to specify a cart or a product to buy.", 1);
     }
 }

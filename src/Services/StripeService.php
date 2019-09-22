@@ -7,6 +7,7 @@ use Stripe\PaymentIntent;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Tjventurini\VoyagerShop\Models\Card;
+use Tjventurini\VoyagerShop\Events\ChargeUser;
 use Tjventurini\VoyagerShop\Services\CardService;
 use Tjventurini\VoyagerShop\Events\SavePaymentMethod;
 use Tjventurini\VoyagerShop\Events\RemovePaymentMethod;
@@ -77,24 +78,31 @@ class StripeService
     /**
      * Charge the user for a given amount.
      *
+     * @param  string $description
      * @param  int    $amount
      * @param  ?string $stripe_id
      *
      * @return \Stripe\PaymentIntent
      */
-    public function charge(int $amount, string $stripe_id = null): PaymentIntent
+    public function charge(string $description, int $amount, string $stripe_id = null, string $currency = null): PaymentIntent
     {
         // if no payment method is given, we take the default one
         if (!$stripe_id) {
             $stripe_id = $this->user->defaultPaymentMethod()->id;
         }
 
+        // set options
+        $options = [];
+        if ($currency) {
+            $options['currency'] = $currency;
+        }
+
         // charge the user using Billable trait
-        $Payment = $this->user->charge($amount, $stripe_id)
+        $Payment = $this->user->charge($amount, $stripe_id, $options)
             ->asStripePaymentIntent();
 
         // dispatch event
-        event(new ChargeUser($this->user, $Payment));
+        event(new ChargeUser($this->user, $description, $Payment));
 
         // return the payment intent
         return $Payment;

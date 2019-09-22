@@ -13,6 +13,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class ChargeUser
 {
     public $user;
+    public $description;
     public $payment;
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -22,9 +23,10 @@ class ChargeUser
      *
      * @return void
      */
-    public function __construct($user, $payment)
+    public function __construct($user, $description, $payment)
     {
         $this->user = $user;
+        $this->description = $description;
         $this->payment = $payment;
     }
 }
