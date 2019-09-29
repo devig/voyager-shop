@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Tjventurini\VoyagerShop\Models\Order;
 use Tjventurini\VoyagerShop\Models\OrderItem;
 use Tjventurini\VoyagerShop\Models\ProductVariant;
+use Tjventurini\VoyagerShop\Services\StripeService;
 
 class OrderService
 {
@@ -119,5 +120,30 @@ class OrderService
         }
 
         throw new \Exception("You need to specify a cart or a product to buy.", 1);
+    }
+
+    /**
+     * Method to order a single product.
+     *
+     * @param  int         $product_variant_id
+     * @param  string|null $stipre_id
+     * @param  string      $currency
+     *
+     * @return \Stripe\PaymentIntent
+     */
+    private function orderProduct(int $product_variant_id, string $stipre_id = null, string $currency = null): PaymentIntent
+    {
+        // get the product variant by id
+        $ProductVariant = ProductVariant::findOrFail($product_variant_id);
+
+        // get the price from the product variant
+        $price = $ProductVariant->price;
+
+        // create charge description
+        $description = trans('shop::orders.service.buy-product-description', ['product' => $ProductVariant->name]);
+
+        // make the charge
+        $StripeService = new StripeService();
+        return $StripeService->charge($description, $price, $stripe_id, $currency);
     }
 }

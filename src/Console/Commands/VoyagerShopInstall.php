@@ -11,7 +11,7 @@ class VoyagerShopInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'voyager-shop:install {-- force : Wether the whole project should be refreshed.}';
+    protected $signature = 'voyager-shop:install {-- force : Wether the whole project should be refreshed.} {-- demo : Wether the demo content should be added or not.}';
 
     /**
      * The console command description.
@@ -61,6 +61,9 @@ class VoyagerShopInstall extends Command
 
         // run seeders
         $this->runSeeders();
+
+        // install demo content
+        $this->demo();
 
         // install passport
         $this->call('passport:install');
@@ -164,5 +167,19 @@ class VoyagerShopInstall extends Command
 
         // shop
         $this->call('db:seed', ['--class' => "Tjventurini\VoyagerShop\Seeds\VoyagerShopDatabaseSeeder"]);
+    }
+
+    /**
+     * Method to add demo content.
+     *
+     * @return void
+     */
+    private function demo(): void
+    {
+        // check if we should install demo content
+        if ($this->option('demo')) {
+            // run demo content seeder
+            $this->call('db:seed', ['--class' => "Tjventurini\VoyagerShop\Seeds\VoyagerShopDemoContentSeeder"]);
+        }
     }
 }

@@ -31,4 +31,17 @@ return [
         'created_at' => 'Created at',
         'updated_at' => 'Updated at',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Order Service
+    |--------------------------------------------------------------------------
+    |
+    | Strings for the Order Service.
+    |
+    */
+    
+    'service' => [
+        'buy-product-description' => 'Buy :product',
+    ],
 ];
