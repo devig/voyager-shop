@@ -31,10 +31,11 @@ class StripeService
      * @param  string $stripe_id
      * @param  string $brand
      * @param  string $last_four
+     * @param  ?string $name
      *
      * @return \Tjventurini\VoyagerShop\Models\Card
      */
-    public function savePaymentMethod(string $stripe_id, string $brand, string $last_four, $name = null): Card
+    public function savePaymentMethod(string $stripe_id, string $brand, string $last_four, string $name = null): Card
     {
         // save the card to database
         $CardService = new CardService();
@@ -47,7 +48,7 @@ class StripeService
         $this->user->updateDefaultPaymentMethod($stripe_id);
 
         // dispatch event
-        event(new SavePaymentMethod());
+        event(new SavePaymentMethod($Card));
 
         // return card
         return $Card;

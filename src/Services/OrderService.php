@@ -100,6 +100,18 @@ class OrderService
     }
 
     /**
+     * Get the order by a given token.
+     *
+     * @param  string $token
+     *
+     * @return \Tjventurini\VoyagerShop\Models\Order
+     */
+    public function getOrderByToken(string $token): Order
+    {
+        return Order::where('token', $token)->firstOrFail();
+    }
+
+    /**
      * Method to order cart items or single product.
      *
      * @param  string|null $token
@@ -126,18 +138,18 @@ class OrderService
      * Method to order a single product.
      *
      * @param  int         $product_variant_id
-     * @param  string|null $stipre_id
+     * @param  string|null $stripe_id
      * @param  string      $currency
      *
      * @return \Stripe\PaymentIntent
      */
-    private function orderProduct(int $product_variant_id, string $stipre_id = null, string $currency = null): PaymentIntent
+    private function orderProduct(int $product_variant_id, string $stripe_id = null, string $currency = null): PaymentIntent
     {
         // get the product variant by id
         $ProductVariant = ProductVariant::findOrFail($product_variant_id);
 
         // get the price from the product variant
-        $price = $ProductVariant->price;
+        $price = $ProductVariant->priceRaw;
 
         // create charge description
         $description = trans('shop::orders.service.buy-product-description', ['product' => $ProductVariant->name]);
@@ -145,5 +157,49 @@ class OrderService
         // make the charge
         $StripeService = new StripeService();
         return $StripeService->charge($description, $price, $stripe_id, $currency);
+    }
+
+    /**
+     * Method to order all items of the current cart by token.
+     *
+     * @param  string $token
+     * @param  string $stripe_id
+     * @param  string $currency
+     *
+     * @return \Stripe\PaymentIntent
+     */
+    private function orderCart(string $token, string $stripe_id = null, string $currency = null): PaymentIntent
+    {
+        // get the order by token
+        $Order = $this->getOrderByToken($token);
+
+        // check the state of the order
+        if ($Order->state != config('voyager-shop.order_states.cart')) {
+            throw new \Exception("The given order has the wrong state.", 1);
+        }
+
+        // get all items from the order
+        $OrderItems = $Order->orderItems;
+
+        // check if there is at least one item in the cart
+        if (!count($OrderItems)) {
+            throw new \Exception("The given order does contain any items.", 1);
+        }
+
+        // get the full price of the order
+        $price = $Order->priceRaw;
+
+        // get description
+        $description = trans('shop::orders.buy-order-description', ['id' => $Order->id]);
+
+        // make the charge
+        $StripeService = new StripeService();
+        $PaymentIntent = $StripeService->charge($description, $price, $stripe_id, $currency);
+
+        // update the order state
+        $Order->update(['state' => config('voyager-shop.order_states.billed')]);
+
+        // return the payment intent
+        return $PaymentIntent;
     }
 }

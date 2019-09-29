@@ -3,7 +3,6 @@
 namespace Tjventurini\VoyagerShop\GraphQL\Mutations;
 
 use GraphQL\Type\Definition\ResolveInfo;
-use Tjventurini\VoyagerShop\Models\Order;
 use Tjventurini\VoyagerShop\Models\ProductVariant;
 use Tjventurini\VoyagerShop\Services\OrderService;
 use Tjventurini\VoyagerShop\Services\StripeService;

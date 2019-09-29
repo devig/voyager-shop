@@ -20,14 +20,7 @@ class CreateOrdersTable extends Migration
 
                 $table->string('token');
 
-                $table->enum('state', [
-                    'cart',
-                    'pending',
-                    'billed',
-                    'canceled',
-                    'declined',
-                    'refunded'
-                ])->default('cart');
+                $table->enum('state', config('voyager-shop.order_states'))->default('cart');
 
                 // create user_id
                 $table->bigInteger('user_id')

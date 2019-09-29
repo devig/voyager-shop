@@ -4,6 +4,7 @@ namespace Tjventurini\VoyagerShop\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
+use Tjventurini\VoyagerShop\Models\Card;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -21,7 +22,7 @@ class SavePaymentMethod
      *
      * @return void
      */
-    public function __construct($paymentMethod)
+    public function __construct(Card $paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
     }

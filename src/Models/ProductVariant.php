@@ -27,6 +27,16 @@ class ProductVariant extends Model
     {
         return $value / 100;
     }
+    
+    /**
+     * Get the price attribute as float.
+     *
+     * @return float
+     */
+    public function getPriceRawAttribute(): float
+    {
+        return $this->attributes['price'];
+    }
 
     /**
      * Method to set the price of this model as int.

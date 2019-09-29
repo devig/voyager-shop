@@ -56,6 +56,33 @@ return [
         'card' => 'card_id',
     ],
 
-    'currency' => 'usd',
+    /*
+    |--------------------------------------------------------------------------
+    | Default Currency
+    |--------------------------------------------------------------------------
+    |
+    | In this section you can set the options for your default currency.
+    |
+    */
 
+    'currency' => 'usd',
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Order States
+    |--------------------------------------------------------------------------
+    |
+    | In this section you can set the states of the orders.
+    |
+    */
+    
+    'order_states' => [
+        'cart' => 'cart',
+        'pending' => 'pending',
+        'billed' => 'billed',
+        'canceled' => 'canceled',
+        'declined' => 'declined',
+        'refunded' => 'refunded'
+    ],
+    
 ];
