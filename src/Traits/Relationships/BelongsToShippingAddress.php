@@ -11,8 +11,6 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 trait BelongsToShippingAddress
 {
     /**
@@ -20,7 +18,7 @@ trait BelongsToShippingAddress
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function shippingAddress(): BelongsTo
+    public function shippingAddress(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         $model = config('voyager-shop.models.shippingAddress');
         $foreign_key = config('voyager-shop.foreign_keys.shippingAddress');

@@ -12,18 +12,13 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
-
 trait HasManyOrderItems
 {
-    use GetRelationshipKey;
-    
     /**
      * Relationship with orderItems model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function orderItems(): HasMany
+    public function orderItems(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         $key = $this->getRelationshipKey();
 

@@ -11,15 +11,13 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 trait BelongsToCountry
 {
     /**
      * Relationship with country model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function country(): BelongsTo
+    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         $model = config('voyager-shop.models.country');
         $country_id = config('voyager-shop.foreign_keys.country');

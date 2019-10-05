@@ -2,11 +2,11 @@
 
 namespace Tjventurini\VoyagerShop\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Tjventurini\VoyagerShop\Models\BaseModel;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToCountry;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
 
-class Tax extends Model
+class Tax extends BaseModel
 {
     use BelongsToProject, BelongsToCountry;
 

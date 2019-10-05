@@ -12,18 +12,13 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
-
 trait HasManyProductVariants
 {
-    use GetRelationshipKey;
-    
     /**
      * Relationship with taxes model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function taxes(): HasMany
+    public function taxes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         $key = $this->getRelationshipKey();
 

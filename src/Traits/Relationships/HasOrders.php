@@ -12,8 +12,6 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
 trait HasOrders
 {
     /**
@@ -21,7 +19,7 @@ trait HasOrders
      *
      * @return HasMany
      */
-    public function orders(): HasMany
+    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         $model = config('voyager-shop.models.order');
         $foreign_key = config('voyager-shop.foreign_key.order');

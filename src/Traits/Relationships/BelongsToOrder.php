@@ -11,15 +11,13 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 trait BelongsToOrder
 {
     /**
      * Relationship with order model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function order(): BelongsTo
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         $model = config('voyager-shop.models.order');
         $order_id = config('voyager-shop.foreign_keys.order');

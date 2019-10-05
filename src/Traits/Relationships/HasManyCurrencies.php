@@ -12,24 +12,19 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
-
 trait HasManyCurrencies
 {
-    use GetRelationshipKey;
-    
     /**
-     * Relationship with taxes model.
+     * Relationship with currencies model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function taxes(): HasMany
+    public function currencies(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         $key = $this->getRelationshipKey();
 
         $model = config('voyager-shop.models.currency');
         $country_id = config('voyager-shop.foreign_keys.'.$key);
 
-        return $this->belongsTo($model, $country_id);
+        return $this->hasMany($model, $country_id);
     }
 }

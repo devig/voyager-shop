@@ -2,10 +2,10 @@
 
 namespace Tjventurini\VoyagerShop\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Tjventurini\VoyagerShop\Models\BaseModel;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProduct;
 
-class ProductVariant extends Model
+class ProductVariant extends BaseModel
 {
     use BelongsToProduct;
 

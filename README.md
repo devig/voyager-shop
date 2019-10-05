@@ -20,16 +20,16 @@ namespace App;
 use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Tjventurini\VoyagerShop\Traits\HasCards;
-use Tjventurini\VoyagerShop\Traits\HasOrders;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tjventurini\VoyagerProjects\Traits\HasProjects;
-use Tjventurini\VoyagerShop\Traits\HasManyAddresses;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tjventurini\VoyagerShop\Traits\Relationships\HasOrders;
+use Tjventurini\VoyagerShop\Traits\Relationships\HasManyCards;
+use Tjventurini\VoyagerShop\Traits\Relationships\HasManyAddresses;
 
 class User extends \TCG\Voyager\Models\User
 {
-    use HasApiTokens, Notifiable, HasOrders, HasProjects, HasCards, HasManyAddresses, Billable;
+    use HasApiTokens, Notifiable, HasOrders, HasProjects, HasManyCards, HasManyAddresses, Billable;
 
     ...
 ```

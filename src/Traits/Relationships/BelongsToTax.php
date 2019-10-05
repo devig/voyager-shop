@@ -11,8 +11,6 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 trait BelongsToTax
 {
 
@@ -20,7 +18,7 @@ trait BelongsToTax
      * Relationship with tax model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tax(): BelongsTo
+    public function tax(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         $model = config('voyager-shop.models.tax');
         $tax_id = config('voyager-shop.foreign_keys.tax');

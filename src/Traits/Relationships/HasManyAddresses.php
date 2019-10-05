@@ -12,18 +12,14 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
-
 trait HasManyAddresses
 {
-    use GetRelationshipKey;
-    
     /**
      * HasMany Relationship with the Address model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function addresses(): HasMany
+    public function addresses(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         $key = $this->getRelationshipKey();
         

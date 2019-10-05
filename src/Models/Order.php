@@ -2,14 +2,14 @@
 
 namespace Tjventurini\VoyagerShop\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Tjventurini\VoyagerShop\Models\BaseModel;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToUser;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
 use Tjventurini\VoyagerShop\Traits\Relationships\HasManyOrderItems;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToBillingAddress;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToShippingAddress;
 
-class Order extends Model
+class Order extends BaseModel
 {
     use BelongsToProject,
         BelongsToUser,

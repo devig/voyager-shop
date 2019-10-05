@@ -11,15 +11,13 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 trait BelongsToProductVariant
 {
     /**
      * Relationship with product variant model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function productVariant(): BelongsTo
+    public function productVariant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         $model = config('voyager-shop.models.productVariant');
         $product_variant_id = config('voyager-shop.foreign_keys.productVariant');

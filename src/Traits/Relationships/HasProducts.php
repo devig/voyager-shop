@@ -19,7 +19,7 @@ trait HasProducts
      *
      * @return HasMany
      */
-    public function products(): HasMany
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         $model = config('voyager-shop.models.product');
         $foreign_key = config('voyager-shop.foreign_key.product');

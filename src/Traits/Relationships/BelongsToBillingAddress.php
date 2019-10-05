@@ -11,8 +11,6 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 trait BelongsToBillingAddress
 {
     /**
@@ -20,7 +18,7 @@ trait BelongsToBillingAddress
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function billingAddress(): BelongsTo
+    public function billingAddress(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         $model = config('voyager-shop.models.billingAddress');
         $foreign_key = config('voyager-shop.foreign_keys.billingAddress');

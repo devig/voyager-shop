@@ -2,11 +2,11 @@
 
 namespace Tjventurini\VoyagerShop\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Tjventurini\VoyagerShop\Models\BaseModel;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToUser;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
 
-class Card extends Model
+class Card extends BaseModel
 {
     use BelongsToProject, BelongsToUser;
 
