@@ -43,6 +43,6 @@ return [
     
     'service' => [
         'buy-product-description' => 'Buy :product',
-        'buy-order-description' => 'Buy Order #:id',
+        'buy-cart-description' => 'Buy Order #:id',
     ],
 ];

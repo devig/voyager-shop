@@ -183,14 +183,14 @@ class OrderService
 
         // check if there is at least one item in the cart
         if (!count($OrderItems)) {
-            throw new \Exception("The given order does contain any items.", 1);
+            throw new \Exception("The given order does not contain any items.", 1);
         }
 
         // get the full price of the order
         $price = $Order->priceRaw;
 
         // get description
-        $description = trans('shop::orders.buy-order-description', ['id' => $Order->id]);
+        $description = trans('shop::orders.buy-cart-description', ['id' => $Order->id]);
 
         // make the charge
         $StripeService = new StripeService();

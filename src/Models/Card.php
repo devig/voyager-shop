@@ -12,13 +12,4 @@ class Card extends Model
     use BelongsToProject, BelongsToUser;
 
     protected $guarded = ['id'];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Relationships
-    |--------------------------------------------------------------------------
-    |
-    | In this section you will find all relationships of this model.
-    |
-    */
 }
