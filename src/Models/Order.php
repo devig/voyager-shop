@@ -7,10 +7,12 @@ use Tjventurini\VoyagerShop\Traits\BelongsToUser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tjventurini\VoyagerShop\Traits\BelongsToProject;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Tjventurini\VoyagerShop\Traits\BelongsToBillingAddress;
+use Tjventurini\VoyagerShop\Traits\BelongsToShippingAddress;
 
 class Order extends Model
 {
-    use BelongsToProject, BelongsToUser;
+    use BelongsToProject, BelongsToUser, BelongsToBillingAddress, BelongsToShippingAddress;
 
     protected $guarded = ['id'];
 

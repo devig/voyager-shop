@@ -31,7 +31,7 @@ class VoyagerShopDemoAddressesSeeder extends Seeder
         // create address
         $Address = Address::create([
             'name' => 'John Doe',
-            'street' => 'Himmelweg 13',
+            'street' => 'Himmelweg 13 Tür 5',
             'zip' => '6972',
             'project_id' => $Project->id,
             'country_id' => $Country->id,

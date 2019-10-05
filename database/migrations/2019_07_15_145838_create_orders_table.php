@@ -42,6 +42,25 @@ class CreateOrdersTable extends Migration
                     ->on('projects')
                     ->onDelete('cascade');
 
+                // billing address
+                $table->bigInteger('billing_address_id')
+                    ->unsigned()
+                    ->nullable();
+                $table->foreign('billing_address_id')
+                    ->references('id')
+                    ->on('addresses')
+                    ->onDelete('cascade');
+
+                // shipping address
+                $table->bigInteger('shipping_address_id')
+                    ->unsigned()
+                    ->nullable();
+                $table->foreign('shipping_address_id')
+                    ->references('id')
+                    ->on('addresses')
+                    ->onDelete('cascade');
+
+
                 $table->timestamps();
             });
         });

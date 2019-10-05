@@ -9,6 +9,7 @@ use Tjventurini\VoyagerShop\Models\Order;
 use Tjventurini\VoyagerShop\Models\OrderItem;
 use Tjventurini\VoyagerShop\Models\ProductVariant;
 use Tjventurini\VoyagerShop\Services\StripeService;
+use Tjventurini\VoyagerShop\Services\AddressService;
 
 class OrderService
 {
@@ -201,5 +202,47 @@ class OrderService
 
         // return the payment intent
         return $PaymentIntent;
+    }
+
+    /**
+     * Set Billing Address on Order.
+     *
+     * @param \Tjventurini\VoyagerShop\Models\Order $Order
+     * @param array $billing_address
+     */
+    public function setBillingAddress(Order $Order, array $billing_address): Order
+    {
+        // get address service
+        $AddressService = new AddressService();
+
+        // update or create the billing address
+        $BillingAddress = $AddressService->updateOrCreate($billing_address);
+
+        // set the billing address on the order
+        $Order->update([config('voyager-shop.foreign_keys.billingAddress') => $BillingAddress->id]);
+
+        // return the updated order
+        return $Order->load(['billingAddress']);
+    }
+
+    /**
+     * Set Shipping Address on Order.
+     *
+     * @param \Tjventurini\VoyagerShop\Models\Order $Order
+     * @param array $shipping_address
+     */
+    public function setShippingAddress(Order $Order, array $shipping_address): Order
+    {
+        // get address service
+        $AddressService = new AddressService();
+
+        // update or create the shipping address
+        $ShippingAddress = $AddressService->updateOrCreate($shipping_address);
+
+        // set the shipping address on the order
+        $Order->update([config('voyager-shop.foreign_keys.shippingAddress') => $ShippingAddress->id]);
+
+        // return the updated order
+        return $Order->load(['shippingAddress']);
     }
 }

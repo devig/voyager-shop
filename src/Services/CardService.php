@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Tjventurini\VoyagerShop\Models\Card;
 use Tjventurini\VoyagerShop\Models\Project;
+use Tjventurini\VoyagerProjects\Services\ProjectService;
 
 class CardService
 {
@@ -23,8 +24,9 @@ class CardService
     {
         $User = Auth::user();
 
-        $project_token = request()->headers->get('project_token', false);
-        $Project = Project::where('token', $project_token)->firstOrFail();
+        // get current project
+        $ProjectService = new ProjectService();
+        $Project = $ProjectService->getCurrentProject();
 
         if (!$name) {
             $name = $User->name . ' ' . $brand;

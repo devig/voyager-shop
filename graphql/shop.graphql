@@ -26,6 +26,8 @@ extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
     removePaymentMethod(stripe_id: String!): [Card!]!
     charge(description: String! amount: Int! stripe_id: String currency: String): Payment!
     order(token: String item: ID stripe_id: String currency: String): Payment!
+    setBillingAddress(token: String! id: ID name: String! street: String! zip: String! country: String!): Order!
+    setShippingAddress(token: String! id: ID name: String! street: String! zip: String! country: String!): Order!
 }
 
 ##########################################
@@ -100,6 +102,8 @@ type Order {
     user: User
     project: Project!
     orderItems: [OrderItem!]
+    billingAddress: Address
+    shippingAddress: Address
     created_at: DateTime!
     updated_at: DateTime
 }
@@ -111,6 +115,7 @@ type OrderItem {
     updated_at: DateTime
 }
 type Address {
+    id: ID!
     name: String!
     street: String!
     zip: String!

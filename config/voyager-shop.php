@@ -44,6 +44,8 @@ return [
         'productVariant' => \Tjventurini\VoyagerShop\Models\ProductVariant::class,
         'card' => \Tjventurini\VoyagerShop\Models\Card::class,
         'address' => \Tjventurini\VoyagerShop\Models\Address::class,
+        'billingAddress' => \Tjventurini\VoyagerShop\Models\Address::class,
+        'shippingAddress' => \Tjventurini\VoyagerShop\Models\Address::class,
     ],
 
     'foreign_keys' => [
@@ -57,6 +59,8 @@ return [
         'productVariant' => 'product_variant_id',
         'card' => 'card_id',
         'address' => 'address_id',
+        'billingAddress' => 'billing_address_id',
+        'shippingAddress' => 'shipping_address_id',
     ],
 
     /*
