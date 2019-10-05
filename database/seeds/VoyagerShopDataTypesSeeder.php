@@ -24,6 +24,7 @@ class VoyagerShopDataTypesSeeder extends Seeder
             $this->currencies();
             $this->taxes();
             $this->cards();
+            $this->addresses();
         });
     }
 
@@ -218,5 +219,29 @@ class VoyagerShopDataTypesSeeder extends Seeder
                 'server_side' => 0,
                 'details' => null,
             ]);
+    }
+
+    /**
+     * Create addresses data type.
+     *
+     * @return void
+     */
+    private function addresses(): void
+    {
+        $addresses = DataType::updateOrCreate([
+            'slug' => 'addresses'
+        ], [
+            'name' => 'addresses',
+            'display_name_singular' => trans('shop::addresses.label_singular'),
+            'display_name_plural' => trans('shop::addresses.label_plural'),
+            'icon' => 'voyager-book',
+            'model_name' => \Tjventurini\VoyagerShop\Models\Address::class,
+            'policy_name' => null,
+            'controller' => \Tjventurini\VoyagerShop\Http\Controllers\AddressController::class,
+            'description' => '',
+            'generate_permissions' => 1,
+            'server_side' => 0,
+            'details' => null,
+        ]);
     }
 }

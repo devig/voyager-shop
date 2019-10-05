@@ -39,5 +39,6 @@ class VoyagerShopDemoContentSeeder extends Seeder
         $this->call(VoyagerShopDemoCurrenciesSeeder::class);
         $this->call(VoyagerShopDemoTaxesSeeder::class);
         $this->call(VoyagerShopDemoProductsSeeder::class);
+        $this->call(VoyagerShopDemoAddressesSeeder::class);
     }
 }

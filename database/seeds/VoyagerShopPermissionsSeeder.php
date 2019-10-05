@@ -474,6 +474,63 @@ class VoyagerShopPermissionsSeeder extends Seeder
                 $delete->save();
                 $role->permissions()->attach($delete);
             }
+
+            ///////////////
+            // addresses //
+            ///////////////
+
+            // get admin role
+            $role = Role:: where('name', 'admin')->first();
+
+            // check browse permission
+            $browse = Permission::firstOrNew([
+                'key' => 'browse_addresses',
+                'table_name' => 'addresses',
+            ]);
+            if (!$browse->exists) {
+                $browse->save();
+                $role->permissions()->attach($browse);
+            }
+
+            // check read permission
+            $read = Permission::firstOrNew([
+                'key' => 'read_addresses',
+                'table_name' => 'addresses',
+            ]);
+            if (!$read->exists) {
+                $read->save();
+                $role->permissions()->attach($read);
+            }
+
+            // check edit permission
+            $edit = Permission::firstOrNew([
+                'key' => 'edit_addresses',
+                'table_name' => 'addresses',
+            ]);
+            if (!$edit->exists) {
+                $edit->save();
+                $role->permissions()->attach($edit);
+            }
+
+            // check add permission
+            $add = Permission::firstOrNew([
+                'key' => 'add_addresses',
+                'table_name' => 'addresses',
+            ]);
+            if (!$add->exists) {
+                $add->save();
+                $role->permissions()->attach($add);
+            }
+
+            // check delete permission
+            $delete = Permission::firstOrNew([
+                'key' => 'delete_addresses',
+                'table_name' => 'addresses',
+            ]);
+            if (!$delete->exists) {
+                $delete->save();
+                $role->permissions()->attach($delete);
+            }
         });
     }
 }

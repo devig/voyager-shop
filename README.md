@@ -23,11 +23,13 @@ use Illuminate\Notifications\Notifiable;
 use Tjventurini\VoyagerShop\Traits\HasCards;
 use Tjventurini\VoyagerShop\Traits\HasOrders;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Tjventurini\VoyagerProjects\Traits\HasProjects;
+use Tjventurini\VoyagerShop\Traits\HasManyAddresses;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends \TCG\Voyager\Models\User
 {
-    use HasApiTokens, Notifiable, HasOrders, HasCards, Billable;
+    use HasApiTokens, Notifiable, HasOrders, HasProjects, HasCards, HasManyAddresses, Billable;
 
     ...
 ```

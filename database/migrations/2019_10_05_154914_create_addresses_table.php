@@ -20,6 +20,14 @@ class CreateAddressesTable extends Migration
             $table->string('street');
             $table->string('zip');
 
+            $table->bigInteger('project_id')
+                ->unsigned()
+                ->nullable();
+            $table->foreign('project_id')
+                ->references('id')
+                ->on('projects')
+                ->onDelete('cascade');
+
             $table->bigInteger('country_id')
                 ->unsigned()
                 ->nullable();
@@ -37,6 +45,7 @@ class CreateAddressesTable extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

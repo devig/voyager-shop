@@ -24,6 +24,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
         $this->taxes();
         $this->currencies();
         $this->cards();
+        $this->addresses();
     }
 
     private function countries()
@@ -1248,6 +1249,216 @@ class VoyagerShopDataRowsSeeder extends Seeder
             ], [
                 'type' => 'timestamp',
                 'display_name' => trans('shop::cards.data_rows.updated_at'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+        });
+    }
+
+    /**
+     * Create address data rows.
+     *
+     * @return void
+     */
+    private function addresses(): void
+    {
+        DB::transaction(function () {
+            // get the data type
+            $data_type = DataType::where('slug', 'addresses')->firstOrFail();
+
+            // field id
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => trans('shop::addresses.data_rows.id'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field name
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'name',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::addresses.data_rows.name'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field street
+            $field_street = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'street',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::addresses.data_rows.street'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field zip
+            $field_zip = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'zip',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::addresses.data_rows.zip'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field country
+            $field_country = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'address_belongsto_country_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::addresses.data_rows.country'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.country'),
+                    'table' => config('voyager-shop.tables.countries'),
+                    'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.country'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field project
+            $field_project = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'address_belongsto_project_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::addresses.data_rows.project'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.project'),
+                    'table' => config('voyager-shop.tables.projects'),
+                    'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.project'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field user
+            $field_user = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'address_belongsto_user_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::addresses.data_rows.user'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.user'),
+                    'table' => config('voyager-shop.tables.users'),
+                    'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.user'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field created_at
+            $field_created_at = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'created_at',
+            ], [
+                'type' => 'timestamp',
+                'display_name' => trans('shop::addresses.data_rows.created_at'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field updated_at
+            $field_updated_at = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'updated_at',
+            ], [
+                'type' => 'timestamp',
+                'display_name' => trans('shop::addresses.data_rows.updated_at'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field deleted_at
+            $field_deleted_at = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'deleted_at',
+            ], [
+                'type' => 'timestamp',
+                'display_name' => trans('shop::addresses.data_rows.deleted_at'),
                 'required' => 1,
                 'browse' => 0,
                 'read' => 1,

@@ -71,6 +71,7 @@ type Country {
     name: String!
     code: String!
     project: Project!
+    addresses: [Address!]!
     created_at: DateTime!
     updated_at: DateTime
 }
@@ -109,6 +110,18 @@ type OrderItem {
     created_at: DateTime!
     updated_at: DateTime
 }
+type Address {
+    name: String!
+    street: String!
+    zip: String!
+    project: Project!
+    user: User!
+    country: Country!
+    created_at: DateTime!
+    updated_at: DateTime
+    deleted_at: DateTime
+}
 extend type User {
     orders: [Order!]!
+    addresses: [Address!]!
 }

@@ -155,6 +155,21 @@ class VoyagerShopMenuItemsSeeder extends Seeder
                 'order' => 7,
                 'title' => trans('shop::cards.label_plural'),
             ]);
+
+            // addresses
+            $route = 'voyager.addresses.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-book',
+                'color' => null,
+                'order' => 7,
+                'title' => trans('shop::addresses.label_plural'),
+            ]);
         });
     }
 }

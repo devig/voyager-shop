@@ -5,11 +5,13 @@ namespace Tjventurini\VoyagerShop\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tjventurini\VoyagerShop\Traits\BelongsToProject;
+use Tjventurini\VoyagerShop\Traits\HasManyAddresses;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Country extends Model
 {
-    use BelongsToProject;
+    use BelongsToProject, HasManyAddresses;
+    
     protected $guarded = ['id'];
 
     /*
