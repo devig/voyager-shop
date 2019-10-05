@@ -3,11 +3,13 @@
 namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToOrder;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProductVariant;
 
 class OrderItem extends Model
 {
+    use BelongsToOrder, BelongsToProductVariant;
+
     protected $guarded = ['id'];
     
     /*
@@ -37,39 +39,5 @@ class OrderItem extends Model
     public function getPriceRawAttribute(): float
     {
         return $this->productVariant->priceRaw;
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Relationships
-    |--------------------------------------------------------------------------
-    |
-    | In this section you will find all relationships of this model.
-    |
-    */
-    
-    /**
-     * Relationship with order model.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function order(): BelongsTo
-    {
-        $model = config('voyager-shop.models.order');
-        $order_id = config('voyager-shop.foreign_keys.order');
-
-        return $this->belongsTo($model, $order_id);
-    }
-    
-    /**
-     * Relationship with product variant model.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function productVariant(): BelongsTo
-    {
-        $model = config('voyager-shop.models.productVariant');
-        $product_variant_id = config('voyager-shop.foreign_keys.productVariant');
-
-        return $this->belongsTo($model, $product_variant_id);
     }
 }

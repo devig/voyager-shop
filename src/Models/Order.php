@@ -3,16 +3,19 @@
 namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Tjventurini\VoyagerShop\Traits\BelongsToUser;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Tjventurini\VoyagerShop\Traits\BelongsToProject;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Tjventurini\VoyagerShop\Traits\BelongsToBillingAddress;
-use Tjventurini\VoyagerShop\Traits\BelongsToShippingAddress;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToUser;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
+use Tjventurini\VoyagerShop\Traits\Relationships\HasManyOrderItems;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToBillingAddress;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToShippingAddress;
 
 class Order extends Model
 {
-    use BelongsToProject, BelongsToUser, BelongsToBillingAddress, BelongsToShippingAddress;
+    use BelongsToProject,
+        BelongsToUser,
+        BelongsToBillingAddress,
+        BelongsToShippingAddress,
+        HasManyOrderItems;
 
     protected $guarded = ['id'];
 
@@ -55,26 +58,5 @@ class Order extends Model
             $price += $OrderItem->priceRaw;
         }
         return $price;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Relationships
-    |--------------------------------------------------------------------------
-    |
-    | In this section you will find all relationships of this model.
-    |
-    */
-    
-    /**
-     * Relationship with order item model.
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function orderItems(): HasMany
-    {
-        $model = config('voyager-shop.models.orderItem');
-        $order_id = config('voyager-shop.foreign_keys.order');
-
-        return $this->hasMany($model, $order_id);
     }
 }

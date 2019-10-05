@@ -2,34 +2,34 @@
 
 /*
 |--------------------------------------------------------------------------
-| HasManyAddresses Trait
+| HasManyProductVariants Trait
 |--------------------------------------------------------------------------
 |
 | Trait to add to models that should have a has many relationship with the
-| addresses. Eg. the user model.
+| product variants. Eg. the user model.
 |
 */
 
-namespace Tjventurini\VoyagerShop\Traits;
+namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
 
-trait HasManyAddresses
+trait HasManyProductVariants
 {
     use GetRelationshipKey;
     
     /**
-     * HasMany Relationship with the Address model.
-     *
+     * Relationship with taxes model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function addresses(): HasMany
+    public function taxes(): HasMany
     {
         $key = $this->getRelationshipKey();
-        
-        $model = config('voyager-shop.models.address');
-        $foreign_key = config('voyager-shop.foreign_keys.'.$key);
 
-        return $this->hasMany($model, $foreign_key);
+        $model = config('voyager-shop.models.productVariant');
+        $country_id = config('voyager-shop.foreign_keys.'.$key);
+
+        return $this->belongsTo($model, $country_id);
     }
 }

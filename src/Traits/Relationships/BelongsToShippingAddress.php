@@ -9,7 +9,7 @@
 |
 */
 
-namespace Tjventurini\VoyagerShop\Traits;
+namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

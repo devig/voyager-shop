@@ -4,9 +4,9 @@ namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Tjventurini\VoyagerShop\Traits\BelongsToUser;
-use Tjventurini\VoyagerShop\Traits\BelongsToCountry;
-use Tjventurini\VoyagerShop\Traits\BelongsToProject;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToUser;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToCountry;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
 
 class Address extends Model
 {

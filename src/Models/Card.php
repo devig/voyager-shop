@@ -3,9 +3,8 @@
 namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Tjventurini\VoyagerShop\Traits\BelongsToUser;
-use Tjventurini\VoyagerShop\Traits\BelongsToProject;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToUser;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
 
 class Card extends Model
 {
