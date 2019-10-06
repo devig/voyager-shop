@@ -12,8 +12,11 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-trait HasOrders
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
+
+trait HasManyOrders
 {
+    use GetRelationshipKey;
     /**
      * Method to establish a relationship with orders.
      *
@@ -21,8 +24,11 @@ trait HasOrders
      */
     public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
+        $key = $this->getRelationshipKey();
+
         $model = config('voyager-shop.models.order');
-        $foreign_key = config('voyager-shop.foreign_key.order');
+        $foreign_key = config('voyager-shop.foreign_key.'.$key);
+        
         return $this->hasMany($model, $foreign_key);
     }
 }

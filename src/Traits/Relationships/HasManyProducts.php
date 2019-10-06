@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| HasProducts Trait
+| HasManyProducts Trait
 |--------------------------------------------------------------------------
 |
 | Trait to add to models that should have a relationship with products of
@@ -12,7 +12,7 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-trait HasProducts
+trait HasManyProducts
 {
     /**
      * Method to establish a relationship with products.

@@ -26,8 +26,8 @@ trait HasManyOrderItems
         $key = $this->getRelationshipKey();
 
         $model = config('voyager-shop.models.orderItem');
-        $country_id = config('voyager-shop.foreign_keys.'.$key);
+        $foreign_key = config('voyager-shop.foreign_keys.'.$key);
 
-        return $this->hasMany($model, $country_id);
+        return $this->hasMany($model, $foreign_key);
     }
 }
