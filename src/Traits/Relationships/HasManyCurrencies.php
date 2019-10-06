@@ -12,8 +12,11 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
+
 trait HasManyCurrencies
 {
+    use GetRelationshipKey;
     /**
      * Relationship with currencies model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

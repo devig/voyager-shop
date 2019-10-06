@@ -2,11 +2,11 @@
 
 namespace Tjventurini\VoyagerShop\Models;
 
-use Tjventurini\VoyagerShop\Models\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToOrder;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProductVariant;
 
-class OrderItem extends BaseModel
+class OrderItem extends Model
 {
     use BelongsToOrder, BelongsToProductVariant;
 

@@ -2,8 +2,11 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
+
 trait HasManyCards
 {
+    use GetRelationshipKey;
     /**
      * Relationship with cards.
      *

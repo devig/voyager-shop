@@ -12,8 +12,11 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
+
 trait HasManyOrderItems
 {
+    use GetRelationshipKey;
     /**
      * Relationship with orderItems model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -25,6 +28,6 @@ trait HasManyOrderItems
         $model = config('voyager-shop.models.orderItem');
         $country_id = config('voyager-shop.foreign_keys.'.$key);
 
-        return $this->belongsTo($model, $country_id);
+        return $this->hasMany($model, $country_id);
     }
 }

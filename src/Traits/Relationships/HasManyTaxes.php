@@ -12,8 +12,11 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
+
 trait HasManyTaxes
 {
+    use GetRelationshipKey;
     /**
      * Relationship with taxes model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
