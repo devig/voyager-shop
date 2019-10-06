@@ -11,6 +11,7 @@
 
 namespace Tjventurini\VoyagerShop\Services;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Tjventurini\VoyagerShop\Models\Address;
@@ -33,6 +34,7 @@ class AddressService
             'street' => 'required|string|min:3',
             'zip' => 'required|string|min:4',
             'country' => 'required|string|size:2|exists:countries,code',
+            'user_id' => 'sometimes|exists:users,id',
         ]);
 
         if ($validator->fails()) {
@@ -75,6 +77,8 @@ class AddressService
                 'street' => $address['street'],
                 'zip' => $address['zip'],
                 config('voyager-shop.foreign_keys.country') => $Country->id,
+                config('voyager-shop.foreign_keys.user') => $User->id,
+                config('voyager-shop.foreign_keys.project') => $Project->id,
             ]);
             return $Address;
         }
@@ -88,5 +92,27 @@ class AddressService
             config('voyager-shop.foreign_keys.user') => $User->id,
             config('voyager-shop.foreign_keys.project') => $Project->id,
         ]);
+    }
+
+    /**
+     * Method to delete an address from the user profile.
+     * @param  int    $id
+     * @return \Illuminate\Support\Collection
+     */
+    public function deleteAddress(int $id): Collection
+    {
+        // get the user
+        $User = Auth::user();
+
+        // throw error when user is not authenticated
+        if (!$User) {
+            throw new \Exception("Unauthenticated.", 1);
+        }
+
+        // delete address
+        $User->addresses()->findOrFail($id)->delete();
+
+        // return the current list of addresses
+        return $User->addresses;
     }
 }

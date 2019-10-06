@@ -28,6 +28,8 @@ extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
     order(token: String item: ID stripe_id: String currency: String): Payment!
     setBillingAddress(token: String! id: ID name: String! street: String! zip: String! country: String!): Order!
     setShippingAddress(token: String! id: ID name: String! street: String! zip: String! country: String!): Order!
+    updateOrCreateAddress(name: String! street: String! zip: String! country: String!): Address!
+    deleteAddress(id: ID!): [Address!]!
 }
 
 ##########################################

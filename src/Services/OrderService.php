@@ -219,7 +219,9 @@ class OrderService
         $BillingAddress = $AddressService->updateOrCreate($billing_address);
 
         // set the billing address on the order
-        $Order->update([config('voyager-shop.foreign_keys.billingAddress') => $BillingAddress->id]);
+        $Order->update([
+            config('voyager-shop.foreign_keys.billingAddress') => $BillingAddress->id
+        ]);
 
         // return the updated order
         return $Order->load(['billingAddress']);
