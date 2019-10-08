@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Tjventurini\VoyagerShop\Models\Address;
 use Tjventurini\VoyagerProjects\Services\ProjectService;
+use Tjventurini\VoyagerShop\Events\UpdateOrCreateAddress;
+use Tjventurini\VoyagerShop\GraphQL\Mutations\DeleteAddress;
 
 class AddressService
 {
@@ -28,14 +30,7 @@ class AddressService
      */
     public function validate(array $address): bool
     {
-        $validator = Validator::make($address, [
-            'id' => 'sometimes|exists:addresses,id',
-            'name' => 'required|string|min:3',
-            'street' => 'required|string|min:3',
-            'zip' => 'required|string|min:4',
-            'country' => 'required|string|size:2|exists:countries,code',
-            'user_id' => 'sometimes|exists:users,id',
-        ]);
+        $validator = Validator::make($address, config('voyager-shop.validation.address'));
 
         if ($validator->fails()) {
             return false;
@@ -68,6 +63,9 @@ class AddressService
         // get country
         $CountryService = new CountryService();
         $Country = $CountryService->getCountryByCode($address['country']);
+
+        // trigger event
+        event(new UpdateOrCreateAddress($User, $Project, $Country, $address));
 
         // update address if we have an id
         if (isset($address['id'])) {
@@ -109,8 +107,14 @@ class AddressService
             throw new \Exception("Unauthenticated.", 1);
         }
 
+        // get address to delete
+        $Address = $User->addresses()->findOrFail($id);
+
+        // fire event
+        event(new DeleteAddress);
+
         // delete address
-        $User->addresses()->findOrFail($id)->delete();
+        $Address->delete();
 
         // return the current list of addresses
         return $User->addresses;

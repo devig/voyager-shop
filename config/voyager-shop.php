@@ -91,5 +91,26 @@ return [
         'declined' => 'declined',
         'refunded' => 'refunded'
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validation
+    |--------------------------------------------------------------------------
+    |
+    | In this section you can overwrite the validation rules used for each
+    | entity.
+    |
+    */
+    
+    'validation' => [
+        'address' => [
+            'id' => 'sometimes|exists:addresses,id',
+            'name' => 'required|string|min:3',
+            'street' => 'required|string|min:3',
+            'zip' => 'required|string|min:4',
+            'country' => 'required|string|size:2|exists:countries,code',
+            'user_id' => 'sometimes|exists:users,id',
+        ]
+    ],
     
 ];
