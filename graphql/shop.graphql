@@ -132,3 +132,11 @@ extend type User {
     orders: [Order!]!
     addresses: [Address!]!
 }
+extend type Project {
+    products: [Product!]!
+    addresses: [Address!]!
+    orders: [Order!]!
+    cards: [Card!]!
+    currencies: [Currency!]!
+    taxes: [Tax!]!
+}
