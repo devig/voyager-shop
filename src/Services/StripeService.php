@@ -64,7 +64,7 @@ class StripeService
     public function removePaymentMethod(string $stripe_id): Collection
     {
         $CardService = new CardService();
-        $Cards = $CardService->removePaymentMethod($stripe_id);
+        $Cards = $CardService->deleteCard($stripe_id);
 
         // delete payment method from stripe
         $this->user->removePaymentMethod($stripe_id);

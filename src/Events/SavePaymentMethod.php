@@ -22,8 +22,8 @@ class SavePaymentMethod
      *
      * @return void
      */
-    public function __construct(Card $paymentMethod)
+    public function __construct(Card &$paymentMethod)
     {
-        $this->paymentMethod = $paymentMethod;
+        $this->paymentMethod = &$paymentMethod;
     }
 }

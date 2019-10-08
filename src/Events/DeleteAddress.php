@@ -22,8 +22,8 @@ class UpdateOrCreateAddress
      *
      * @return void
      */
-    public function __construct(Address $Address)
+    public function __construct(Address &$Address)
     {
-        $this->Address = $Address;
+        $this->Address = &$Address;
     }
 }

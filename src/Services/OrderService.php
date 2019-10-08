@@ -6,7 +6,12 @@ use App\User;
 use Stripe\PaymentIntent;
 use Illuminate\Support\Collection;
 use Tjventurini\VoyagerShop\Models\Order;
+use Tjventurini\VoyagerShop\Events\AddToCart;
+use Tjventurini\VoyagerShop\Events\OrderCart;
 use Tjventurini\VoyagerShop\Models\OrderItem;
+use Tjventurini\VoyagerShop\Events\CreateCart;
+use Tjventurini\VoyagerShop\Events\UpdateCart;
+use Tjventurini\VoyagerShop\Events\RemoveFromCart;
 use Tjventurini\VoyagerShop\Models\ProductVariant;
 use Tjventurini\VoyagerShop\Services\StripeService;
 use Tjventurini\VoyagerShop\Services\AddressService;
@@ -20,7 +25,14 @@ class OrderService
      */
     public function createCart(): Order
     {
-        return Order::create();
+        // create an order
+        $Order = Order::create();
+
+        // fire event
+        event(new CreateCart($Order));
+
+        // return the order
+        return $Order;
     }
 
     /**
@@ -33,23 +45,34 @@ class OrderService
      */
     public function addToCart(Order $Order, ProductVariant $ProductVariant): Order
     {
-        // check if product variant is already in cart
+        // get order item if available
         $OrderItem = $Order->orderItems()
             ->where(config('voyager-shop.foreign_keys.productVariant'), $ProductVariant->id)
             ->first();
+
+        // if order item is available update it
         if (!is_null($OrderItem)) {
             $quantity = $OrderItem->quantity;
             $OrderItem->update([
                 'quantity' => $quantity + 1
             ]);
+
+            // fire event
+            event(new AddToCart($Order, $OrderItem));
+            
+            // return the current order
             return $Order;
         }
 
         // create order item if product variant is not already in cart
-        $Order->orderItems()->create([
+        $OrderItem = $Order->orderItems()->create([
             config('voyager-shop.foreign_keys.productVariant') => $ProductVariant->id
         ]);
 
+        // fire event
+        event(new AddToCart($Order, $OrderItem));
+            
+        // return the current order
         return $Order;
     }
 
@@ -63,10 +86,18 @@ class OrderService
      */
     public function removeFromCart(Order $Order, ProductVariant $ProductVariant): Order
     {
-        $Order->orderItems()
+        // get the order item
+        $OrderItem = $Order->orderItems()
             ->where(config('voyager-shop.foreign_keys.productVariant'), $ProductVariant->id)
-            ->delete();
+            ->firstOrFail();
 
+        // fire event
+        event(new RemoveFromCart($Order, $OrderItem));
+
+        // delete the order item
+        $OrderItem->delete();
+
+        // return the updated order
         return $Order;
     }
 
@@ -91,12 +122,18 @@ class OrderService
      */
     public function updateCart(Order $Order, ProductVariant $ProductVariant, array $data): Order
     {
+        // get order item
         $OrderItem = $Order->orderItems()
             ->where(config('voyager-shop.foreign_keys.productVariant'), $ProductVariant->id)
             ->firstOrFail();
 
+        // fire event
+        event(new UpdateCart($Order, $OrderItem, $data));
+
+        // update order item with given data
         $OrderItem->update($data);
 
+        // return updated order
         return $Order;
     }
 
@@ -136,31 +173,6 @@ class OrderService
     }
 
     /**
-     * Method to order a single product.
-     *
-     * @param  int         $product_variant_id
-     * @param  string|null $stripe_id
-     * @param  string      $currency
-     *
-     * @return \Stripe\PaymentIntent
-     */
-    private function orderProduct(int $product_variant_id, string $stripe_id = null, string $currency = null): PaymentIntent
-    {
-        // get the product variant by id
-        $ProductVariant = ProductVariant::findOrFail($product_variant_id);
-
-        // get the price from the product variant
-        $price = $ProductVariant->priceRaw;
-
-        // create charge description
-        $description = trans('shop::orders.service.buy-product-description', ['product' => $ProductVariant->name]);
-
-        // make the charge
-        $StripeService = new StripeService();
-        return $StripeService->charge($description, $price, $stripe_id, $currency);
-    }
-
-    /**
      * Method to order all items of the current cart by token.
      *
      * @param  string $token
@@ -193,6 +205,43 @@ class OrderService
         // get description
         $description = trans('shop::orders.buy-cart-description', ['id' => $Order->id]);
 
+        // fire event
+        event(new OrderCart($Order, $OrderItems, $price, $description));
+
+        // make the charge
+        $StripeService = new StripeService();
+        $PaymentIntent = $StripeService->charge($description, $price, $stripe_id, $currency);
+
+        // update the order state
+        $Order->update(['state' => config('voyager-shop.order_states.billed')]);
+
+        // return the payment intent
+        return $PaymentIntent;
+    }
+
+    /**
+     * Method to order a single product.
+     *
+     * @param  int         $product_variant_id
+     * @param  string|null $stripe_id
+     * @param  string      $currency
+     *
+     * @return \Stripe\PaymentIntent
+     */
+    private function orderProduct(int $product_variant_id, string $stripe_id = null, string $currency = null): PaymentIntent
+    {
+        // get the product variant by id
+        $ProductVariant = ProductVariant::findOrFail($product_variant_id);
+
+        // get the price from the product variant
+        $price = $ProductVariant->priceRaw;
+
+        // create charge description
+        $description = trans('shop::orders.service.buy-product-description', ['product' => $ProductVariant->name]);
+
+        // fire event
+        event(new OrderProduct($Order, $OrderItems, $price, $description));
+
         // make the charge
         $StripeService = new StripeService();
         $PaymentIntent = $StripeService->charge($description, $price, $stripe_id, $currency);
@@ -212,6 +261,9 @@ class OrderService
      */
     public function setBillingAddress(Order $Order, array $billing_address): Order
     {
+        // fire event
+        event(new SetBillingAddress($billing_address));
+        
         // get address service
         $AddressService = new AddressService();
 
@@ -235,6 +287,9 @@ class OrderService
      */
     public function setShippingAddress(Order $Order, array $shipping_address): Order
     {
+        // fire event
+        event(new SetShippingAddress($shipping_address));
+
         // get address service
         $AddressService = new AddressService();
 

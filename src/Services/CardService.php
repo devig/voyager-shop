@@ -28,11 +28,13 @@ class CardService
         $ProjectService = new ProjectService();
         $Project = $ProjectService->getCurrentProject();
 
+        // create default name
         if (!$name) {
             $name = $User->name . ' ' . $brand;
         }
 
-        return $User->cards()->updateOrCreate([
+        // update or create card model
+        $Card = $User->cards()->updateOrCreate([
             'stripe_id' => $stripe_id
         ], [
             'name' => $name,
@@ -40,6 +42,12 @@ class CardService
             'last_four' => $last_four,
             'project_id' => $Project->id,
         ]);
+
+        // fire event
+        event(new SaveCard($Card));
+
+        // return card
+        return $Card;
     }
 
     /**
@@ -53,21 +61,29 @@ class CardService
     }
 
     /**
-     * Remove the given payment method.
+     * Remove the delete card by stripe_id.
      *
      * @param  string    $stripe_id
      *
      * @return \Illuminate\Support\Collection
      */
-    public function removePaymentMethod(string $stripe_id): Collection
+    public function deleteCard(string $stripe_id): Collection
     {
+        // get current user
         $User = Auth::user();
 
-        $User->cards()
+        // get ccard
+        $Card = $User->cards()
             ->where('stripe_id', $stripe_id)
-            ->firstOrFail()
-            ->delete();
+            ->firstOrFail();
 
+        // fire event
+        event(new DeleteCard($Card));
+
+        // delete ccard
+        $Card->delete();
+
+        // return list of current cards
         return $User->cards;
     }
 }

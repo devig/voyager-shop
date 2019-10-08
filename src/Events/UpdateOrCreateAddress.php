@@ -27,11 +27,11 @@ class UpdateOrCreateAddress
      *
      * @return void
      */
-    public function __construct(User $User, Project $Project, Country $Country, array $address)
+    public function __construct(User &$User, Project &$Project, Country &$Country, array &$address)
     {
-        $this->User = $User;
-        $this->Project = $Project;
-        $this->Country = $Country;
-        $this->address = $address;
+        $this->User = &$User;
+        $this->Project = &$Project;
+        $this->Country = &$Country;
+        $this->address = &$address;
     }
 }

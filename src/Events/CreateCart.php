@@ -2,33 +2,28 @@
 
 namespace Tjventurini\VoyagerShop\Events;
 
-use App\User;
-use Laravel\Cashier\Payment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
+use Tjventurini\VoyagerShop\Models\Order;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ChargeUser
+class CreateCart
 {
-    public $user;
-    public $description;
-    public $payment;
-
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $Order;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User &$user, string &$description, Payment &$payment)
+    public function __construct(Order &$Order)
     {
-        $this->user = $user;
-        $this->description = $description;
-        $this->payment = $payment;
+        $this->Order = &$Order;
     }
 }
