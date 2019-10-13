@@ -18,7 +18,7 @@ class VoyagerShopInstall extends Command
      *
      * @var string
      */
-    protected $description = 'Install the Voyager Shop.';
+    protected $description = 'Install the Voyager Shop Package.';
 
     /**
      * Create a new command instance.
@@ -58,6 +58,16 @@ class VoyagerShopInstall extends Command
 
         // run migrations
         $this->runMigrations();
+
+        // install tags
+        $this->call('voyager-tags:install', [
+            '--demo' => $this->option('demo')
+        ]);
+
+        // install projects
+        $this->call('voyager-projects:install', [
+            '--demo' => $this->option('demo')
+        ]);
 
         // run seeders
         $this->runSeeders();
@@ -110,18 +120,6 @@ class VoyagerShopInstall extends Command
      */
     private function provisionPackages(): void
     {
-        // tags
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerTags\VoyagerTagsServiceProvider", '--tag' => 'config']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerTags\VoyagerTagsServiceProvider", '--tag' => 'views']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerTags\VoyagerTagsServiceProvider", '--tag' => 'lang']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerTags\VoyagerTagsServiceProvider", '--tag' => 'graphql']);
-
-        // projects
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerProjects\VoyagerProjectsServiceProvider", '--tag' => 'config']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerProjects\VoyagerProjectsServiceProvider", '--tag' => 'views']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerProjects\VoyagerProjectsServiceProvider", '--tag' => 'lang']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerProjects\VoyagerProjectsServiceProvider", '--tag' => 'graphql']);
-
         // shop
         $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'config']);
         $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'views']);
@@ -158,12 +156,6 @@ class VoyagerShopInstall extends Command
     {
         // voyager
         $this->call('db:seed', ['--class' => "VoyagerDatabaseSeeder"]);
-
-        // tags
-        $this->call('db:seed', ['--class' => "Tjventurini\VoyagerTags\Seeds\VoyagerTagsDatabaseSeeder"]);
-
-        // projects
-        $this->call('db:seed', ['--class' => "Tjventurini\VoyagerProjects\Seeds\VoyagerProjectsDatabaseSeeder"]);
 
         // shop
         $this->call('db:seed', ['--class' => "Tjventurini\VoyagerShop\Seeds\VoyagerShopDatabaseSeeder"]);

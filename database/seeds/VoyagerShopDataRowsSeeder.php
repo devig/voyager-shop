@@ -25,6 +25,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
         $this->currencies();
         $this->cards();
         $this->addresses();
+        $this->tags();
     }
 
     private function countries()
@@ -1468,6 +1469,45 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'details' => json_encode([]),
                 'order' => 1,
             ]);
+        });
+    }
+
+    /**
+     * Create tags data rows.
+     *
+     * @return void
+     */
+    private function tags(): void
+    {
+        DB::transaction(function () {
+            // get the data type
+            $data_type = DataType::where('slug', 'tags')->firstOrFail();
+
+            // field project
+            $field_project = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'tag_belongsto_project_relationship',
+                ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::tags.data_rows.project'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.project'),
+                    'table' => config('voyager-shop.tables.projects'),
+                    'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.project'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+                ]);
         });
     }
 }

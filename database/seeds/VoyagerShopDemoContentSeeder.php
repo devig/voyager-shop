@@ -9,11 +9,11 @@ use Illuminate\Database\Seeder;
 use TCG\Voyager\Models\MenuItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Tjventurini\VoyagerShop\Seeds\VoyagerShopDemoTagsSeeder;
 use Tjventurini\VoyagerShop\Seeds\VoyagerShopDemoTaxesSeeder;
 use Tjventurini\VoyagerShop\Seeds\VoyagerShopDemoProductsSeeder;
 use Tjventurini\VoyagerShop\Seeds\VoyagerShopDemoCountriesSeeder;
 use Tjventurini\VoyagerShop\Seeds\VoyagerShopDemoCurrenciesSeeder;
-use Tjventurini\VoyagerProjects\Seeds\VoyagerProjectDemoContentSeeder;
 
 class VoyagerShopDemoContentSeeder extends Seeder
 {
@@ -34,11 +34,11 @@ class VoyagerShopDemoContentSeeder extends Seeder
             'role_id' => $AdminRole->id,
         ]);
 
-        $this->call(VoyagerProjectDemoContentSeeder::class);
         $this->call(VoyagerShopDemoCountriesSeeder::class);
         $this->call(VoyagerShopDemoCurrenciesSeeder::class);
         $this->call(VoyagerShopDemoTaxesSeeder::class);
         $this->call(VoyagerShopDemoProductsSeeder::class);
         $this->call(VoyagerShopDemoAddressesSeeder::class);
+        $this->call(VoyagerShopDemoTagsSeeder::class);
     }
 }

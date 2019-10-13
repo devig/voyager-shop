@@ -12,11 +12,8 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
-
 trait HasManyAddresses
 {
-    use GetRelationshipKey;
     /**
      * HasMany Relationship with the Address model.
      *

@@ -12,11 +12,8 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
-use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
-
 trait HasManyOrders
 {
-    use GetRelationshipKey;
     /**
      * Method to establish a relationship with orders.
      *
