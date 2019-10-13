@@ -26,6 +26,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
         $this->cards();
         $this->addresses();
         $this->tags();
+        $this->projects();
     }
 
     private function countries()
@@ -125,7 +126,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -142,7 +143,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -264,7 +265,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -281,7 +282,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -445,7 +446,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -462,7 +463,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -600,7 +601,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -617,7 +618,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -737,7 +738,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -754,7 +755,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -889,7 +890,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -906,7 +907,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -1056,7 +1057,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -1073,7 +1074,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -1240,7 +1241,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -1257,7 +1258,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -1433,7 +1434,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field updated_at
@@ -1450,7 +1451,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
 
             // field deleted_at
@@ -1467,7 +1468,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'add' => 0,
                 'delete' => 1,
                 'details' => json_encode([]),
-                'order' => 1,
+                'order' => 99,
             ]);
         });
     }
@@ -1500,6 +1501,45 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'model' => config('voyager-shop.models.project'),
                     'table' => config('voyager-shop.tables.projects'),
                     'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.project'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+                ]);
+        });
+    }
+
+    /**
+     * Create projects data rows.
+     *
+     * @return void
+     */
+    private function projects(): void
+    {
+        DB::transaction(function () {
+            // get the data type
+            $data_type = DataType::where('slug', 'projects')->firstOrFail();
+
+            // field tags
+            $field_tags = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'project_hasmany_tags_relationship',
+                ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::projects.data_rows.tags'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.tag'),
+                    'table' => config('voyager-shop.tables.tag'),
+                    'type' => 'hasMany',
                     'column' => config('voyager-shop.foreign_keys.project'),
                     'key' => 'id',
                     'label' => 'name',

@@ -23,6 +23,7 @@ return [
    
     'tables' => [
         'projects' => 'projects',
+        'project' => 'projects',
         'products' => 'products',
         'taxes' => 'taxes',
         'users' => 'users',
@@ -31,6 +32,7 @@ return [
         'countries' => 'countries',
         'cards' => 'cards',
         'addresses' => 'addresses',
+        'tag' => 'tags',
     ],
 
     'models' => [
@@ -46,6 +48,7 @@ return [
         'address' => \Tjventurini\VoyagerShop\Models\Address::class,
         'billingAddress' => \Tjventurini\VoyagerShop\Models\Address::class,
         'shippingAddress' => \Tjventurini\VoyagerShop\Models\Address::class,
+        'tag' => \Tjventurini\VoyagerShop\Models\Tag::class,
     ],
 
     'foreign_keys' => [
@@ -61,6 +64,7 @@ return [
         'address' => 'address_id',
         'billingAddress' => 'billing_address_id',
         'shippingAddress' => 'shipping_address_id',
+        'tag' => 'tag_id',
     ],
 
     /*
