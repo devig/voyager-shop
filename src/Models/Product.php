@@ -5,7 +5,7 @@ namespace Tjventurini\VoyagerShop\Models;
 use Illuminate\Database\Eloquent\Model;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToTax;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
-use Tjventurini\VoyagerTags\Traits\Relationships\BelongsToManyTags;
+use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToManyTags;
 use Tjventurini\VoyagerShop\Traits\Relationships\HasManyProductVariants;
 
 class Product extends Model
@@ -16,4 +16,6 @@ class Product extends Model
         BelongsToManyTags;
     
     protected $guarded = ['id'];
+
+    protected $with = ['productVariants'];
 }

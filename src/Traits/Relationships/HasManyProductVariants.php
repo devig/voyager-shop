@@ -12,22 +12,23 @@
 
 namespace Tjventurini\VoyagerShop\Traits\Relationships;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
 
 trait HasManyProductVariants
 {
     use GetRelationshipKey;
     /**
-     * Relationship with taxes model.
+     * Relationship with productVariants model.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function taxes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function productVariants(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         $key = $this->getRelationshipKey();
 
         $model = config('voyager-shop.models.productVariant');
         $country_id = config('voyager-shop.foreign_keys.'.$key);
 
-        return $this->belongsTo($model, $country_id);
+        return $this->hasMany($model, $country_id);
     }
 }

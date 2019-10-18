@@ -22,6 +22,7 @@ return [
         'includes_tax' => 'Tax Included',
         'project' => 'Project',
         'tax' => 'Tax',
+        'tags' => 'Tags',
         'created_at' => 'Created at',
         'updated_at' => 'Updated at',
     ],

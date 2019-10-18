@@ -56,6 +56,7 @@ type Product {
     description: String
     includes_tax: Boolean!
     tax: Tax!
+    tags: [Tag!]!
     project: Project!
     productVariants: [ProductVariant!]!
     created_at: DateTime!
@@ -139,4 +140,7 @@ extend type Project {
     cards: [Card!]!
     currencies: [Currency!]!
     taxes: [Tax!]!
+}
+extend type Tag {
+    products: [Product!]!
 }

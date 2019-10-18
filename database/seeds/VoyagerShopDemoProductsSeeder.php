@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Tjventurini\VoyagerShop\Models\Tag;
 use Tjventurini\VoyagerShop\Models\Tax;
 use Tjventurini\VoyagerShop\Models\Product;
 use Tjventurini\VoyagerShop\Models\Project;
@@ -52,5 +53,8 @@ class VoyagerShopDemoProductsSeeder extends Seeder
             'price' => '3000',
             'product_id' => $Product->id,
         ]);
+
+        // get tags and sync with products
+        $Product->tags()->sync([1, 2], 1);
     }
 }

@@ -32,7 +32,7 @@ return [
         'countries' => 'countries',
         'cards' => 'cards',
         'addresses' => 'addresses',
-        'tag' => 'tags',
+        'tag' => 'product_tag',
     ],
 
     'models' => [
