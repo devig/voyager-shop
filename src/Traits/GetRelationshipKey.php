@@ -21,6 +21,6 @@ trait GetRelationshipKey
      */
     private function getRelationshipKey(): string
     {
-        return strtolower(static::class);
+        return strtolower((new \ReflectionClass($this))->getShortName());
     }
 }
