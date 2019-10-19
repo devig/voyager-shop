@@ -47,7 +47,16 @@ If you don't use USD as your default currency you should add set the your defaul
 CASHIER_CURRENCY=eur
 ```
 
-For more information about the Payment Implementation check out the [Laravel Cashier Documentation](https://laravel.com/docs/billing).
+
+For more information about the payment implementation check out the [Laravel Cashier Documentation](https://laravel.com/docs/billing).
+
+To setup the stripe webhooks you need to set your `STRIPE_WEBHOOK_SECRET` in the `.env` file aswell.
+
+```
+STRIPE_WEBHOOK_SECRET=your-webhook-secret
+```
+
+For more information about the webhooks implementation check out the [spatie/laravel-stripe-webhooks](https://github.com/spatie/laravel-stripe-webhooks) package documentation on github.
 
 ## Frontend Example
 

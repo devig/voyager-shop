@@ -125,6 +125,10 @@ class VoyagerShopInstall extends Command
         $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'views']);
         $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'lang']);
         $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'graphql']);
+
+        // stripe webhooks
+        $this->customCall('vendor:publish', ['--provider' => "Spatie\StripeWebhooks\StripeWebhooksServiceProvider", '--tag' => "config"]);
+        $this->customCall('vendor:publish', ['--provider' => "Spatie\WebhookClient\WebhookClientServiceProvider", '--tag' => "migrations"]);
     }
 
     /**

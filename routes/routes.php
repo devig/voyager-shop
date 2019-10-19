@@ -25,3 +25,6 @@ Route::group(['prefix' => config('voyager.prefix')], function () {
     Route::get('taxes', $namespace . 'TaxesController@index')->name('voyager.taxes.index');
     Route::get('cards', $namespace . 'CardsController@index')->name('voyager.cards.index');
 });
+
+// stripe webhooks
+Route::stripeWebhooks('stripe/webhooks');
