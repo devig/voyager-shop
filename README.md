@@ -131,3 +131,7 @@ Here is a sample implementation of the stripe.js framework to get a payment meth
 </body>
 </html>
 ```
+
+# Documentation
+
+Please read the full [Documentation]() before using this package in production.
