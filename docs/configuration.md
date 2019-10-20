@@ -18,6 +18,8 @@ STRIPE_WEBHOOK_SECRET=<stripe-webhook-secret>
 
 ## Configuration
 
+The `voyager-shop.php` configuration file holds most of the configuration options available for this package. Read this section carefully to understand how you can influence the behavior of the package to match your needs.
+
 |             Key             | Description                                                                                                                                                                                                     |
 |:---------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |    `voyager-shop.tables`    | Holds an array of tables used in the relationships of this package. Feel free to overwrite them as needed. Take a look at the `Tjventurini/VoyagerShop/Traits/Relationships` traits for more information.       |
