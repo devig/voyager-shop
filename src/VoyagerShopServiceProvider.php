@@ -4,6 +4,9 @@ namespace Tjventurini\VoyagerShop;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
+use Tjventurini\VoyagerShop\Models\Order;
+use Tjventurini\VoyagerShop\Observers\OrderObserver;
+use Tjventurini\VoyagerShop\Console\Commands\VoyagerShopInstall;
 
 class VoyagerShopServiceProvider extends ServiceProvider
 {
@@ -45,6 +48,34 @@ class VoyagerShopServiceProvider extends ServiceProvider
 
         // tell laravel where to find routes
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
+
+        // register commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                VoyagerShopInstall::class,
+            ]);
+        }
+
+        // observers
+        Order::observe(OrderObserver::class);
+
+        // update lighthouse configurationc
+        config(
+            [
+                'lighthouse.namespaces.mutations' => array_merge(
+                    [
+                        'Tjventurini\\VoyagerShop\\GraphQL\\Mutations'
+                    ],
+                    (!is_array(config('lighthouse.namespaces.mutations'))) ? [config('lighthouse.namespaces.mutations')] : config('lighthouse.namespaces.mutations')
+                ),
+                'lighthouse.namespaces.queries' => array_merge(
+                    [
+                        'Tjventurini\\VoyagerShop\\GraphQL\\Queries'
+                    ],
+                    (!is_array(config('lighthouse.namespaces.queries'))) ? [config('lighthouse.namespaces.queries')] : config('lighthouse.namespaces.queries')
+                )
+            ]
+        );
     }
 
     /**

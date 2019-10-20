@@ -1,0 +1,148 @@
+##########################################
+# Queries
+extend type Query @middleware(checks: ["projectToken"]) {
+    products: [Product!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Product")
+    product(slug: String! @eq): Product! @find(model: "Tjventurini\\VoyagerShop\\Models\\Product")
+    countries: [Country!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Country")
+    country(code: String! @eq): Country! @find(model: "Tjventurini\\VoyagerShop\\Models\\Country")
+    taxes: [Tax!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Tax")
+    tax(id: ID!): Tax! @find(model: "Tjventurini\\VoyagerShop\\Models\\Tax")
+    currencies: [Currency!]! @paginate(type: "paginator" model: "Tjventurini\\VoyagerShop\\Models\\Currency")
+    currency(code: String! @eq): Currency! @find(model: "Tjventurini\\VoyagerShop\\Models\\Currency")
+    # custom queries
+    cart(token: String! @eq): Order! @find(model: "Tjventurini\\VoyagerShop\\Models\\Order") @middleware(checks: ["auth:api"])
+    orders: [Order!] @middleware(checks: ["auth:api"])
+    cards: [Card!] @middleware(checks: ["auth:api"])
+}
+
+##########################################
+# Mutations
+extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
+    createCart: Order!
+    addToCart(token: String! item: ID!): Order!
+    removeFromCart(token: String! item: ID!): Order!
+    updateCart(token: String! item: ID! quantity: Int!): Order!
+    savePaymentMethod(stripe_id: String!, brand: String!, last_four: String!, name: String): Card!
+    removePaymentMethod(stripe_id: String!): [Card!]!
+    charge(description: String! amount: Int! stripe_id: String currency: String): Payment!
+    order(token: String item: ID stripe_id: String currency: String): Payment!
+    setBillingAddress(token: String! id: ID name: String! street: String! zip: String! country: String!): Order!
+    setShippingAddress(token: String! id: ID name: String! street: String! zip: String! country: String!): Order!
+    updateOrCreateAddress(name: String! street: String! zip: String! country: String!): Address!
+    deleteAddress(id: ID!): [Address!]!
+}
+
+##########################################
+# Types
+type Payment {
+    id: String!
+    amount: Int!
+    currency: String!
+}
+type Card {
+    stripe_id: String!
+    name: String!
+    brand: String!
+    last_four: String!
+    project: Project!
+    user: User!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Product {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String
+    includes_tax: Boolean!
+    tax: Tax!
+    tags: [Tag!]!
+    project: Project!
+    productVariants: [ProductVariant!]!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type ProductVariant {
+    id: ID!
+    name: String!
+    details: String!
+    price: Float!
+    price_net: Float!
+    price_gross: Float!
+    product: Product!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Country {
+    id: ID!
+    name: String!
+    code: String!
+    project: Project!
+    addresses: [Address!]!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Tax {
+    id: ID!
+    name: String!
+    tax: Int!
+    project: Project!
+    country: Country!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Currency {
+    id: ID!
+    name: String!
+    code: String!
+    sign: String!
+    project: Project!
+    country: Country!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Order {
+    token: String!
+    state: String!
+    user: User
+    project: Project!
+    orderItems: [OrderItem!]
+    billingAddress: Address
+    shippingAddress: Address
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type OrderItem {
+    order: Order!
+    productVariant: ProductVariant!
+    quantity: Int!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+type Address {
+    id: ID!
+    name: String!
+    street: String!
+    zip: String!
+    project: Project!
+    user: User!
+    country: Country!
+    created_at: DateTime!
+    updated_at: DateTime
+    deleted_at: DateTime
+}
+extend type User {
+    orders: [Order!]!
+    addresses: [Address!]!
+}
+extend type Project {
+    products: [Product!]!
+    addresses: [Address!]!
+    orders: [Order!]!
+    cards: [Card!]!
+    currencies: [Currency!]!
+    taxes: [Tax!]!
+}
+extend type Tag {
+    products: [Product!]!
+}
