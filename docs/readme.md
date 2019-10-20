@@ -1,6 +1,6 @@
 # Voyager Shop Documentation
 
-This package is a simple boilerplate to get you starting with building a shop with a voyager admin panel.
+This package is a simple boilerplate to get you started with building a shop with a voyager admin panel.
 
 ## Features
 
