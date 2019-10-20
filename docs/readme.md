@@ -2,7 +2,7 @@
 
 This package is a simple boilerplate to get you started with building a shop with a voyager admin panel.
 
-## Features
+## Features ⭐
 
 * [Voyager Admin Panel](https://voyager.devdojo.com/)
 * [Lighthouse PHP](https://lighthouse-php.com)
@@ -14,6 +14,6 @@ This package is a simple boilerplate to get you started with building a shop wit
 * Basic Models such as Orders, Products, Cards and Addresses
 * And many little things that you are going to enjoy 😉
 
-## Table of Content
+## Table of Content 
 
 * [Installation](installation.md)
