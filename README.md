@@ -134,4 +134,4 @@ Here is a sample implementation of the stripe.js framework to get a payment meth
 
 # Documentation
 
-Please read the full [Documentation]() before using this package in production.
+Please read the full [Documentation](https://tjventurini.github.io/voyager-shop/) before using this package in production.
