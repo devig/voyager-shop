@@ -17,3 +17,4 @@ This package is a simple boilerplate to get you started with building a shop wit
 ## Table of Content 
 
 * [Installation](installation.md)
+* [Configuration](configuration.md)
