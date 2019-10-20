@@ -3,6 +3,7 @@
 namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToUser;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProject;
 use Tjventurini\VoyagerShop\Traits\Relationships\HasManyOrderItems;
@@ -11,7 +12,8 @@ use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToShippingAddress;
 
 class Order extends Model
 {
-    use BelongsToProject,
+    use GetRelationshipKey,
+        BelongsToProject,
         BelongsToUser,
         BelongsToBillingAddress,
         BelongsToShippingAddress,
