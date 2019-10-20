@@ -67,6 +67,8 @@ type ProductVariant {
     name: String!
     details: String!
     price: Float!
+    price_net: Float!
+    price_gross: Float!
     product: Product!
     created_at: DateTime!
     updated_at: DateTime

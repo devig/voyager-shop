@@ -11,7 +11,7 @@ class VoyagerShopInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'voyager-shop:install {-- force : Wether the whole project should be refreshed.} {-- demo : Wether the demo content should be added or not.}';
+    protected $signature = 'voyager-shop:install {--force : Whether the assets should be forcefully published or not.} {--demo : Whether the demo content should be added or not.} {--refresh : Whether the whole project should be refreshed.}';
 
     /**
      * The console command description.
@@ -93,27 +93,6 @@ class VoyagerShopInstall extends Command
     }
 
     /**
-     * Run command but check for force flag and append if set.
-     *
-     * @param  string $command
-     *
-     * @return void
-     */
-    public function customCall(string $command, array $options = []): void
-    {
-        // get force value
-        $force = $this->option('force');
-
-        // append force flag if force flag is set
-        if ($force) {
-            $options['--force'] = true;
-        }
-
-        // run command
-        $this->call($command, $options);
-    }
-
-    /**
      * Provision the packages.
      *
      * @return void
@@ -121,14 +100,36 @@ class VoyagerShopInstall extends Command
     private function provisionPackages(): void
     {
         // shop
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'config']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'views']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'lang']);
-        $this->customCall('vendor:publish', ['--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider", '--tag' => 'graphql']);
+        $this->call('vendor:publish', [
+            '--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider",
+            '--tag' => 'config',
+            '--force' => $this->option('force'),
+        ]);
+        $this->call('vendor:publish', [
+            '--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider",
+            '--tag' => 'views',
+            '--force' => $this->option('force'),
+        ]);
+        $this->call('vendor:publish', [
+            '--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider",
+            '--tag' => 'lang',
+            '--force' => $this->option('force'),
+        ]);
+        $this->call('vendor:publish', [
+            '--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider",
+            '--tag' => 'graphql',
+            '--force' => $this->option('force'),
+        ]);
 
         // stripe webhooks
-        $this->customCall('vendor:publish', ['--provider' => "Spatie\StripeWebhooks\StripeWebhooksServiceProvider", '--tag' => "config"]);
-        $this->customCall('vendor:publish', ['--provider' => "Spatie\WebhookClient\WebhookClientServiceProvider", '--tag' => "migrations"]);
+        $this->call('vendor:publish', [
+            '--provider' => "Spatie\StripeWebhooks\StripeWebhooksServiceProvider",
+            '--tag' => "config",
+            '--force' => $this->option('force'),
+        ]);
+        if (!count(\File::glob("database/migrations/*create_webhook_calls_table.php"))) {
+            $this->call('vendor:publish', ['--provider' => "Spatie\WebhookClient\WebhookClientServiceProvider", '--tag' => "migrations"]);
+        }
     }
 
     /**
@@ -138,11 +139,11 @@ class VoyagerShopInstall extends Command
      */
     private function runMigrations(): void
     {
-        // get force value
-        $force = $this->option('force');
+        // get refresh value
+        $refresh = $this->option('refresh');
 
-        // if force flag is set we want to refresh the migrations
-        if ($force) {
+        // if refresh flag is set we want to refresh the migrations
+        if ($refresh) {
             $this->call('migrate:refresh');
             return;
         }

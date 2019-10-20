@@ -42,7 +42,7 @@ class VoyagerShopDemoProductsSeeder extends Seeder
         $ProductVariantOne = ProductVariant::create([
             'name' => 'Sample Product Variant One',
             'details' => 'Sample Product Variant Details',
-            'price' => '1500',
+            'price' => '15',
             'product_id' => $Product->id,
         ]);
 
@@ -50,7 +50,7 @@ class VoyagerShopDemoProductsSeeder extends Seeder
         $ProductVariantTwo = ProductVariant::create([
             'name' => 'Sample Product Variant Two',
             'details' => 'Sample Product Variant Details',
-            'price' => '3000',
+            'price' => '30',
             'product_id' => $Product->id,
         ]);
 
