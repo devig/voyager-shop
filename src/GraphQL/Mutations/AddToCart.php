@@ -26,6 +26,6 @@ class AddToCart
         $ProductVariant = ProductVariant::findOrFail($args['item']);
 
         $OrderService = new OrderService();
-        return $OrderService->addToCart($Order, $ProductVariant);
+        return $OrderService->addToCart($Order, $ProductVariant, $args['quantity'] ?? 1);
     }
 }

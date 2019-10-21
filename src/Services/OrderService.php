@@ -42,10 +42,11 @@ class OrderService
      *
      * @param \Tjventurini\VoyagerShop\Models\Order          $Order
      * @param \Tjventurini\VoyagerShop\Models\ProductVariant $ProductVariant
+     * @param int $quantity The quantity of items to add to the given Order.
      *
      * @return  \Tjventurini\VoyagerShop\Models\Order
      */
-    public function addToCart(Order $Order, ProductVariant $ProductVariant): Order
+    public function addToCart(Order $Order, ProductVariant $ProductVariant, int $quantity = 1): Order
     {
         // get order item if available
         $OrderItem = $Order->orderItems()
@@ -54,9 +55,9 @@ class OrderService
 
         // if order item is available update it
         if (!is_null($OrderItem)) {
-            $quantity = $OrderItem->quantity;
+            $order_item_quantity = $OrderItem->quantity;
             $OrderItem->update([
-                'quantity' => $quantity + 1
+                'quantity' => $order_item_quantity + $quantity
             ]);
 
             // fire event
@@ -68,7 +69,8 @@ class OrderService
 
         // create order item if product variant is not already in cart
         $OrderItem = $Order->orderItems()->create([
-            config('voyager-shop.foreign_keys.productVariant') => $ProductVariant->id
+            config('voyager-shop.foreign_keys.productVariant') => $ProductVariant->id,
+            'quantity' => $quantity
         ]);
 
         // fire event

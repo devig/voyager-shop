@@ -19,7 +19,7 @@ extend type Query @middleware(checks: ["projectToken"]) {
 # Mutations
 extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
     createCart: Order!
-    addToCart(token: String! item: ID!): Order!
+    addToCart(token: String!, item: ID!, quantity: Int): Order!
     removeFromCart(token: String! item: ID!): Order!
     updateCart(token: String! item: ID! quantity: Int!): Order!
     savePaymentMethod(stripe_id: String!, brand: String!, last_four: String!, name: String): Card!
