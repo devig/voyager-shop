@@ -33,12 +33,32 @@ class OrderItem extends Model
     }
     
     /**
-     * Get the price attribute as float.
+     * Get the price_raw attribute as float.
      *
      * @return float
      */
     public function getPriceRawAttribute(): float
     {
         return $this->productVariant->priceRaw;
+    }
+    
+    /**
+     * Get the price_net attribute as float.
+     *
+     * @return float
+     */
+    public function getPriceNetAttribute(): float
+    {
+        return $this->productVariant->price_net;
+    }
+    
+    /**
+     * Get the price_gross attribute as float.
+     *
+     * @return float
+     */
+    public function getPriceGrossAttribute(): float
+    {
+        return $this->productVariant->price_gross;
     }
 }

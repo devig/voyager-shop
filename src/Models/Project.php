@@ -2,6 +2,7 @@
 
 namespace Tjventurini\VoyagerShop\Models;
 
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
 use Tjventurini\VoyagerProjects\Models\Project as BaseModel;
 use Tjventurini\VoyagerShop\Traits\Relationships\HasManyCards;
 use Tjventurini\VoyagerShop\Traits\Relationships\HasManyTaxes;
@@ -12,5 +13,5 @@ use Tjventurini\VoyagerShop\Traits\Relationships\HasManyCurrencies;
 
 class Project extends BaseModel
 {
-    use HasManyProducts, HasManyAddresses, HasManyOrders, HasManyCards, HasManyCurrencies, HasManyTaxes;
+    use GetRelationshipKey, HasManyProducts, HasManyAddresses, HasManyOrders, HasManyCards, HasManyCurrencies, HasManyTaxes;
 }

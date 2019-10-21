@@ -3,11 +3,12 @@
 namespace Tjventurini\VoyagerShop\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Tjventurini\VoyagerShop\Traits\GetRelationshipKey;
 use Tjventurini\VoyagerShop\Traits\Relationships\BelongsToProduct;
 
 class ProductVariant extends Model
 {
-    use BelongsToProduct;
+    use GetRelationshipKey, BelongsToProduct;
 
     protected $guarded = ['id'];
 
