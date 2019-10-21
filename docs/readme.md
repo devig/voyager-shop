@@ -21,3 +21,4 @@ This package is a simple boilerplate to get you started with building a shop wit
 * [Models](models.md)
 * [GraphQL](graphql.md)
 * [Events](events.md)
+* [Services](services.md)
