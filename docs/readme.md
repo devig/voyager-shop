@@ -19,3 +19,4 @@ This package is a simple boilerplate to get you started with building a shop wit
 * [Installation](installation.md)
 * [Configuration](configuration.md)
 * [Models](models.md)
+* [GraphQL](graphql.md)
