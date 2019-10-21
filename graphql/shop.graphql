@@ -44,8 +44,8 @@ type Card {
     name: String!
     brand: String!
     last_four: String!
-    project: Project!
-    user: User!
+    project: Project! @belongsTo
+    user: User! @belongsTo
     created_at: DateTime!
     updated_at: DateTime
 }
@@ -55,10 +55,10 @@ type Product {
     slug: String!
     description: String
     includes_tax: Boolean!
-    tax: Tax!
-    tags: [Tag!]!
-    project: Project!
-    productVariants: [ProductVariant!]!
+    tax: Tax! @belongsTo
+    tags: [Tag!]! @belongsToMany
+    project: Project! @belongsTo
+    productVariants: [ProductVariant!]! @hasMany
     created_at: DateTime!
     updated_at: DateTime
 }
@@ -69,7 +69,7 @@ type ProductVariant {
     price: Float!
     price_net: Float!
     price_gross: Float!
-    product: Product!
+    product: Product! @belongsTo
     created_at: DateTime!
     updated_at: DateTime
 }
@@ -77,7 +77,7 @@ type Country {
     id: ID!
     name: String!
     code: String!
-    project: Project!
+    project: Project! @belongsTo
     addresses: [Address!]!
     created_at: DateTime!
     updated_at: DateTime
@@ -86,8 +86,8 @@ type Tax {
     id: ID!
     name: String!
     tax: Int!
-    project: Project!
-    country: Country!
+    project: Project! @belongsTo
+    country: Country! @belongsTo
     created_at: DateTime!
     updated_at: DateTime
 }
@@ -96,25 +96,25 @@ type Currency {
     name: String!
     code: String!
     sign: String!
-    project: Project!
-    country: Country!
+    project: Project! @belongsTo
+    country: Country! @belongsTo
     created_at: DateTime!
     updated_at: DateTime
 }
 type Order {
     token: String!
     state: String!
-    user: User
-    project: Project!
+    user: User @belongsTo
+    project: Project! @belongsTo
     orderItems: [OrderItem!]
-    billingAddress: Address
-    shippingAddress: Address
+    billingAddress: Address @belongsTo
+    shippingAddress: Address @belongsTo
     created_at: DateTime!
     updated_at: DateTime
 }
 type OrderItem {
-    order: Order!
-    productVariant: ProductVariant!
+    order: Order! @belongsTo
+    productVariant: ProductVariant! @belongsTo
     quantity: Int!
     price_net: Float!
     price_gross: Float!
@@ -126,25 +126,25 @@ type Address {
     name: String!
     street: String!
     zip: String!
-    project: Project!
-    user: User!
-    country: Country!
+    project: Project! @belongsTo
+    user: User! @belongsTo
+    country: Country! @belongsTo
     created_at: DateTime!
     updated_at: DateTime
     deleted_at: DateTime
 }
 extend type User {
-    orders: [Order!]!
-    addresses: [Address!]!
+    orders: [Order!]! @hasMany
+    addresses: [Address!]! @hasMany
 }
 extend type Project {
-    products: [Product!]!
-    addresses: [Address!]!
-    orders: [Order!]!
-    cards: [Card!]!
-    currencies: [Currency!]!
-    taxes: [Tax!]!
+    products: [Product!]! @hasMany
+    addresses: [Address!]! @hasMany
+    orders: [Order!]! @hasMany
+    cards: [Card!]! @hasMany
+    currencies: [Currency!]! @hasMany
+    taxes: [Tax!]! @hasMany
 }
 extend type Tag {
-    products: [Product!]!
+    products: [Product!]! @belongsToMany
 }
