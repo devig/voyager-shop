@@ -8,7 +8,7 @@ This package is a simple boilerplate to get you started with building a shop wit
 * [Lighthouse PHP](https://lighthouse-php.com)
 * [Laravel Cashier](https://laravel.com/docs/cashier)
 * [Stripe Webhooks](https://github.com/spatie/laravel-stripe-webhooks)
-* [Laravel Telescope](https://laravel.com/docs/telescope)
+* [Laravel Telescope](telescope.md)
 * [Voyager Projects](https://github.com/tjventurini/voyager-projects)
 * [Voyager Tags](https://github.com/tjventurini/voyager-tags)
 * Basic Models such as Orders, Products, Cards and Addresses
@@ -22,3 +22,4 @@ This package is a simple boilerplate to get you started with building a shop wit
 * [GraphQL](graphql.md)
 * [Events](events.md)
 * [Services](services.md)
+* [Laravel Telescope](telescope.md)

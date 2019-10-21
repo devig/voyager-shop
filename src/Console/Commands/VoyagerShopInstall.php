@@ -56,6 +56,9 @@ class VoyagerShopInstall extends Command
             '--tag' => 'cashier-migrations'
         ]);
 
+        // install telescope
+        $this->installTelescope();
+
         // run migrations
         $this->runMigrations();
 
@@ -178,5 +181,31 @@ class VoyagerShopInstall extends Command
             // run demo content seeder
             $this->call('db:seed', ['--class' => "Tjventurini\VoyagerShop\Seeds\VoyagerShopDemoContentSeeder"]);
         }
+    }
+
+    /**
+     * Method to install telescope.
+     *
+     * @return void
+     */
+    private function installTelescope(): void
+    {
+        $this->call('telescope:install');
+
+        if ($this->option('force')) {
+            $this->call('telescope:publish');
+        }
+
+        $this->call('vendor:publish', [
+            '--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider",
+            '--tag' => 'providers',
+            '--force' => $this->option('force'),
+        ]);
+
+        $this->call('vendor:publish', [
+            '--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider",
+            '--tag' => 'policies',
+            '--force' => $this->option('force'),
+        ]);
     }
 }

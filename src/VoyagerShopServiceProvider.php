@@ -49,6 +49,16 @@ class VoyagerShopServiceProvider extends ServiceProvider
         // tell laravel where to find routes
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
 
+        // publish providers
+        $this->publishes([
+            __DIR__.'/Providers' => base_path('app/Providers'),
+        ], 'providers');
+
+        // publish providers
+        $this->publishes([
+            __DIR__.'/Policies' => base_path('app/Policies'),
+        ], 'policies');
+
         // register commands
         if ($this->app->runningInConsole()) {
             $this->commands([

@@ -170,6 +170,22 @@ class VoyagerShopMenuItemsSeeder extends Seeder
                 'order' => 7,
                 'title' => trans('shop::addresses.label_plural'),
             ]);
+
+            // telescope
+            $route = 'telescope';
+            $ToolsMenuItem = MenuItem::where('title', 'Tools')->firstOrFail();
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $ToolsMenuItem->id,
+                'target' => '_blank',
+                'icon_class' => 'voyager-logbook',
+                'color' => null,
+                'order' => 6,
+                'title' => 'Telescope',
+            ]);
         });
     }
 }
