@@ -116,6 +116,8 @@ type OrderItem {
     order: Order!
     productVariant: ProductVariant!
     quantity: Int!
+    price_net: Float!
+    price_gross: Float!
     created_at: DateTime!
     updated_at: DateTime
 }
