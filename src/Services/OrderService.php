@@ -15,6 +15,8 @@ use Tjventurini\VoyagerShop\Events\RemoveFromCart;
 use Tjventurini\VoyagerShop\Models\ProductVariant;
 use Tjventurini\VoyagerShop\Services\StripeService;
 use Tjventurini\VoyagerShop\Services\AddressService;
+use Tjventurini\VoyagerShop\Events\SetBillingAddress;
+use Tjventurini\VoyagerShop\Events\SetShippingAddress;
 
 class OrderService
 {

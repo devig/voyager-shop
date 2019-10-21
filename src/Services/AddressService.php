@@ -111,7 +111,7 @@ class AddressService
         $Address = $User->addresses()->findOrFail($id);
 
         // fire event
-        event(new DeleteAddress);
+        event(new DeleteAddress($Address));
 
         // delete address
         $Address->delete();

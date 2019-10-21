@@ -70,7 +70,7 @@ class StripeService
         $this->user->removePaymentMethod($stripe_id);
 
         // dispatch event
-        event(new RemovePaymentMethod());
+        event(new RemovePaymentMethod($stripe_id));
 
         // return cards
         return $Cards;

@@ -21,7 +21,7 @@ class RemovePaymentMethod
      *
      * @return void
      */
-    public function __construct(&$paymentMethod)
+    public function __construct(string &$paymentMethod)
     {
         $this->paymentMethod = &$paymentMethod;
     }
