@@ -40,16 +40,35 @@ In this section of the documentation you will find all types exposed by the shop
 
 In this section of the documentation you will find all queries exposed by the shop graphql schema of this package.
 
-|   Query    | Parameters      | Returns          | Description                                          |                                    |
-|:----------:|:----------------|:-----------------|:-----------------------------------------------------|:-----------------------------------|
-|  products  | -               | `[Product!]!`    | Query all products available in the current project. |                                    |
-|  product   | `slug: String!` | `Product!`       | Query a specific product by slug.                    |                                    |
-| countries  | -               | `[Country!]!`    | Query all available countries in this project.       |                                    |
-|  country   | -               | `code: String!`  | `Country!`                                           | Query a specific country by code.  |
-|   taxes    | -               | `[Tax!]!`        | Query all available taxes in this project.           |                                    |
-|    tax     | -               | `id: String!`    | `Tax!`                                               | Query a specific tax by id.        |
-| currencies | -               | `[Currency!]!`   | Query all available currencies in this project.      |                                    |
-|  currency  | -               | `code: String!`  | `Currency!`                                          | Query a specific currency by code. |
-|    cart    | -               | `token: String!` | `Order!`                                             | Query a specific cart by token.    |
-|   orders   | -               | `[Order!]!`      | Query all available orders of the logged in user.    |                                    |
-|   cards    | -               | `[Card!]!`       | Query all available cards of the logged in user.     |                                    |
+|   Query    | Parameters       | Returns        | Description                                          |
+|:----------:|:-----------------|:---------------|:-----------------------------------------------------|
+|  `products`  | -                | `[Product!]!`  | Query all products available in the current project. |
+|  `product`   | `slug: String!`  | `Product!`     | Query a specific product by slug.                    |
+| `countries`  | -                | `[Country!]!`  | Query all available countries in this project.       |
+|  `country`   | `code: String!`  | `Country!`     | Query a specific country by code.                    |
+|   `taxes`    | -                | `[Tax!]!`      | Query all available taxes in this project.           |
+|    `tax`     | `id: String!`    | `Tax!`         | Query a specific tax by id.                          |
+| `currencies` | -                | `[Currency!]!` | Query all available currencies in this project.      |
+|  `currency`  | `code: String!`  | `Currency!`    | Query a specific currency by code.                   |
+|    `cart`    | `token: String!` | `Order!`       | Query a specific cart by token.                      |
+|   `orders`   | -                | `[Order!]!`    | Query all available orders of the logged in user.    |
+|   `cards`    | -                | `[Card!]!`     | Query all available cards of the logged in user.     |
+
+## Mutations
+
+In this section of the documentation you will find all mutations exposed by the shop graphql schema of this package.
+
+|Mutation| Parameters|Returns| Description|
+|:-:|:-|:-|:-|
+|`createCart`|-|`Order!`|Creates an order and returns it. Use the token to work on the current order.|
+|`addToCart`|`token: String! item: ID!`|`Order!`|Add a product to the cart. You send an `Order` token and the id of the `ProductVariant` that you want to ad to the cart.|
+|`removeFromCart`|`token: String! item: ID!`|`Order!`|Remove a product from the cart. You send an `Order` token and the id of the `ProductVariant` that you want to remove from the cart.|
+|`updateCart`|`token: String! item: ID! quantity: Int!`|`Order!`|Update a given item in the cart. You send an `Order` token, the id of a given `ProductVariant` and the new `quantity`.|
+|`savePaymentMethod`|`stripe_id: String!, brand: String!, last_four: String!, name: String`|`Card!`|Add a new `PaymentMethod` as `Card` model to the database and stripe.|
+|`removePaymentMethod`|`stripe_id: String!`|`[Card!]!`|Remove a payment method by `strype_id` from the database and from stripe.|
+|`charge`|`description: String! amount: Int! stripe_id: String currency: String`|`Payment!`|Charge a `User` for a given amount. You send a `description`, an `amount`, the `stripe_id` of a `PaymentMethod` and the currency code of the selected `Currency`.|
+|`order`|`token: String item: ID stripe_id: String currency: String`|`Payment!`|This mutation lets you either buy an `Order` by token or a `ProductVariant` by id.|
+|`setBillingAddress`|`token: String! id: ID name: String! street: String! zip: String! country: String!`|`Order!`|Set the billing `Address` for a given `Order`.|
+|`setShippingAddress`|`token: String! id: ID name: String! street: String! zip: String! country: String!`|`Order!`|Set the shipping `Address` for a given `Order`.|
+|`updateOrCreateAddress`|`name: String! street: String! zip: String! country: String!`|`Address!`|Manage the `Address` of the current `User`.|
+|`deleteAddress`|`id: ID!`|`[Address!]!`|Delete a given `Address` from the `User`.|
