@@ -104,6 +104,10 @@ type Currency {
 type Order {
     token: String!
     state: String!
+    price: Float!
+    price_raw: Int!
+    price_net: Float!
+    price_gross: Float!
     user: User @belongsTo
     project: Project! @belongsTo
     orderItems: [OrderItem!]

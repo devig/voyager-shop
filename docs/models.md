@@ -15,8 +15,8 @@ User addresses to deliver the order to or to use as billing address.
 
 Payment methods related to users. It also keeps a reference of the payment method saved to stripe.
 
-|       -       | Description                     |
-|:-------------:|:--------------------------------|
+|       -       | Description                         |
+|:-------------:|:------------------------------------|
 | Relationships | Belongs to `Project` and an `User`. |
 
 ## Country
@@ -39,12 +39,14 @@ Currencies used in a project.
 
 Represents a customer order in the shop.
 
-|       -       | Description                                                                                                            |
-|:-------------:|:-----------------------------------------------------------------------------------------------------------------------|
+|       -       | Description                                                                                                                    |
+|:-------------:|:-------------------------------------------------------------------------------------------------------------------------------|
 | Relationships | Belongs to `Project`, belongs to `User`, belongs to billing `Address`, belongs to shipping `Address` and has many `OrderItem`. |
-|  Attributes   | By default an `Order` gets created with an order state or `cart`.                                                        |
-|       -       | The `price` attribute is calculated from the order items related to the order.                                         |
-|       -       | The `price_raw` attribute is calculated from the order items related to the order, but represented as integer.         |
+|  Attributes   | By default an `Order` gets created with an order state or `cart`.                                                              |
+|       -       | The `price` attribute is calculated from the order items related to the order.                                                 |
+|       -       | The `price_raw` attribute is calculated from the order items related to the order, but represented as integer.                 |
+|       -       | The `price_net` attribute is calculated from the order items related to the order.                                             |
+|       -       | The `price_gross` attribute is calculated from the order items related to the order.                                           |
 
 ## OrderItem
 

@@ -25,6 +25,12 @@ class Order extends Model
         'state' => 'cart',
     ];
 
+    protected $appends = [
+        'price_net',
+        'price_gross',
+        'price_raw',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | Accessors and Mutators
@@ -58,6 +64,34 @@ class Order extends Model
         $price = 0;
         foreach ($this->orderItems as $OrderItem) {
             $price += $OrderItem->priceRaw;
+        }
+        return $price;
+    }
+    
+    /**
+     * Get the price_net of the order as float.
+     *
+     * @return float
+     */
+    public function getPriceNetAttribute(): float
+    {
+        $price = 0;
+        foreach ($this->orderItems as $OrderItem) {
+            $price += $OrderItem->price_net;
+        }
+        return $price;
+    }
+    
+    /**
+     * Get the price_gross of the order as float.
+     *
+     * @return float
+     */
+    public function getPriceGrossAttribute(): float
+    {
+        $price = 0;
+        foreach ($this->orderItems as $OrderItem) {
+            $price += $OrderItem->price_gross;
         }
         return $price;
     }
