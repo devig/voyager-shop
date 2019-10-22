@@ -23,14 +23,7 @@ class AddressController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'name' => 'required|string|min:3',
-            'street' => 'required|string|min:5',
-            'zip' => 'required|string|min:4',
-            'address_belongsto_project_relationship' => 'required|exists:projects,id',
-            'address_belongsto_country_relationship' => 'required|exists:countries,id',
-            'address_belongsto_user_relationship' => 'required|exists:users,id',
-        ];
+        return config('voyager-shop.validation.address');
     }
 
     /**

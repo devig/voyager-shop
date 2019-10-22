@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Tjventurini\VoyagerShop\Models\Address;
-use Tjventurini\VoyagerProjects\Services\ProjectService;
+use Tjventurini\VoyagerShop\Services\ProjectService;
 use Tjventurini\VoyagerShop\Events\UpdateOrCreateAddress;
 use Tjventurini\VoyagerShop\GraphQL\Mutations\DeleteAddress;
 
@@ -50,7 +50,7 @@ class AddressService
     {
         // validate address
         if (!$this->validate($address)) {
-            throw new \Exception("Address Validation Orror", 1);
+            throw new \Exception("Address Validation Error", 1);
         }
 
         // get current user

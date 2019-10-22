@@ -81,20 +81,20 @@ class VoyagerShopMenuItemsSeeder extends Seeder
                 'title' => trans('shop::products.label_plural'),
             ]);
 
-            // // product variants
-            // $route = 'voyager.product_variants.index';
-            // $menuItem = MenuItem::updateOrCreate([
-            //     'route' => $route,
-            // ], [
-            //     'url' => '',
-            //     'menu_id' => $menu->id,
-            //     'parent_id' => $parentItem->id,
-            //     'target' => '_self',
-            //     'icon_class' => 'voyager-star-half',
-            //     'color' => null,
-            //     'order' => 3,
-            //     'title' => trans('shop::product-variants.label_plural'),
-            // ]);
+            // product variants
+            $route = 'voyager.product_variants.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-star-half',
+                'color' => null,
+                'order' => 3,
+                'title' => trans('shop::product-variants.label_plural'),
+            ]);
 
             // country
             $route = 'voyager.countries.index';

@@ -23,14 +23,7 @@ class CardsController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'name' => 'required|min:3',
-            'brand' => 'required|min:3',
-            'last_four' => 'required|digits:4',
-            'stripe_id' => 'required|min:3',
-            'project_id' => 'required|exists:projects,id',
-            'user_id' => 'required|exists:users,id',
-        ];
+        return config('voyager-shop.validation.cards');
     }
 
     /**

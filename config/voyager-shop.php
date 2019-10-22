@@ -112,8 +112,18 @@ return [
             'name' => 'required|string|min:3',
             'street' => 'required|string|min:3',
             'zip' => 'required|string|min:4',
-            'country' => 'required|string|size:2|exists:countries,code',
+            'project_id' => 'sometimes|exists:projects,id',
+            'country_id' => 'sometimes|exists:countries,id',
+            'country' => 'sometimes|string|size:2|exists:countries,code',
             'user_id' => 'sometimes|exists:users,id',
+        ],
+        'cards' => [
+            'name' => 'required|min:3',
+            'brand' => 'required|min:3',
+            'last_four' => 'required|digits:4',
+            'stripe_id' => 'required|min:3',
+            'project_id' => 'required|exists:projects,id',
+            'user_id' => 'required|exists:users,id',
         ]
     ],
     
