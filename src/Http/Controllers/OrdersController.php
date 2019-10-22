@@ -23,11 +23,7 @@ class OrdersController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'state' => 'required|in:cart,pending,billed,canceled,declined,refunded',
-            'order_belongsto_project_relationship' => 'required|exists:projects,id',
-            'order_belongsto_user_relationship' => 'required|exists:users,id',
-        ];
+        return config('voyager-shop.validation.orders');
     }
 
     /**

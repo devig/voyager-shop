@@ -23,11 +23,7 @@ class OrderItemsController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'order_item_belongsto_product-variant_relationship' => 'required|exists:product_variants,id',
-            'quantity' => 'required|numeric|min:1',
-            'order_item_belongsto_order_relationship' => 'required|exists:orders,id',
-        ];
+        return config('voyager-shop.validation.order_items');
     }
 
     /**

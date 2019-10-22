@@ -24,9 +24,17 @@ class VoyagerShopDemoCountriesSeeder extends Seeder
 
         // create country
         $Austria = Country::updateOrCreate([
-            'code' => 'AT'
+            'code' => 'AUT'
         ], [
             'name' => 'Austria',
+            'project_id' => $Project->id,
+        ]);
+
+        // create country
+        $USA = Country::updateOrCreate([
+            'code' => 'USA'
+        ], [
+            'name' => 'United States of America',
             'project_id' => $Project->id,
         ]);
     }

@@ -23,11 +23,7 @@ class CountriesController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'name' => 'required|min:3',
-            'code' => 'required|regex:/^[A-Z]{2}$/',
-            'country_belongsto_project_relationship' => 'required|exists:projects,id',
-        ];
+        return config('voyager-shop.validation.countries');
     }
 
     /**

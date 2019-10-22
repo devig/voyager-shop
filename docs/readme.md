@@ -23,3 +23,4 @@ This package is a simple boilerplate to get you started with building a shop wit
 * [Events](events.md)
 * [Services](services.md)
 * [Laravel Telescope](telescope.md)
+* [Validation](validation.md)

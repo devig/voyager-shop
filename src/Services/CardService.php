@@ -5,11 +5,30 @@ namespace Tjventurini\VoyagerShop\Services;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Tjventurini\VoyagerShop\Models\Card;
+use Illuminate\Support\Facades\Validator;
 use Tjventurini\VoyagerShop\Models\Project;
+use Tjventurini\VoyagerShop\Events\SaveCard;
 use Tjventurini\VoyagerProjects\Services\ProjectService;
 
 class CardService
 {
+    /**
+     * Method to validate card data.
+     *
+     * @param  array  $card
+     *
+     * @return void
+     */
+    private function validate(array $card): void
+    {
+        $Validator = Validator::make($card, config('voyager-shop.validation.cards'));
+
+        if ($Validator->fails()) {
+            dd($Validator->messages()->toArray());
+            throw new \Exception("Card validation fails.", 1);
+        }
+    }
+
     /**
      * Method to save cards to the given user.
      *
@@ -32,6 +51,14 @@ class CardService
         if (!$name) {
             $name = $User->name . ' ' . $brand;
         }
+
+        // validate card
+        $this->validate([
+            'name' => $name,
+            'brand' => $brand,
+            'last_four' => $last_four,
+            'stripe_id' => $stripe_id
+        ]);
 
         // update or create card model
         $Card = $User->cards()->updateOrCreate([

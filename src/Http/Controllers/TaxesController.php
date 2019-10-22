@@ -23,12 +23,7 @@ class TaxesController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'name' => 'required|min:3',
-            'tax' => 'required|digits:2',
-            'tax_belongsto_project_relationship' => 'required|exists:projects,id',
-            'tax_belongsto_country_relationship' => 'required|exists:countries,id',
-        ];
+        return config('voyager-shop.validation.taxes');
     }
 
     /**

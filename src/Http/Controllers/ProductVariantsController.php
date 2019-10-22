@@ -23,13 +23,7 @@ class ProductVariantsController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'name' => 'required|min:3',
-            'details' => 'required|min:3',
-            'price' => 'required|numeric',
-
-            'product_id' => 'required|exists:products,id',
-        ];
+        return config('voyager-shop.validation.product_variants');
     }
 
     /**

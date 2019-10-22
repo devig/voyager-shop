@@ -23,14 +23,7 @@ class CurrenciesController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'name' => 'required|min:3',
-            'code' => 'required|regex:/^[A-Z]{3}$/',
-            'sign' => 'required|min:1|max:1',
-
-            'currency_belongsto_project_relationship' => 'required|exists:projects,id',
-            'currency_belongsto_country_relationship' => 'required|exists:countries,id',
-        ];
+        return config('voyager-shop.validation.currencies');
     }
 
     /**

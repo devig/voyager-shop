@@ -23,17 +23,7 @@ class ProductsController extends VoyagerBaseController
      */
     private function rules(): array
     {
-        return [
-            'name' => 'required|min:3',
-            'slug' => 'required|min:3',
-            'description' => 'required|min:3',
-
-            'includes_tax' => 'sometimes|required|boolean',
-
-            'project_id' => 'required|exists:projects,id',
-
-            'tax_id' => 'required|exists:taxes,id',
-        ];
+        return config('voyager-shop.validation.products');
     }
 
     /**
