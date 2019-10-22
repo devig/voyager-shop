@@ -159,7 +159,7 @@ return [
             'name' => 'required|min:3',
             'slug' => 'required|min:3',
             'description' => 'required|min:3',
-            'includes_tax' => 'sometimes|required|boolean',
+            'includes_tax' => 'sometimes|required|in:on,off',
             'project_id' => 'required|exists:projects,id',
             'tax_id' => 'required|exists:taxes,id',
         ],
