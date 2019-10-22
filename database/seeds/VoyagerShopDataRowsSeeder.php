@@ -459,6 +459,32 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 'order' => 1,
             ]);
 
+            // field tags
+            $field_tags = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'product_hasmany_product_variants_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::products.data_rows.productVariants'),
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.productVariant'),
+                    'table' => config('voyager-shop.tables.productVariant'),
+                    'type' => 'hasMany',
+                    'column' => config('voyager-shop.foreign_keys.product'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
             // field created_at
             $field_created_at = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,

@@ -23,6 +23,7 @@ return [
         'project' => 'Project',
         'tax' => 'Tax',
         'tags' => 'Tags',
+        'productVariants' => 'Product Variants',
         'created_at' => 'Created at',
         'updated_at' => 'Updated at',
     ],
