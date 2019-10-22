@@ -30,7 +30,7 @@ class VoyagerShopServiceProvider extends ServiceProvider
 
         // tell laravel where to publish views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/voyager/shop'),
+            __DIR__.'/../resources/views' => resource_path('views'),
         ], 'views');
 
         // tell laravel where to find translations

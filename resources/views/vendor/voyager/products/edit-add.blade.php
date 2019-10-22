@@ -115,14 +115,17 @@
                 <!-- ### VARIANTS START ### -->
                 <?php
                     // load product variants of this product
-                    $ProductVariants = Tjventurini\VoyagerShop\Models\Product::findOrFail($dataTypeContent->id)->productVariants;
+                    $ProductVariants = Tjventurini\VoyagerShop\Models\Product::findOrFail($dataTypeContent->id)
+                                        ->productVariants()->with(['product'])->get();
                     // load data_type of product variants
-                    $dataType = TCG\Voyager\Models\DataType::where('slug', 'product_variants')->firstOrFail();
+                    $dataType = TCG\Voyager\Models\DataType::where('slug', 'product_variants')
+                                    ->firstOrFail();
                     // load the data_row elements of the product variants
                     $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows')};
                 ?>
                 @foreach($ProductVariants as $ProductVariant)
-                    <div class="panel panel panel-bordered panel-warning">
+                    <?php $dataTypeContent = $ProductVariant; ?>
+                    <div class="panel panel panel-bordered panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title"><i class="icon wb-clipboard"></i> {{ $ProductVariant->name }}</h3>
                             <div class="panel-actions">
@@ -312,7 +315,7 @@
             $('.form-group').on('click', '.remove-single-file', deleteHandler('a', false));
 
             $('#confirm_delete').on('click', function(){
-                $.post('{{ route('voyager.media.remove') }}', params, function (response) {
+                $.post('{{ route('voyager.'.$dataType->slug.'.media.remove') }}', params, function (response) {
                     if ( response
                         && response.data
                         && response.data.status

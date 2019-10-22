@@ -435,7 +435,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
             // field tags
             $field_tags = DataRow::updateOrCreate([
                 'data_type_id' => $data_type->id,
-                'field' => 'product_belongsto_tags_relationship',
+                'field' => 'product_belongstomany_tags_relationship',
             ], [
                 'type' => 'relationship',
                 'display_name' => trans('shop::products.data_rows.tags'),
@@ -449,11 +449,10 @@ class VoyagerShopDataRowsSeeder extends Seeder
                     'model' => config('voyager-shop.models.tag'),
                     'table' => config('voyager-shop.tables.tag'),
                     'type' => 'belongsToMany',
-                    // 'column' => config('voyager-shop.foreign_keys.tag'),
                     'column' => 'id',
                     'key' => 'id',
                     'label' => 'name',
-                    'pivot_table' => config('voyager-shop.tables.tags'),
+                    'pivot_table' => config('voyager-shop.tables.tag'),
                     'pivot' => 0,
                     'taggable' => 0,
                 ],

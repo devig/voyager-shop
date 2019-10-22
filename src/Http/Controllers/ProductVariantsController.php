@@ -28,7 +28,7 @@ class ProductVariantsController extends VoyagerBaseController
             'details' => 'required|min:3',
             'price' => 'required|numeric',
 
-            'product_variant_belongsto_product_relationship' => 'required|exists:products,id',
+            'product_id' => 'required|exists:products,id',
         ];
     }
 

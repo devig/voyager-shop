@@ -123,6 +123,11 @@ class VoyagerShopInstall extends Command
             '--tag' => 'graphql',
             '--force' => $this->option('force'),
         ]);
+        $this->call('vendor:publish', [
+            '--provider' => "Tjventurini\VoyagerShop\VoyagerShopServiceProvider",
+            '--tag' => 'views',
+            '--force' => $this->option('force'),
+        ]);
 
         // stripe webhooks
         $this->call('vendor:publish', [
