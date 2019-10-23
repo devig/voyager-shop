@@ -13,7 +13,7 @@ use Spatie\WebhookClient\Models\WebhookCall;
 use Tjventurini\VoyagerShop\Mail\OrderReceived;
 use Tjventurini\VoyagerShop\Mail\PaymentReceived;
 
-class HandlePaymentIntentSucceeded implements ShouldQueue
+class HandlePaymentIntent implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 

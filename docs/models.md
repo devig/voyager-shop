@@ -60,6 +60,12 @@ Represents an item of a cart/order.
 |       -       | The `price_net` attribute represents the `price_net` attribute of the related product variant. |
 |       -       | The `price_net` attribute represents the `price_net` attribute of the related product variant. |
 
+## Payment
+
+| - | Description |
+|:-:|:---|
+| Relationships | Belongs to `User`, `Project`, `Order`, `Currency` and `ProductVariant`.|
+
 ## Product
 
 Represents a base product in the shop and holds all general information about the buyable product.
