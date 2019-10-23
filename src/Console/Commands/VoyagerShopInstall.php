@@ -135,11 +135,6 @@ class VoyagerShopInstall extends Command
         ]);
 
         // stripe webhooks
-        $this->call('vendor:publish', [
-            '--provider' => "Spatie\StripeWebhooks\StripeWebhooksServiceProvider",
-            '--tag' => "config",
-            '--force' => $this->option('force'),
-        ]);
         if (!count(\File::glob("database/migrations/*create_webhook_calls_table.php"))) {
             $this->call('vendor:publish', ['--provider' => "Spatie\WebhookClient\WebhookClientServiceProvider", '--tag' => "migrations"]);
         }
