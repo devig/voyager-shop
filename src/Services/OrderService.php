@@ -6,11 +6,13 @@ use App\User;
 use Stripe\PaymentIntent;
 use Illuminate\Support\Collection;
 use Tjventurini\VoyagerShop\Models\Order;
+use Tjventurini\VoyagerShop\Models\Payment;
 use Tjventurini\VoyagerShop\Events\AddToCart;
 use Tjventurini\VoyagerShop\Events\OrderCart;
 use Tjventurini\VoyagerShop\Models\OrderItem;
 use Tjventurini\VoyagerShop\Events\CreateCart;
 use Tjventurini\VoyagerShop\Events\UpdateCart;
+use Tjventurini\VoyagerShop\Events\OrderProduct;
 use Tjventurini\VoyagerShop\Events\RemoveFromCart;
 use Tjventurini\VoyagerShop\Models\ProductVariant;
 use Tjventurini\VoyagerShop\Services\StripeService;
@@ -161,9 +163,9 @@ class OrderService
      * @param  string|null $stripe_id
      * @param  string|null $currency
      *
-     * @return \Stripe\PaymentIntent
+     * @return \Tjventurini\VoyagerShop\Models\Payment
      */
-    public function order(string $token = null, int $product_variant_id = null, string $stripe_id = null, string $currency = null): PaymentIntent
+    public function order(string $token = null, int $product_variant_id = null, string $stripe_id = null, string $currency = null): Payment
     {
         if ($token) {
             return $this->orderCart($token, $stripe_id, $currency);
@@ -183,9 +185,9 @@ class OrderService
      * @param  string $stripe_id
      * @param  string $currency
      *
-     * @return \Stripe\PaymentIntent
+     * @return \Tjventurini\VoyagerShop\Models\Payment
      */
-    private function orderCart(string $token, string $stripe_id = null, string $currency = null): PaymentIntent
+    private function orderCart(string $token, string $stripe_id = null, string $currency = null): Payment
     {
         // get the order by token
         $Order = $this->getOrderByToken($token);
@@ -214,13 +216,18 @@ class OrderService
 
         // make the charge
         $StripeService = new StripeService();
-        $PaymentIntent = $StripeService->charge($description, $price, $stripe_id, $currency);
+        $Payment = $StripeService->charge($description, $price, $stripe_id, $currency);
+
+        // connect payment with order
+        $Payment->update([
+            config('voyager-shop.foreign_keys.order', 'order_id') => $Order->id
+        ]);
 
         // update the order state
         $Order->update(['state' => config('voyager-shop.order_states.billed')]);
 
-        // return the payment intent
-        return $PaymentIntent;
+        // return the payment
+        return $Payment;
     }
 
     /**
@@ -230,31 +237,33 @@ class OrderService
      * @param  string|null $stripe_id
      * @param  string      $currency
      *
-     * @return \Stripe\PaymentIntent
+     * @return \Tjventurini\VoyagerShop\Models\Payment
      */
-    private function orderProduct(int $product_variant_id, string $stripe_id = null, string $currency = null): PaymentIntent
+    private function orderProduct(int $product_variant_id, string $stripe_id = null, string $currency = null): Payment
     {
         // get the product variant by id
         $ProductVariant = ProductVariant::findOrFail($product_variant_id);
 
         // get the price from the product variant
-        $price = $ProductVariant->priceRaw;
+        $price = $ProductVariant->price_gross_raw;
 
         // create charge description
         $description = trans('shop::orders.service.buy-product-description', ['product' => $ProductVariant->name]);
 
         // fire event
-        event(new OrderProduct($Order, $OrderItems, $price, $description));
+        event(new OrderProduct($ProductVariant, $price, $description));
 
         // make the charge
         $StripeService = new StripeService();
-        $PaymentIntent = $StripeService->charge($description, $price, $stripe_id, $currency);
+        $Payment = $StripeService->charge($description, $price, $stripe_id, $currency);
 
-        // update the order state
-        $Order->update(['state' => config('voyager-shop.order_states.billed')]);
+        // connect payment with productVariant
+        $Payment->update([
+            config('voyager-shop.foreign_keys.productVariant', 'product_variant_id') => $ProductVariant->id
+        ]);
 
-        // return the payment intent
-        return $PaymentIntent;
+        // return the payment
+        return $Payment;
     }
 
     /**

@@ -37,7 +37,12 @@ extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
 type Payment {
     id: String!
     amount: Int!
-    currency: String!
+    stripe_id: String!
+    state: String
+    currency: Currency! @belongsTo
+    user: User @belongsTo
+    order: Order @belongsTo
+    productVariant: ProductVariant @belongsTo
 }
 type Card {
     stripe_id: String!
@@ -67,8 +72,11 @@ type ProductVariant {
     name: String!
     details: String!
     price: Float!
+    price_raw: Int!
     price_net: Float!
+    price_net_raw: Int!
     price_gross: Float!
+    price_gross_raw: Int!
     product: Product! @belongsTo
     created_at: DateTime!
     updated_at: DateTime

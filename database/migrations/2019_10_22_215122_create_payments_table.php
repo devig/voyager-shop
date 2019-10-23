@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->bigIncrements('id');
 
             $table->integer('amount');
-            $table->string('payment_method');
+            $table->string('payment_method')->nullable();
             $table->string('stripe_id');
             $table->string('state');
 
@@ -47,6 +47,19 @@ class CreatePaymentsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
+            // create currency_id column
+            // ! make sure to use the same column type
+            //   as in the referenced column
+            //   e.g. integer or bigInteger
+            $table->bigInteger('currency_id')
+                ->unsigned()
+                ->nullable();
+            // make currency_id column a foreign key
+            $table->foreign('currency_id')
+                ->references('id')
+                ->on('currencies')
+                ->onDelete('cascade');
+
             // create order_id column
             // ! make sure to use the same column type
             //   as in the referenced column
@@ -58,6 +71,19 @@ class CreatePaymentsTable extends Migration
             $table->foreign('order_id')
                 ->references('id')
                 ->on('orders')
+                ->onDelete('cascade');
+
+            // create product_variant_id column
+            // ! make sure to use the same column type
+            //   as in the referenced column
+            //   e.g. integer or bigInteger
+            $table->bigInteger('product_variant_id')
+                ->unsigned()
+                ->nullable();
+            // make product_variant_id column a foreign key
+            $table->foreign('product_variant_id')
+                ->references('id')
+                ->on('product_variants')
                 ->onDelete('cascade');
 
             $table->timestamps();

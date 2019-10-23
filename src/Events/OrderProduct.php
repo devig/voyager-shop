@@ -4,20 +4,18 @@ namespace Tjventurini\VoyagerShop\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Tjventurini\VoyagerShop\Models\Order;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
-use Tjventurini\VoyagerShop\Models\OrderItem;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Tjventurini\VoyagerShop\Models\ProductVariant;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class OrderProduct
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $Order;
-    public $OrderItem;
+    public $ProductVariant;
     public $price;
     public $description;
 
@@ -26,10 +24,9 @@ class OrderProduct
      *
      * @return void
      */
-    public function __construct(Order &$Order, OrderItem &$OrderItem, int &$price, string &$description)
+    public function __construct(ProductVariant &$ProductVariant, int &$price, string &$description)
     {
-        $this->Order = &$Order;
-        $this->OrderItem = &$OrderItem;
+        $this->ProductVariant = &$ProductVariant;
         $this->price = &$price;
         $this->description = &$description;
     }

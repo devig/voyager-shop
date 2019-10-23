@@ -59,6 +59,23 @@ class ProductVariant extends Model
     }
 
     /**
+     * Get the price_net_raw attribute as float.
+     *
+     * @return float
+     */
+    public function getPriceNetRawAttribute(): float
+    {
+        // if price includes taxes, then
+        //   calculate price_net value
+        if ($this->product->includes_tax) {
+            return $this->attributes['price'] / (100 + $this->product->tax->tax) * 100;
+        }
+
+        // otherwise just return the current price
+        return $this->attributes['price'];
+    }
+
+    /**
      * Get the price_gross attribute as float.
      *
      * @return float
@@ -72,6 +89,22 @@ class ProductVariant extends Model
 
         // otherwise calculate the price_gross value
         return $this->attributes['price'] / 100 * (100 + $this->product->tax->tax) / 100;
+    }
+
+    /**
+     * Get the price_gross attribute as float.
+     *
+     * @return float
+     */
+    public function getPriceGrossRawAttribute(): float
+    {
+        // if the price includes the taxes then just return the value
+        if ($this->product->includes_tax) {
+            return $this->attributes['price'];
+        }
+
+        // otherwise calculate the price_gross value
+        return $this->attributes['price'] / 100 * (100 + $this->product->tax->tax);
     }
 
     /**

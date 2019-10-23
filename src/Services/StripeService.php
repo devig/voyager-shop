@@ -7,8 +7,11 @@ use Stripe\PaymentIntent;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Tjventurini\VoyagerShop\Models\Card;
+use Tjventurini\VoyagerShop\Models\Payment;
+use Tjventurini\VoyagerShop\Models\Currency;
 use Tjventurini\VoyagerShop\Events\ChargeUser;
 use Tjventurini\VoyagerShop\Services\CardService;
+use Tjventurini\VoyagerShop\Services\ProjectService;
 use Tjventurini\VoyagerShop\Events\SavePaymentMethod;
 use Tjventurini\VoyagerShop\Events\RemovePaymentMethod;
 
@@ -85,7 +88,7 @@ class StripeService
      *
      * @return \Stripe\PaymentIntent
      */
-    public function charge(string $description, int $amount, string $stripe_id = null, string $currency = null): PaymentIntent
+    public function charge(string $description, int $amount, string $stripe_id = null, string $currency = null): Payment
     {
         // if no payment method is given, we take the default one
         if (!$stripe_id) {
@@ -93,17 +96,37 @@ class StripeService
         }
 
         // set options
-        $options = [];
-        if ($currency) {
-            $options['currency'] = $currency;
-        }
+        $options = [
+            'currency' => $currency ?? config('voyager-shop.currency', 'usd')
+        ];
 
         // charge the user using Billable trait
-        $Payment = $this->user->charge($amount, $stripe_id, $options)
+        $PaymentIntent = $this->user->charge($amount, $stripe_id, $options)
             ->asStripePaymentIntent();
 
+        // get current project
+        $ProjectService = new ProjectService();
+        $Project = $ProjectService->getCurrentProject();
+
+        // get current user
+        $User = Auth::user();
+
+        // get currency
+        $Currency = Currency::where('code', $options['currency'])->firstOrFail();
+
+        // create payment
+        $Payment = Payment::create([
+            'amount' => $amount,
+            'payment_method' => $PaymentIntent->payment_method_types[0] ?? null,
+            'stripe_id' => $PaymentIntent->id,
+            'state' => $PaymentIntent->status,
+            'project_id' => $Project->id,
+            'user_id' => $User->id ?? null,
+            'currency_id' => $Currency->id,
+        ]);
+
         // dispatch event
-        event(new ChargeUser($this->user, $description, $Payment));
+        event(new ChargeUser($this->user, $description, $PaymentIntent, $Payment));
 
         // return the payment intent
         return $Payment;

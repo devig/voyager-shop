@@ -72,14 +72,14 @@ class VoyagerShopInstall extends Command
             '--demo' => $this->option('demo')
         ]);
 
+        // install passport
+        $this->call('passport:install');
+
         // run seeders
         $this->runSeeders();
 
         // install demo content
         $this->demo();
-
-        // install passport
-        $this->call('passport:install');
 
         // clear cache
         $this->call('cache:clear');

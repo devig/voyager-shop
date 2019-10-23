@@ -3,6 +3,7 @@
 namespace Tjventurini\VoyagerShop\Seeds;
 
 use App\User;
+use Laravel\Passport\Client;
 use TCG\Voyager\Models\Menu;
 use TCG\Voyager\Models\Role;
 use Illuminate\Database\Seeder;
@@ -32,6 +33,12 @@ class VoyagerShopDemoContentSeeder extends Seeder
             'name' => 'Admin',
             'password' => Hash::make('password'),
             'role_id' => $AdminRole->id,
+            'stripe_id' => 'cus_FtplinV6YiDs04',
+        ]);
+
+        // update passport oauth client
+        $Client = Client::findOrFail(2)->update([
+            'secret' => 'ILFB0Gy78ZP0hdyksCGSWmTJGmC6m5QC3xIrte9Q'
         ]);
 
         $this->call(VoyagerShopDemoCountriesSeeder::class);

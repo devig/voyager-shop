@@ -33,6 +33,7 @@ return [
         'cards' => 'cards',
         'addresses' => 'addresses',
         'tag' => 'product_tag',
+        'currency' => 'currencies',
     ],
 
     'models' => [
@@ -50,6 +51,7 @@ return [
         'shippingAddress' => \Tjventurini\VoyagerShop\Models\Address::class,
         'tag' => \Tjventurini\VoyagerShop\Models\Tag::class,
         'payment' => \Tjventurini\VoyagerShop\Models\Payment::class,
+        'currency' => \Tjventurini\VoyagerShop\Models\Currency::class,
     ],
 
     'foreign_keys' => [
@@ -67,6 +69,7 @@ return [
         'shippingAddress' => 'shipping_address_id',
         'tag' => 'tag_id',
         'payment' => 'payment_id',
+        'currency' => 'currency_id',
     ],
 
     /*
