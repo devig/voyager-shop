@@ -59,6 +59,11 @@ class VoyagerShopServiceProvider extends ServiceProvider
             __DIR__.'/Policies' => base_path('app/Policies'),
         ], 'policies');
 
+        // publish middleware
+        $this->publishes([
+            __DIR__.'/Http/Middleware' => base_path('app/Http/Middleware'),
+        ], 'middleware');
+
         // register commands
         if ($this->app->runningInConsole()) {
             $this->commands([

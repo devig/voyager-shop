@@ -25,6 +25,7 @@ class VoyagerShopDataTypesSeeder extends Seeder
             $this->taxes();
             $this->cards();
             $this->addresses();
+            $this->payments();
         });
     }
 
@@ -238,6 +239,30 @@ class VoyagerShopDataTypesSeeder extends Seeder
             'model_name' => \Tjventurini\VoyagerShop\Models\Address::class,
             'policy_name' => null,
             'controller' => \Tjventurini\VoyagerShop\Http\Controllers\AddressController::class,
+            'description' => '',
+            'generate_permissions' => 1,
+            'server_side' => 0,
+            'details' => null,
+        ]);
+    }
+
+    /**
+     * Method to create payments data type.
+     *
+     * @return void
+     */
+    private function payments(): void
+    {
+        $payments = DataType::updateOrCreate([
+            'slug' => 'payments'
+        ], [
+            'name' => 'payments',
+            'display_name_singular' => trans('shop::payments.label_singular'),
+            'display_name_plural' => trans('shop::payments.label_plural'),
+            'icon' => 'voyager-dollar',
+            'model_name' => \Tjventurini\VoyagerShop\Models\Payment::class,
+            'policy_name' => null,
+            'controller' => \Tjventurini\VoyagerShop\Http\Controllers\PaymentsController::class,
             'description' => '',
             'generate_permissions' => 1,
             'server_side' => 0,

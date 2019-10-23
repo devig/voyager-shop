@@ -27,6 +27,7 @@ class VoyagerShopDataRowsSeeder extends Seeder
         $this->addresses();
         $this->tags();
         $this->projects();
+        $this->payments();
     }
 
     private function countries()
@@ -1601,6 +1602,218 @@ class VoyagerShopDataRowsSeeder extends Seeder
                 ],
                 'order' => 1,
                 ]);
+        });
+    }
+
+    /**
+     * Method to create the payment data_rows.
+     *
+     * @return void
+     */
+    private function payments(): void
+    {
+        DB::transaction(function () {
+            $data_type = DataType::where('slug', 'payments')->firstOrFail();
+
+            // field id
+            $field_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'id',
+            ], [
+                'type' => 'hidden',
+                'display_name' => trans('shop::payments.data_rows.id'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field amount
+            $field_amount = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'amount',
+            ], [
+                'type' => 'number',
+                'display_name' => trans('shop::payments.data_rows.amount'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'step' => 0.01,
+                    'min' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field payment_method
+            $field_payment_method = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'payment_method',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::payments.data_rows.payment_method'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field stripe_id
+            $field_stripe_id = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'stripe_id',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::payments.data_rows.stripe_id'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field state
+            $field_state = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'state',
+            ], [
+                'type' => 'text',
+                'display_name' => trans('shop::payments.data_rows.state'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 1,
+            ]);
+
+            // field project
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'payment_belongsto_project_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::payments.data_rows.project'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.project'),
+                    'table' => config('voyager-shop.tables.projects'),
+                    'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.project'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field user
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'payment_belongsto_user_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::payments.data_rows.user'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.user'),
+                    'table' => config('voyager-shop.tables.users'),
+                    'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.user'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field order
+            $field_name = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'payment_belongsto_order_relationship',
+            ], [
+                'type' => 'relationship',
+                'display_name' => trans('shop::payments.data_rows.order'),
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => [
+                    'model' => config('voyager-shop.models.order'),
+                    'table' => config('voyager-shop.tables.orders'),
+                    'type' => 'belongsTo',
+                    'column' => config('voyager-shop.foreign_keys.order'),
+                    'key' => 'id',
+                    'label' => 'name',
+                    'pivot' => 0,
+                    'taggable' => 0,
+                ],
+                'order' => 1,
+            ]);
+
+            // field created_at
+            $field_created_at = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'created_at',
+            ], [
+                'type' => 'timestamp',
+                'display_name' => trans('shop::payments.data_rows.created_at'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 99,
+            ]);
+
+            // field updated_at
+            $field_updated_at = DataRow::updateOrCreate([
+                'data_type_id' => $data_type->id,
+                'field' => 'updated_at',
+            ], [
+                'type' => 'timestamp',
+                'display_name' => trans('shop::payments.data_rows.updated_at'),
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 1,
+                'details' => json_encode([]),
+                'order' => 99,
+            ]);
         });
     }
 }

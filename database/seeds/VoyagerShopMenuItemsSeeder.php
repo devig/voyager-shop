@@ -171,6 +171,21 @@ class VoyagerShopMenuItemsSeeder extends Seeder
                 'title' => trans('shop::addresses.label_plural'),
             ]);
 
+            // payments
+            $route = 'voyager.payments.index';
+            $menuItem = MenuItem::updateOrCreate([
+                'route' => $route,
+            ], [
+                'url' => '',
+                'menu_id' => $menu->id,
+                'parent_id' => $parentItem->id,
+                'target' => '_self',
+                'icon_class' => 'voyager-dollar',
+                'color' => null,
+                'order' => 7,
+                'title' => trans('shop::payments.label_plural'),
+            ]);
+
             // telescope
             $route = 'telescope';
             $ToolsMenuItem = MenuItem::where('title', 'Tools')->firstOrFail();

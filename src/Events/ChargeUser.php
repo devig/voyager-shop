@@ -3,7 +3,7 @@
 namespace Tjventurini\VoyagerShop\Events;
 
 use App\User;
-use Laravel\Cashier\Payment;
+use Stripe\PaymentIntent;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -25,7 +25,7 @@ class ChargeUser
      *
      * @return void
      */
-    public function __construct(User &$user, string &$description, Payment &$payment)
+    public function __construct(User &$user, string &$description, PaymentIntent &$payment)
     {
         $this->user = $user;
         $this->description = $description;

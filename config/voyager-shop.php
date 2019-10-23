@@ -49,6 +49,7 @@ return [
         'billingAddress' => \Tjventurini\VoyagerShop\Models\Address::class,
         'shippingAddress' => \Tjventurini\VoyagerShop\Models\Address::class,
         'tag' => \Tjventurini\VoyagerShop\Models\Tag::class,
+        'payment' => \Tjventurini\VoyagerShop\Models\Payment::class,
     ],
 
     'foreign_keys' => [
@@ -65,6 +66,7 @@ return [
         'billingAddress' => 'billing_address_id',
         'shippingAddress' => 'shipping_address_id',
         'tag' => 'tag_id',
+        'payment' => 'payment_id',
     ],
 
     /*
@@ -176,6 +178,16 @@ return [
             'tax' => 'required|digits:2',
             'project_id' => 'required|exists:projects,id',
             'country_id' => 'required|exists:countries,id',
+        ],
+
+        'payments' => [
+            'amount' => 'required|numeric',
+            'payment_method' => 'required|string',
+            'stripe_id' => 'required|min:3',
+            'state' => 'required|string',
+            'project_id' => 'sometimes|exists:projects,id',
+            'order_id' => 'sometimes|exists:orders,id',
+            'user_id' => 'sometimes|exists:users,id',
         ],
 
     ],
