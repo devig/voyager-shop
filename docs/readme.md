@@ -24,3 +24,4 @@ This package is a simple boilerplate to get you started with building a shop wit
 * [Services](services.md)
 * [Laravel Telescope](telescope.md)
 * [Validation](validation.md)
+* [Payments](payments.md)

@@ -4,7 +4,7 @@ Payment {{ $Payment->id }} received
 @component('mail::table')
 | Attribute | Value |
 |:---------:|:-----:|
-| Amount | {{ $Payment->currency->sign }} {{ $Payment->amount }} |
+| Amount | {{ $Payment->currency->sign }} {{ $Payment->amount / 100 }} |
 | Payment Method | {{ $Payment->payment_method }} |
 | State | {{ $Payment->state }} |
 | Project | {{ $Payment->project->name }} |

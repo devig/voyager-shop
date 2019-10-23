@@ -16,7 +16,7 @@ return [
      * https://stripe.com/docs/api#event_types.
      */
     'jobs' => [
-        'payment_intent_succeeded' => \Tjventurini\VoyagerShop\Jobs\StripeWebhooks\HandlePaymentIntent::class,
+        'payment_intent_succeeded' => \Tjventurini\VoyagerShop\Jobs\StripeWebhooks\HandlePaymentIntentSucceeded::class,
     ],
 
     /*
