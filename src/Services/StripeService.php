@@ -95,9 +95,13 @@ class StripeService
             $stripe_id = $this->user->defaultPaymentMethod()->id;
         }
 
+        // set currency
+        $currency = $currency ?? config('voyager-shop.currency', 'usd');
+        $Currency = Currency::where('code', $currency)->firstOrFail();
+
         // set options
         $options = [
-            'currency' => $currency ?? config('voyager-shop.currency', 'usd')
+            'currency' => $currency
         ];
 
         // charge the user using Billable trait
@@ -110,9 +114,6 @@ class StripeService
 
         // get current user
         $User = Auth::user();
-
-        // get currency
-        $Currency = Currency::where('code', $options['currency'])->firstOrFail();
 
         // create payment
         $Payment = Payment::create([
