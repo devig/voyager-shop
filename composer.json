@@ -17,6 +17,7 @@
         "spatie/laravel-stripe-webhooks": "^2.2",
         "laravel/telescope": "^2.1",
         "guzzlehttp/guzzle": "^6.4",
+        "barryvdh/laravel-dompdf": "^0.8.5",
         "laravel/cashier": "^10.2"
     },
     "require-dev": {

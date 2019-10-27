@@ -119,6 +119,7 @@ class StripeService
         $Payment = Payment::create([
             'amount' => $amount,
             'payment_method' => $PaymentIntent->payment_method_types[0] ?? null,
+            'description' => $description,
             'stripe_id' => $PaymentIntent->id,
             'state' => $PaymentIntent->status,
             'project_id' => $Project->id,

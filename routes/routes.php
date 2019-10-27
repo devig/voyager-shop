@@ -11,9 +11,10 @@
 |
 */
 
-Route::group(['prefix' => config('voyager.prefix')], function () {
-    // create namespace prefix
-    $namespace = '\\Tjventurini\\VoyagerShop\\Http\\Controllers\\';
+// create namespace prefix
+$namespace = '\\Tjventurini\\VoyagerShop\\Http\\Controllers\\';
+
+Route::group(['prefix' => config('voyager.prefix')], function () use ($namespace) {
 
     // create routes
     Route::get('orders', $namespace . 'OrdersController@index')->name('voyager.orders.index');
@@ -28,3 +29,6 @@ Route::group(['prefix' => config('voyager.prefix')], function () {
 
 // stripe webhooks
 Route::stripeWebhooks('stripe/webhooks');
+
+// invoices
+Route::get('invoice/{token}', $namespace.'InvoiceController@download');

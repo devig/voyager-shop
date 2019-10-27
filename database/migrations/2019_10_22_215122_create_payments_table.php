@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->string('token')->nullable()->unique();
 
             $table->integer('amount');
+            $table->string('description');
             $table->string('payment_method')->nullable();
             $table->string('stripe_id');
             $table->string('state');
