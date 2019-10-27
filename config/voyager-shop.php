@@ -209,5 +209,17 @@ return [
         ],
 
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Token
+    |--------------------------------------------------------------------------
+    |
+    | In this section you can overwrite all settings regarding the tokens.
+    | Tokens are used for Orders and Payments.
+    |
+    */
     
+    'tokens_length' => 60,
+        
 ];

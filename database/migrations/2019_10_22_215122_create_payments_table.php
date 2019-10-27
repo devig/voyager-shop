@@ -16,6 +16,8 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->string('token')->nullable()->unique();
+
             $table->integer('amount');
             $table->string('payment_method')->nullable();
             $table->string('stripe_id');

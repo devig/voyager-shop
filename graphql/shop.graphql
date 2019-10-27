@@ -36,6 +36,7 @@ extend type Mutation @middleware(checks: ["projectToken", "auth:api"]) {
 # Types
 type Payment {
     id: String!
+    token: String!
     amount: Int!
     stripe_id: String!
     state: String

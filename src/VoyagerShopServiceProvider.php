@@ -5,7 +5,9 @@ namespace Tjventurini\VoyagerShop;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 use Tjventurini\VoyagerShop\Models\Order;
+use Tjventurini\VoyagerShop\Models\Payment;
 use Tjventurini\VoyagerShop\Observers\OrderObserver;
+use Tjventurini\VoyagerShop\Observers\PaymentObserver;
 use Tjventurini\VoyagerShop\Console\Commands\VoyagerShopInstall;
 
 class VoyagerShopServiceProvider extends ServiceProvider
@@ -73,6 +75,7 @@ class VoyagerShopServiceProvider extends ServiceProvider
 
         // observers
         Order::observe(OrderObserver::class);
+        Payment::observe(PaymentObserver::class);
 
         // update lighthouse configurationc
         config(

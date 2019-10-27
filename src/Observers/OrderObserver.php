@@ -17,7 +17,7 @@ class OrderObserver
     public function creating(Order $order): void
     {
         // create token
-        $order->token = Str::random(60);
+        $order->token = Str::random(config('voyager-shop.tokens_length'));
 
         // connect with user
         $User = Auth::user();
