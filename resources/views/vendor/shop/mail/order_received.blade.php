@@ -19,4 +19,6 @@ We received your payment and order.
 @endforeach
 @endcomponent
 
+You can download your invoice [here]({{ route('voyager-shop.invoices', ['token' => $Payment->token]) }}).
+
 @endcomponent

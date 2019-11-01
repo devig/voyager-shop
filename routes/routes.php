@@ -31,4 +31,5 @@ Route::group(['prefix' => config('voyager.prefix')], function () use ($namespace
 Route::stripeWebhooks('stripe/webhooks');
 
 // invoices
-Route::get('invoice/{token}', $namespace.'InvoiceController@download');
+Route::get('invoice/{token}', $namespace.'InvoiceController@download')
+    ->name('voyager-shop.invoices');
