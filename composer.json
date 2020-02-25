@@ -1,5 +1,5 @@
 {
-    "name": "tjventurini/voyager-shop",
+    "name": "devig/voyager-shop",
     "description": "This package provides a graphql shop that is manageable through the voyager admin panel.",
     "type": "package",
     "authors": [
