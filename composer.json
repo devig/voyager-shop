@@ -18,7 +18,7 @@
         "laravel/telescope": "^2.1",
         "guzzlehttp/guzzle": "^6.4",
         "barryvdh/laravel-dompdf": "^0.8.5",
-        "laravel/cashier": "^10.2"
+        "laravel/cashier": "^9.3"
     },
     "require-dev": {
         "mll-lab/laravel-graphql-playground": "^1.0"
