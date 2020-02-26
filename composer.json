@@ -15,7 +15,7 @@
         "laravel/passport": "^7.3",
         "joselfonseca/lighthouse-graphql-passport-auth": "^1.3",
         "spatie/laravel-stripe-webhooks": "^2.2",
-        "laravel/telescope": "^2.1",
+        "laravel/telescope": "^1.2",
         "laravel/cashier": "^9.3"
     },
     "require-dev": {
