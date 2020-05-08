@@ -9,17 +9,17 @@
         }
     ],
     "require": {
-        "nuwave/lighthouse": "^3.7",
-        "tcg/voyager": "^1.2",
+        "nuwave/lighthouse": "^4.12",
+        "tcg/voyager": "^1.3",
         "tjventurini/voyager-projects": "*",
-        "laravel/passport": "^7.3",
-        "joselfonseca/lighthouse-graphql-passport-auth": "^1.3",
+        "laravel/passport": "^8.0",
+        "joselfonseca/lighthouse-graphql-passport-auth": "^4.1",
         "spatie/laravel-stripe-webhooks": "^2.2",
-        "laravel/telescope": "^2.1",
-        "laravel/cashier": "^9.3"
+        "laravel/telescope": "^3.3",
+        "laravel/cashier": "^11.2"
     },
     "require-dev": {
-        "mll-lab/laravel-graphql-playground": "^1.0"
+        "mll-lab/laravel-graphql-playground": "^2.1"
     },
     "autoload": {
         "psr-4": {
