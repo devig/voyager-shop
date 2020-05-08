@@ -14,7 +14,7 @@
         "tjventurini/voyager-projects": "*",
         "laravel/passport": "^8.0",
         "joselfonseca/lighthouse-graphql-passport-auth": "^4.1",
-        "spatie/laravel-stripe-webhooks": "^2.2",
+        "spatie/laravel-stripe-webhooks": "^2.3",
         "laravel/telescope": "^3.3",
         "laravel/cashier": "^11.2"
     },
