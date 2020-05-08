@@ -11,7 +11,7 @@
     "require": {
         "nuwave/lighthouse": "^3.7",
         "tcg/voyager": "^1.2",
-        "tjventurini/voyager-projects": "*",
+        "devig/voyager-projects": "*",
         "laravel/passport": "^7.3",
         "joselfonseca/lighthouse-graphql-passport-auth": "^1.3",
         "spatie/laravel-stripe-webhooks": "^2.2",
